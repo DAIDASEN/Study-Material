@@ -8,7 +8,7 @@
 - Multimodalities
 
 Procedure: pretraining $\rightarrow$ vanilla supervised fine-tuning (SFT) $\rightarrow$ long-CoT supervised fine-turning $\rightarrow$ and reinforcement learning (RL)
-
+1
 ### 1. Prompt Set Curation
 
 - Diverse Coverage (Text only & Text + Images)
