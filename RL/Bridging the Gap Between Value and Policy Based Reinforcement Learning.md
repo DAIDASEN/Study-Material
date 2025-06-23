@@ -4,7 +4,7 @@ O_{ER}(s, \pi) = \sum \pi(a | s) \cdot r(s, a) + \gamma O_{ER}(s', \pi)
 $$
 For a softmax version we have an entropy:
 $$
-O_{ENT}(s, \pi) = O_{ER}(s, \pi) + \tau H(s, \pi)
+O_{ENT}(s, \pi) = O_{ER}(s, \pi) + \tau \mathbb{H}(s, \pi)
 $$
 Where $\mathbb{H}(s, \pi) = \sum_{a} \pi(a | s) \left[ -\log \pi(a | s) + \gamma \mathbb{H}(s', \pi) \right]$
 $$
