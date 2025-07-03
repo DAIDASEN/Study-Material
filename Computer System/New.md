@@ -1,5 +1,5 @@
 <font color=green>==**OS Includes:**==</font>
-<font color=green>**a program $\Rarr$ “kernel”**</font>
+<font color=green>**a program $\Rarr$ “Kernel”**</font>
 **1.** Manage all physical devices such as CPU, RAM, hard disk etc. 
 **2.** It exposes some functions as **system calls** for configuring the kernel or building things on-top.
 **<font color=green>Some more programs</font>**
