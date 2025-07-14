@@ -1,6 +1,6 @@
 # From $r$ to $Q^*$: Your language model is Secretly a Q-function.
 
-Define: A token level MDP as a tuple: $M=(S,A,f,r,p)$
+Define: A token level MDP as a tuple: $M=(S,A,f,r,\rho)$
 State space $S$: All token up-to-now
 Action space $A$: vocabulary of tokens $A$.
 Dynamics $f$ is a deterministic transition model between tokens $f(s,a) = s|a$，$|$ is concatenation.
@@ -37,7 +37,8 @@ $$
 $$
 reward $ r(x,y) = \beta \log \pi^*(y|x) - \beta \log \pi_{ref}(y|x) - Z(x) $
 $$
-\Rightarrow L_{DPO} (\pi_\theta; \pi_{ref}) = -\mathbb{E}_{(x,y^w,y^l)\sim D} [\log \beta \log \pi_{ref}(y|x) - \beta \log \pi_{ref}(y|x)]
+\Rightarrow L_{DPO} (\pi_\theta; \pi_{ref}) = -\mathbb{E}_{(x,y^w,y^l)\sim D} [\log \sigma(
+\beta\log \frac{\pi_\theta(y^w|x)}{\pi_{ref}(y^w|x)} - \beta \log \frac{\pi_\theta(y^l|x)}{\pi_{ref}(y^l|x)})]
 $$
 For RLHF's equation we have fixed point solution
 $$
@@ -50,7 +51,7 @@ $$
 Proof: $\pi^*(a_t|s_t) = \frac{e^{Q^*(s_t,a_t) / \beta}}{e^{V^*(s_t) / \beta}}$
 
 $$
-\sum_{a \in A} \pi^*(a_t|s_t) = 1 \quad \text{Therefore} \quad e^{V^*(s_t, S_t) / \beta} = \sum_{a \in A} e^{Q^*(s_t,a) / \beta}
+\sum_{a \in A} \pi^*(a_t|s_t) = 1 \quad \text{Therefore} \quad e^{V^*(s_t) / \beta} = \sum_{a \in A} e^{Q^*(s_t,a) / \beta}
 $$
 However no information for single State  action pair $ r$  
 
@@ -93,7 +94,7 @@ $$
 $$
 
 $$
-\Rightarrow L(\pi_\theta, D) = -\mathbb{E}_{(\tau, \omega) \sim D} \left[ \log \sigma \left( \left[ \sum_{t=0}^{T} \beta \log \pi_\theta(a_t|s_t) - \sum_{t=0}^{T} \beta \log \pi_{ref}(a_t|s_t) \right] \right) \right]
+
 $$
 
 #### Token-Level DPO Can Parameterize Any Dense Reward Function
@@ -111,8 +112,6 @@ $$
 \beta \log \frac{\pi^*(a_t | s_t)}{\pi_{\text{ref}}(a_t | s_t)} = r(s_t, a_t) + V^*(s_{t+1}) - V^*(s_t).
 $$
 Denote $ \beta \log \frac{\pi^*(a_t | s_t)}{\pi_{\text{ref}}(a_t | s_t)} $ as another reward function, 2 reward functions are equivalent.
-
-
 
 **Theorem 1.** Given a reference policy \( $\pi_{\text{ref}}$ \) and a parameter \($ \beta > 0 $\), all reward classes consistent with the Plackett-Luce (and Bradley-Terry) models in equation (1) can be represented with the re-parameterization of the form
 $$
