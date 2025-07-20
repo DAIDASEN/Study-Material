@@ -168,4 +168,4 @@ Generate $a_t$ following $\pi(a|s_t, \theta_t)$ and then observe $r_{t+1}, s_{t+
 <font color=green>Impotance Sampling</font>
 $$\mathbb{E}_{X \sim p_0}[X] = \sum_x p_0(x)x = \sum_x p_1(x) \frac{p_0(x)}{p_1(x)} x = \mathbb{E}_{X \sim p_1}[f(X)]$$, where $f(x) = \frac{p_0(x)}{p_1(x)}$
 Moreover we have: $$\mathbb{E}_{X \sim p_0}[X] \approx \bar{f} = \frac{1}{n} \sum_{i=1}^n f(x_i) = \frac{1}{n} \sum_{i=1}^n \frac{p_0(x_i)}{p_1(x_i)} x_i$$
-$\frac{p_0(x_i)}{p_1(x_i)}$ is called importance weight
+$\frac{p_0(x_i)}{p_1(x_i)}$ is called importance weight.
