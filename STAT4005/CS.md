@@ -83,7 +83,8 @@ ${X_t:t=1,2,...,n}$${X_1,X_2,...,X_n}$
 $F_\textbf{t}(\textbf{x}) = P(X_{t_1} ≤ x_1, ..., X_{t_n} ≤ x_n)$, $\textbf{x}=(x_1,x_2,\ ...,x_n),\ \textbf{t} = (t_1,\ ...,t_n)$
 <font color=blue>**Strictly stationary**</font>: distribution of a process does not change over time
 A process {$X_t$} is said to be strictly stationary if: for all $n$, $(t_1, t_2, ..., t_n)$ and $h$ we have   $(X_{t_1}, ..., X_{t_n}) \stackrel{d}{=} (X_{t_1+h}, ..., X_{t_n+h})$
-"$\stackrel{d}{=}$" means "equal in distribution", i.e., $F_{\mathbf{t}}(\mathbf{x}) = P(X_{t_1} \leq x_1,..., X_{t_n} \leq x_n) = P(X_{t_1+h} \leq x_1,..., X_{t_n+h} \leq x_n) = F_{\mathbf{t}+h}(\mathbf{x})$<font color=blue>**Weakly stationary**</font> (second order stationary/wide-sense stationary)
+"$\stackrel{d}{=}$" means "equal in distribution", i.e., $F_{\mathbf{t}}(\mathbf{x}) = P(X_{t_1} \leq x_1,..., X_{t_n} \leq x_n) = P(X_{t_1+h} \leq x_1,..., X_{t_n+h} \leq x_n) = F_{\mathbf{t}+h}(\mathbf{x})$
+<font color=blue>**Weakly stationary**</font> (second order stationary/wide-sense stationary)
 If $E(X_t) = \mu$ and $\text{Cov}(X_t, X_{t+h}) = \gamma(h) $仅与$h$有关$\Rightarrow$  {$X_t$} 是弱平稳的
 <font color=blue>**Autocovariance function & Autocorrelation function**</font> 
 ==ACVF==: $\gamma(h) = \text{Cov}(X_t, X_{t+h})$, 描述了随机过程在相隔 $h$ 个时间单位的两个观测值之间的协方差
@@ -188,7 +189,7 @@ The roots of $\phi(x)$ are $x = \frac{1}{\xi_1}, \ldots, \frac{1}{\xi_p}$.
 $$\phi(B)Y_t = \theta(B)Z_t, \quad Z_t \sim WN(0, \sigma^2),$$
 where $$\phi(B) = 1 - \phi_1B - \cdots - \phi_pB^p$$     $$\theta(B) = 1 - \theta_1B - \cdots - \theta_qB^q$$ are the characteristic polynomials with NO common roots.
 **Property:**
-**Stationary solution** exists if $\Rightarrow$ All roots of $\phi(B)$ are **not on*** the unit circle 
+**Stationary solution** exists if $\Rightarrow$ All roots of $\phi(B)$ are **not on** the unit circle 
 **Causal** if $\Rightarrow$  All roots of $\phi(B)$ are **outside** the unit circle ⇒ $Y_t = \phi^{-1}(B)\theta(B)Z_t = \sum_{k\geq 0} \psi_k Z_{t-k}$, with $\sum_{k\geq 0}|\psi_k| < \infty$. **Invertible** if $\Rightarrow$ All roots of $\theta(B)$ are **outside** the unit circle ⇒ $Z_t = \theta^{-1}(B)\phi(B)Y_t = \sum_{k\geq 0} \pi_k Y_{t-k}$, with $\sum_{k\geq 0}|\pi_k| < \infty$.
 
 **==ARIMA==**
