@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\section*{Question 7: Paper Summaries}
+
+\subsection*{Efficient Estimation of Word Representations in Vector Space (Word2Vec)}
+
+\begin{itemize}
+    \item \textbf{Motivation}: The authors wanted to create high-quality word vectors from very large datasets (billions of words) with less computational complexity than existing methods. The goal was to capture syntactic and semantic word relationships.
+    \item \textbf{Novelty}: The paper introduced two new model architectures: the Continuous Bag-of-Words (CBOW) model and the Skip-gram model. CBOW predicts a word from its context, while Skip-gram predicts the context from a word. The novelty also lies in optimization techniques like hierarchical softmax and negative sampling, which made training much more efficient.
+    \item \textbf{Intuition}: The method works because it's based on the distributional hypothesis: words that appear in similar contexts have similar meanings. By training a simple neural network to perform a context-prediction task, the learned word embeddings (the weights of the hidden layer) implicitly capture these contextual similarities.
+    \item \textbf{Implementation}: \href{https://code.google.com/archive/p/word2vec/}{https://code.google.com/archive/p/word2vec/}
+\end{itemize}
+
+\subsection*{Attention Is All You Need (Transformer)}
+
+\begin{itemize}
+    \item \textbf{Motivation}: The authors aimed to create a new model for sequence transduction tasks (like machine translation) that did not rely on recurrence (RNNs) or convolution (CNNs). The goal was to improve parallelization and reduce training time while achieving better performance.
+    \item \textbf{Novelty}: The paper introduced the Transformer architecture, which is based solely on attention mechanisms. It uses self-attention to compute representations of its input and output sequences. The model also introduced multi-head attention and positional encodings to capture sequence order.
+    \item \textbf{Intuition}: Instead of processing a sequence word-by-word, the self-attention mechanism allows the model to weigh the importance of all other words in the sequence when encoding a particular word. This allows it to capture long-range dependencies more effectively than RNNs. By doing this in parallel for all words, it becomes much faster to train.
+    \item \textbf{Implementation}: The official implementation is part of the Tensor2Tensor library: \href{https://github.com/tensorflow/tensor2tensor}{https://github.com/tensorflow/tensor2tensor}
+\end{itemize}
+
+\subsection*{BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}
+
+\begin{itemize}
+    \item \textbf{Motivation}: Previous language representation models were either unidirectional (like GPT) or shallowly bidirectional. The authors wanted to pre-train a truly deep bidirectional representation that could be fine-tuned for a wide range of natural language understanding (NLU) tasks.
+    \item \textbf{Novelty}: BERT's key innovation is its pre-training strategy, which uses a "masked language model" (MLM) objective. It randomly masks some of the tokens from the input and the model's objective is to predict the original masked words based on the context from both left and right. It also uses a "next sentence prediction" task.
+    \item \textbf{Intuition}: By pre-training on a task that requires understanding the full context of a sentence (both left and right of a word), BERT learns a much richer and more robust representation of language than models that only look at the context in one direction. This deep bidirectional understanding can then be easily adapted to various downstream tasks.
+    \item \textbf{Implementation}: \href{https://github.com/google-research/bert}{https://github.com/google-research/bert}
+\end{itemize}
+
+\subsection*{MSA Transformer}
+
+\begin{itemize}
+    \item \textbf{Motivation}: The authors wanted to apply the success of Transformer models to the field of protein biology. Specifically, they aimed to predict protein contact maps (which pairs of amino acids are close in 3D space) directly from sequence data, leveraging information from multiple sequence alignments (MSAs).
+    \item \textbf{Novelty}: This work adapts the Transformer architecture to operate on MSAs. It uses tied row and column attention mechanisms to capture information both within individual sequences (rows) and across aligned positions (columns) in the MSA. This allows the model to learn co-evolutionary information, which is indicative of structural contacts.
+    \item \textbf{Intuition}: Co-evolution suggests that a mutation in one part of a protein is often compensated by a mutation in another part to maintain the protein's function and structure. These correlated mutations are a strong signal for spatial proximity. By applying attention across the MSA, the model can learn these complex dependencies and use them to predict which amino acid pairs are in contact.
+    \item \textbf{Implementation}: \href{https://github.com/facebookresearch/esm}{https://github.com/facebookresearch/esm} (The MSA Transformer is part of the ESM library).
+\end{itemize}
+
+\end{document}

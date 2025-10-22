@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+\section*{Question 1: Gradient Vanishing and Gradient Explosion}
+
+\subsection*{What are they?}
+\textbf{Gradient Vanishing}: In deep neural networks, during backpropagation, the gradients of the loss function with respect to the weights in the earlier layers can become extremely small. This is because the gradients are calculated by the chain rule, and if many of the gradients in the product are less than 1, the resulting gradient will shrink exponentially. This makes the weights in the early layers update very slowly or not at all, hindering the training process.
+
+\textbf{Gradient Explosion}: This is the opposite problem. The gradients in the early layers become extremely large. This happens when many of the gradients in the chain rule product are greater than 1. The large gradients can cause the weight updates to be too large, leading to an unstable training process and the loss function may diverge.
+
+\subsection*{How to solve them?}
+Here are three methods to address these issues:
+
+\begin{enumerate}
+    \item \textbf{Weight Initialization}: Properly initializing the weights of the network can prevent the gradients from becoming too small or too large at the beginning of training. Methods like Xavier/Glorot initialization or He initialization are designed to maintain the variance of the activations and backpropagated gradients as they pass through the layers.
+
+    \item \textbf{Batch Normalization}: This technique normalizes the input to each layer for each mini-batch. By keeping the mean and variance of the inputs to a layer fixed, it helps to stabilize the distribution of activation values and reduces the problem of internal covariate shift. This stabilization helps to prevent gradients from vanishing or exploding.
+
+    \item \textbf{Gradient Clipping}: This is a direct solution for gradient explosion. It involves setting a threshold for the gradients. If the norm of the gradient exceeds this threshold, it is scaled down to the threshold value. This prevents the weight updates from becoming too large and destabilizing the network.
+
+    \item \textbf{Using Non-saturating Activation Functions}: Activation functions like Sigmoid and Tanh saturate for large positive or negative inputs, meaning their derivatives are close to zero. This can cause gradient vanishing. Using non-saturating activation functions like ReLU (Rectified Linear Unit) and its variants (Leaky ReLU, etc.) can help. For inputs greater than 0, the derivative of ReLU is 1, which helps to prevent the gradient from vanishing.
+
+    \item \textbf{Using Residual Networks (ResNets)}: ResNets introduce "skip connections" that allow the gradient to be directly backpropagated to earlier layers, bypassing some layers. This provides a shorter path for the gradient, which helps to mitigate the vanishing gradient problem in very deep networks.
+\end{enumerate}
+
+\end{document}

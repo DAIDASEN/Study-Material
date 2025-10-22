@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+\section*{Question 3: Training Loss Doesn't Decrease}
+
+If the training loss of a neural network does not decrease in the first several epochs, here are three possible reasons:
+
+\begin{enumerate}
+    \item \textbf{Improper Learning Rate}: The learning rate is a crucial hyperparameter.
+    \begin{itemize}
+        \item \textbf{Too Low}: If the learning rate is too small, the weight updates are tiny, and the model learns extremely slowly. The loss may appear to be stuck because the changes are too small to be significant in the first few epochs.
+        \item \textbf{Too High}: If the learning rate is too large, the optimizer might overshoot the optimal point in the loss landscape. Instead of converging, the loss might oscillate wildly or even diverge (increase), preventing any meaningful learning.
+    \end{itemize}
+
+    \item \textbf{Data Issues}: The problem might lie within the data itself or how it's prepared.
+    \begin{itemize}
+        \item \textbf{Improper Normalization}: If the input features are not normalized (e.g., scaled to a common range like [0, 1] or standardized to have zero mean and unit variance), features with larger scales can dominate the learning process and lead to unstable gradients, making it hard for the loss to decrease.
+        \item \textbf{Corrupted Data or Labels}: There might be errors in the dataset, such as incorrect labels or corrupted input samples. If the labels are random or noisy, the model cannot learn a meaningful mapping from inputs to outputs, and the loss will not consistently decrease.
+    \end{itemize}
+
+    \item \textbf{Weight Initialization Issues}: The way the initial weights of the network are set can significantly impact training. If weights are initialized improperly (e.g., all to zero, or to very large values), it can lead to problems like symmetry breaking failure or immediate gradient explosion/vanishing. This can cause neurons to become saturated or "die" (e.g., with ReLU activation), preventing the network from learning from the start.
+\end{enumerate}
+
+\end{document}

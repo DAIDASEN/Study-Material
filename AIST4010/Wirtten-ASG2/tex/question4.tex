@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+\section*{Question 4: Imbalanced Datasets}
+
+\subsection*{How do they affect training and prediction?}
+Imbalanced datasets, where one or more classes (the majority class) have significantly more samples than others (the minority classes), can severely bias a deep learning model. The model, aiming to minimize the overall loss, will naturally focus on the majority class, as it contributes more to the total loss. This leads to:
+\begin{itemize}
+    \item \textbf{High Accuracy, Poor Performance}: The model might achieve high accuracy simply by predicting the majority class for every sample. However, it will have very poor performance on the minority classes, often failing to correctly classify them at all.
+    \item \textbf{Biased Decision Boundary}: The learned decision boundary will be skewed towards the minority class, as the model prioritizes the correct classification of the majority class samples.
+\end{itemize}
+
+\subsection*{How to alleviate the issue?}
+Here are three possible ways to address the problem of imbalanced datasets:
+
+\begin{enumerate}
+    \item \textbf{Resampling Techniques}: This involves modifying the dataset to make it more balanced.
+    \begin{itemize}
+        \item \textbf{Oversampling}: Increase the number of instances in the minority class by duplicating existing ones or generating new synthetic samples. A popular method for this is SMOTE (Synthetic Minority Over-sampling Technique), which creates new synthetic samples by interpolating between existing minority class samples.
+        \item \textbf{Undersampling}: Decrease the number of instances in the majority class by randomly removing samples. This can be effective but may lead to loss of important information from the majority class.
+    \end{itemize}
+
+    \item \textbf{Cost-Sensitive Learning}: This approach assigns a higher misclassification cost to the minority class. By doing so, it forces the model to pay more attention to correctly classifying the minority samples. In practice, this is often implemented by assigning higher weights to the loss calculated for the minority class samples during training. Most deep learning frameworks support class weights in their loss functions.
+
+    \item \textbf{Data Augmentation}: For the minority class, we can generate more training data by applying various transformations to the existing samples. For image data, this could include rotations, flips, zooms, and color jittering. This increases the diversity of the minority class samples and helps the model to learn more robust features, reducing the risk of overfitting to the few available samples.
+\end{enumerate}
+
+\end{document}

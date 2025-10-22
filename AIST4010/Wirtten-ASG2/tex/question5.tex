@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{listings}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\section*{Question 5: LeNet on Fashion-MNIST}
+
+I implemented LeNet-5 using PyTorch and trained it on the Fashion-MNIST dataset. The following sections detail the results of various experiments compared to a baseline model.
+
+\subsection*{Baseline Performance}
+The baseline LeNet-5 model uses Sigmoid activation functions and Average Pooling.
+\begin{itemize}
+    \item \textbf{Accuracy}: 87.99\%
+\end{itemize}
+
+\subsection*{Experiment Results}
+The following table summarizes the test accuracy for each experiment.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{Experiment} & \textbf{Setting} & \textbf{Test Accuracy (\%)} \\
+\hline
+\textbf{a. CONV Layers} & Add one CONV layer & 86.93 \\
+& Remove one CONV layer & 87.24 \\
+\hline
+\textbf{b. FC Layers} & Add one FC layer & 87.83 \\
+& Remove one FC layer & 87.95 \\
+\hline
+\textbf{c. Dropout} & Dropout rate = 0.25 & 88.11 \\
+& Dropout rate = 0.5 & 88.05 \\
+\hline
+\textbf{d. Pooling Layer} & Max Pooling & 88.61 \\
+& Avg Pooling, kernel size=3 & 87.33 \\
+\hline
+\textbf{e. Conv Window} & Kernel size = 3 & 88.40 \\
+& Kernel size = 7 & 87.62 \\
+\hline
+\textbf{f. Output Channels} & More channels (12, 32) & 88.48 \\
+& Less channels (4, 8) & 87.11 \\
+\hline
+\textbf{g. Activation} & ReLU & \textbf{88.89} \\
+& Leaky ReLU & 88.66 \\
+\hline
+\end{tabular}
+\caption{Comparison of LeNet modifications on Fashion-MNIST.}
+\label{tab:results}
+\end{table}
+
+\subsection*{Best Result}
+The best performance was achieved by replacing the Sigmoid activation function with ReLU.
+\begin{itemize}
+    \item \textbf{Best Setting}: Using ReLU as the activation function.
+    \item \textbf{Best Accuracy}: 88.89\%
+\end{itemize}
+
+\subsection*{Code}
+The python code for this question is in `question5.py`.
+
+\end{document}
