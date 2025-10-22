@@ -1,0 +1,11 @@
+{
+  "results": {
+    "Baseline (Sigmoid, AvgPool)": 77.25,
+    "More CONV (extra 3x3)": 78.12,
+    "Less CONV (single conv)": 83.73
+  },
+  "best": {
+    "name": "Less CONV (single conv)",
+    "acc": 83.73
+  }
+}

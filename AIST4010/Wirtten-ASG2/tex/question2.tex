@@ -1,36 +1,15 @@
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
-\begin{document}
-
-\section*{Question 2: 2D vs 3D Convolution}
-
-\subsection*{Similarities}
-\begin{itemize}
-    \item \textbf{Core Operation}: Both 2D and 3D convolutions perform the same fundamental operation: they apply a filter (kernel) to an input volume and compute a dot product between the kernel's weights and the input patch it is currently on. This process is repeated as the kernel slides over the entire input.
-    \item \textbf{Parameter Sharing}: Both types of convolution utilize parameter sharing, meaning the same kernel is used across all spatial locations of the input. This drastically reduces the number of parameters in the model compared to a fully connected layer, making the network more efficient and less prone to overfitting.
-    \item \textbf{Local Connectivity}: Both operations exploit the principle of local connectivity, where each neuron in the output feature map is connected to only a small, local region of the input. This is based on the assumption that features in data like images or videos are local.
+% Question 2 content (input-only)
+	extbf{Similarities.}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Locality and parameter sharing}: Convolutional kernels apply local receptive fields with shared weights.
+  \item \emph{Translation equivariance}: Feature maps shift consistently with input translations (exact under appropriate padding/stride settings).
 \end{itemize}
 
-\subsection*{Differences}
-\begin{itemize}
-    \item \textbf{Input Data Dimensionality}: The most significant difference lies in the dimensionality of the input data they are designed for.
-    \begin{itemize}
-        \item \textbf{2D Convolution}: Operates on 2D data, such as single-channel images (height $\times$ width) or multi-channel images (height $\times$ width $\times$ channels). The convolution kernel slides in two dimensions (horizontally and vertically).
-        \item \textbf{3D Convolution}: Operates on 3D data, where all three dimensions are meaningful and local. Examples include video clips (height $\times$ width $\times$ time) or volumetric medical scans like MRI or CT (height $\times$ width $\times$ depth).
-    \end{itemize}
-    \item \textbf{Kernel Movement}:
-    \begin{itemize}
-        \item In \textbf{2D convolution}, the kernel slides along the height and width of the input.
-        \item In \textbf{3D convolution}, the kernel slides along all three dimensions: height, width, and depth/time.
-    \end{itemize}
-    \item \textbf{Feature Detection}:
-    \begin{itemize}
-        \item \textbf{2D convolution} is used to detect spatial features within a 2D plane, such as edges, corners, or textures in an image.
-        \item \textbf{3D convolution} is capable of detecting features that have a volumetric or spatio-temporal extent. For instance, in a video, a 3D convolution can learn to detect motion patterns (e.g., a person walking) by considering changes across frames. In a medical scan, it can detect 3D shapes like tumors.
-    \end{itemize}
+	extbf{Differences.}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Data domain}: 2D conv on H$\times$W (e.g., images); 3D conv on H$\times$W$\times$D/T (e.g., volumes/videos).
+  \item \emph{Kernel sweep}: 2D slides over two axes; 3D slides over three axes, capturing volumetric or spatio-temporal patterns.
+  \item \emph{Compute/params}: 3D kernels incur higher cost and memory; risk of overfitting increases under limited data.
+  \item \emph{Use cases}: 2D for spatial cues (edges, textures); 3D for motion/shape continuity (temporal dynamics, 3D anatomy).
+  \item \emph{Design variants}: Factorized (2+1)D or separable spatio-temporal convolutions reduce cost while preserving accuracy in videos.
 \end{itemize}
-
-\end{document}

@@ -1,3 +1,5 @@
+import os
+import json
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -110,7 +112,7 @@ class LeNet_Dropout(LeNet5):
         return x
 
 # --- Training and Evaluation Function ---
-def train_and_evaluate(model, train_loader, test_loader, model_name, epochs=10):
+def train_and_evaluate(model, train_loader, test_loader, model_name, epochs=3):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     criterion = nn.CrossEntropyLoss()
@@ -156,79 +158,25 @@ transform = transforms.Compose([
 ])
 
 train_set = torchvision.datasets.FashionMNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = DataLoader(train_set, batch_size=64, shuffle=True)
+train_loader = DataLoader(train_set, batch_size=256, shuffle=True, num_workers=0)
 
 test_set = torchvision.datasets.FashionMNIST(root='./data', train=False, download=True, transform=transform)
-test_loader = DataLoader(test_set, batch_size=1000, shuffle=False)
+test_loader = DataLoader(test_set, batch_size=1000, shuffle=False, num_workers=0)
 
 
 if __name__ == '__main__':
+    # Ensure output dir exists (relative to tex folder)
+    out_dir = os.path.join(os.path.dirname(__file__), 'generated')
+    os.makedirs(out_dir, exist_ok=True)
+
     results = {}
 
-    # Baseline
+    # As per clarification: implement two networks with different number of CONV layers (plus baseline)
     baseline_model = LeNet5()
-    results['Baseline (Sigmoid, AvgPool)'] = train_and_evaluate(baseline_model, train_loader, test_loader, "Baseline")
+    results['Baseline (Sigmoid, AvgPool)'] = train_and_evaluate(baseline_model, train_loader, test_loader, "Baseline", epochs=5)
 
-    # a. CONV layers
-    results['More CONV'] = train_and_evaluate(LeNet_MoreConv(), train_loader, test_loader, "More CONV")
-    results['Less CONV'] = train_and_evaluate(LeNet_LessConv(), train_loader, test_loader, "Less CONV")
-
-    # b. FC layers
-    results['More FC'] = train_and_evaluate(LeNet_MoreFC(), train_loader, test_loader, "More FC")
-    results['Less FC'] = train_and_evaluate(LeNet_LessFC(), train_loader, test_loader, "Less FC")
-
-    # c. Dropout
-    results['Dropout (0.25)'] = train_and_evaluate(LeNet_Dropout(0.25), train_loader, test_loader, "Dropout (0.25)")
-    results['Dropout (0.5)'] = train_and_evaluate(LeNet_Dropout(0.5), train_loader, test_loader, "Dropout (0.5)")
-
-    # d. Pooling Layer
-    lenet_maxpool = LeNet5()
-    lenet_maxpool.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
-    lenet_maxpool.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
-    results['MaxPool'] = train_and_evaluate(lenet_maxpool, train_loader, test_loader, "MaxPool")
-
-    lenet_pool_ks3 = LeNet5()
-    lenet_pool_ks3.pool1 = nn.AvgPool2d(kernel_size=3, stride=2, padding=1) # Adjust to maintain size
-    lenet_pool_ks3.pool2 = nn.AvgPool2d(kernel_size=3, stride=2, padding=1)
-    results['AvgPool (Kernel=3)'] = train_and_evaluate(lenet_pool_ks3, train_loader, test_loader, "AvgPool (Kernel=3)")
-
-    # e. Convolution window size
-    lenet_conv_ks3 = LeNet5()
-    lenet_conv_ks3.conv1 = nn.Conv2d(1, 6, kernel_size=3, padding=1)
-    lenet_conv_ks3.conv2 = nn.Conv2d(6, 16, kernel_size=3)
-    # Adjust fc1 input size due to different conv kernel
-    # After conv1 (3x3, p=1): 28x28 -> 28x28. Pool: 14x14
-    # After conv2 (3x3): 14x14 -> 12x12. Pool: 6x6
-    lenet_conv_ks3.fc1 = nn.Linear(16 * 6 * 6, 120)
-    results['Conv Kernel=3'] = train_and_evaluate(lenet_conv_ks3, train_loader, test_loader, "Conv Kernel=3")
-
-    lenet_conv_ks7 = LeNet5()
-    lenet_conv_ks7.conv1 = nn.Conv2d(1, 6, kernel_size=7, padding=3)
-    lenet_conv_ks7.conv2 = nn.Conv2d(6, 16, kernel_size=7)
-    # After conv1 (7x7, p=3): 28x28 -> 28x28. Pool: 14x14
-    # After conv2 (7x7): 14x14 -> 8x8. Pool: 4x4
-    lenet_conv_ks7.fc1 = nn.Linear(16 * 4 * 4, 120)
-    results['Conv Kernel=7'] = train_and_evaluate(lenet_conv_ks7, train_loader, test_loader, "Conv Kernel=7")
-
-    # f. Number of output channels
-    lenet_ch_more = LeNet5()
-    lenet_ch_more.conv1 = nn.Conv2d(1, 12, kernel_size=5, padding=2)
-    lenet_ch_more.conv2 = nn.Conv2d(12, 32, kernel_size=5)
-    lenet_ch_more.fc1 = nn.Linear(32 * 5 * 5, 120)
-    results['More Channels (12, 32)'] = train_and_evaluate(lenet_ch_more, train_loader, test_loader, "More Channels")
-
-    lenet_ch_less = LeNet5()
-    lenet_ch_less.conv1 = nn.Conv2d(1, 4, kernel_size=5, padding=2)
-    lenet_ch_less.conv2 = nn.Conv2d(4, 8, kernel_size=5)
-    lenet_ch_less.fc1 = nn.Linear(8 * 5 * 5, 120)
-    results['Less Channels (4, 8)'] = train_and_evaluate(lenet_ch_less, train_loader, test_loader, "Less Channels")
-
-    # g. Activation function
-    lenet_relu = LeNet5(activation_fn=nn.ReLU)
-    results['ReLU Activation'] = train_and_evaluate(lenet_relu, train_loader, test_loader, "ReLU Activation")
-
-    lenet_leaky_relu = LeNet5(activation_fn=nn.LeakyReLU)
-    results['LeakyReLU Activation'] = train_and_evaluate(lenet_leaky_relu, train_loader, test_loader, "LeakyReLU Activation")
+    results['More CONV (extra 3x3)'] = train_and_evaluate(LeNet_MoreConv(), train_loader, test_loader, "More CONV", epochs=5)
+    results['Less CONV (single conv)'] = train_and_evaluate(LeNet_LessConv(), train_loader, test_loader, "Less CONV", epochs=5)
 
     # --- Print Final Results ---
     print("\n--- All Experiment Results ---")
@@ -237,3 +185,21 @@ if __name__ == '__main__':
 
     best_model = max(results, key=results.get)
     print(f"\nBest performing model: {best_model} with accuracy {results[best_model]:.2f}%")
+
+    # Save JSON
+    json_path = os.path.join(out_dir, 'question5_results.json')
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump({"results": results, "best": {"name": best_model, "acc": results[best_model]}}, f, indent=2)
+
+    # Write LaTeX table snippet
+    table_path = os.path.join(out_dir, 'question5_results_table.tex')
+    with open(table_path, 'w', encoding='utf-8') as f:
+        f.write("% Auto-generated by question5.py\n")
+        f.write("\\begin{tabular}{@{}llc@{}}\\toprule\n")
+        f.write("Experiment & Setting & Test Acc (\\%) \\ \\midrule\n")
+        for k, v in results.items():
+            exp = 'Conv layers'
+            f.write(f"{exp} & {k} & {v:.2f} \\ \n")
+        f.write("\\midrule\n")
+        f.write(f"\\multicolumn{{2}}{{l}}{{Best}} & {results[best_model]:.2f} \\ \\bottomrule\n")
+        f.write("\\end{tabular}\n")
