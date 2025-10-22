@@ -230,5 +230,8 @@ We may write $\hat{Y}_i = M_i\hat{p}_i$ to relate $p$ to the sample proportions 
 Recall: $\hat{\sigma}_i^2$ is the estimator for population variance of cluster $i$, hence $\hat{\sigma}_i^2 = \frac{m_i}{m_i-1}\hat{p}_i(1-\hat{p}_i)$
 $\hat{\sigma}_c^2$ is the sample variance of the estimated cluster totals, hence <font color="red">$\hat{\sigma}_c^2 = \frac{1}{n-1}\sum_{i=1}^n \left(M_i\hat{p}_i - \frac{M}{N}\hat{p}\right)^2$</font>
 
-**Assumption**: officially we need: n, N, N-n shall be large, but if $$Y_i$$ can be assumed as i.i.d normal, we can use CI formula.
+**Assumption**: 
+officially we need: n, N, N-n shall be large, but if $$Y_i$$ can be assumed as i.i.d normal, we can use CI formula.
 officially we need: n, N, N-n shall be large (which is satisfied), $$Y_i$$ shall be roughly i.i.d normal (which is not satisfied since $$Y_i$$ is either 2 or -1). But since n/N/N-n are large, sample variance is a good estimate of population variance, so using z quantile under the large n/N/N-n condition is approximately ok.
+**Quota Sampling**
+Disadvantage: 1. Instructions leave room for human subjectivity when objectivity is needed 2. Interviewers may seek "nicer" people (e.g., richer), creating bias 3. Impossible to control all factors influencing preferences 4. Fixing one demographic ratio might disturb others 5.Unlike randomization, cannot balance unknown factors in the population
