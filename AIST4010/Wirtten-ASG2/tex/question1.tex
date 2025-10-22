@@ -1,11 +1,11 @@
 % Question 1 content (input-only)
-	extbf{Definitions.}
+\textbf{Definitions.}
 \begin{itemize}[leftmargin=*]
     \item \emph{Vanishing gradients}: Backpropagated gradients decay exponentially across layers (often with saturating activations), yielding negligible updates in early layers.
     \item \emph{Exploding gradients}: Backpropagated gradients grow exponentially, causing unstable updates and divergence.
 \end{itemize}
 
-	extbf{Mitigations (at least three).}
+\textbf{Mitigations (at least three).}
 \begin{itemize}[leftmargin=*]
     \item \emph{Proper initialization}: Xavier/Glorot for tanh; He/Kaiming for ReLU-family to preserve variance through layers.
     \item \emph{Activation choice}: Prefer non-saturating activations (ReLU, LeakyReLU, GELU); avoid deep stacks of sigmoid/tanh.
