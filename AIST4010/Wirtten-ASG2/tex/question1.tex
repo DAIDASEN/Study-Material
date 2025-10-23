@@ -1,15 +1,2 @@
 % Question 1 content (input-only)
-\textbf{Definitions.}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Vanishing gradients}: Backpropagated gradients decay exponentially across layers (often with saturating activations), yielding negligible updates in early layers.
-    \item \emph{Exploding gradients}: Backpropagated gradients grow exponentially, causing unstable updates and divergence.
-\end{itemize}
-
-\textbf{Mitigations (at least three).}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Proper initialization}: Xavier/Glorot for tanh; He/Kaiming for ReLU-family to preserve variance through layers.
-    \item \emph{Activation choice}: Prefer non-saturating activations (ReLU, LeakyReLU, GELU); avoid deep stacks of sigmoid/tanh.
-    \item \emph{Normalization}: BatchNorm/LayerNorm stabilize activations and gradients, enabling deeper networks and larger learning rates.
-    \item \emph{Gradient clipping}: Clip global norm or per-parameter norms to cap extreme updates (mainly for explosion).
-    \item \emph{Architectural aids}: Residual/skip connections and gating (e.g., LSTM) shorten gradient paths and mitigate decay.
-\end{itemize}
+Vanishing gradients denote the exponential decay of backpropagated signals through depth (commonly with saturating activations), while exploding gradients describe the opposite trend that drives unstable, divergent updates. In practice, both are addressed by a combination of principled initialization (Glorot for tanh; He/Kaiming for ReLU-family) and activation design (prefer non-saturating ReLU/LeakyReLU/GELU over deep stacks of sigmoid/tanh). Normalization layers (BatchNorm or LayerNorm) further stabilize activation and gradient statistics, enabling deeper models and larger learning rates. When large spikes arise, gradient clipping (global or per-parameter norms) caps updates directly, and architectural shortcuts such as residual/skip connections or gated units (e.g., LSTM) shorten gradient paths to mitigate decay.

@@ -1,32 +1,8 @@
 % Question 7 content (input-only)
-\textbf{Efficient Estimation of Word Representations in Vector Space (Word2Vec).}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Motivation}: Scalable training of high-quality word embeddings on web-scale corpora.
-    \item \emph{Novelty}: CBOW and Skip-gram objectives; efficient approximations (hierarchical softmax, negative sampling).
-    \item \emph{Intuition}: Distributional hypothesis—context prediction yields semantic/syntactic regularities in embedding space.
-    \item \emph{Implementation}: \href{https://code.google.com/archive/p/word2vec/}{official archive}.
-\end{itemize}
+	extbf{Efficient Estimation of Word Representations in Vector Space (Word2Vec).} Motivation—train high-quality embeddings at web scale; Novelty—CBOW/Skip-gram with efficient approximations (hierarchical softmax, negative sampling); Intuition—distributional hypothesis: predicting context induces semantic/syntactic regularities; Implementation—\href{https://code.google.com/archive/p/word2vec/}{official archive}.
 
-\textbf{Attention Is All You Need (Transformer).}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Motivation}: Remove recurrence/convolution to improve parallelism and long-range dependency modeling in translation.
-    \item \emph{Novelty}: Pure self-attention encoder–decoder, multi-head attention, positional encoding, scaled dot-product.
-    \item \emph{Intuition}: Each token attends to all others, capturing global dependencies with parallel computation.
-    \item \emph{Implementation}: \href{https://github.com/tensorflow/tensor2tensor}{Tensor2Tensor}.
-\end{itemize}
+	extbf{Attention Is All You Need (Transformer).} Motivation—replace recurrence/convolution to maximize parallelism and model long-range dependencies; Novelty—pure self-attention encoder–decoder with multi-head attention and positional encoding; Intuition—each token attends globally, capturing dependencies in parallel; Implementation—\href{https://github.com/tensorflow/tensor2tensor}{Tensor2Tensor}.
 
-\textbf{BERT: Pre-training of Deep Bidirectional Transformers.}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Motivation}: Learn deeply bidirectional language representations adaptable to diverse NLU tasks.
-    \item \emph{Novelty}: Masked Language Modeling and Next Sentence Prediction pretraining objectives.
-    \item \emph{Intuition}: Conditioning on both left and right context yields richer token representations transferable to downstream tasks.
-    \item \emph{Implementation}: \href{https://github.com/google-research/bert}{google-research/bert}.
-\end{itemize}
+	extbf{BERT: Pre-training of Deep Bidirectional Transformers.} Motivation—learn deeply bidirectional language representations for broad NLU transfer; Novelty—Masked Language Modeling and Next Sentence Prediction; Intuition—conditioning on both left and right context yields richer token embeddings transferable across tasks; Implementation—\href{https://github.com/google-research/bert}{google-research/bert}.
 
-\textbf{MSA Transformer.}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Motivation}: Exploit multiple sequence alignments to predict protein structural signals (e.g., contacts).
-    \item \emph{Novelty}: Row/column attention across sequences and aligned positions; captures co-evolutionary patterns.
-    \item \emph{Intuition}: Correlated mutations imply spatial proximity; attention over MSAs models these dependencies.
-    \item \emph{Implementation}: \href{https://github.com/facebookresearch/esm}{facebookresearch/esm} (ESM suite).
-\end{itemize}
+	extbf{MSA Transformer.} Motivation—leverage multiple sequence alignments to capture structural signals in proteins; Novelty—row/column attention across sequences and aligned positions to model co-evolution; Intuition—correlated mutations imply spatial proximity, which attention over MSAs can exploit; Implementation—\href{https://github.com/facebookresearch/esm}{facebookresearch/esm} (ESM suite).

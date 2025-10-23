@@ -1,11 +1,2 @@
 % Question 3 content (input-only)
-\textbf{Symptoms.} Loss plateaus or oscillates in early epochs without downward trend.
-
-\textbf{Likely causes (examples).}
-\begin{itemize}[leftmargin=*]
-  \item \emph{Learning rate mis-specified}: too low (minuscule updates) or too high (overshooting/oscillation). Consider LR range test or scheduler warmup.
-  \item \emph{Data/label issues}: missing normalization/standardization; severe label noise or class leakage; erroneous preprocessing/augmentations.
-  \item \emph{Initialization/activation mismatch}: poor initialization (symmetry, saturation), incompatible with activation (e.g., sigmoid + large weights).
-  \item \emph{Optimization setup}: wrong loss (e.g., missing reduction/weights), disabled gradient flow (requires\_grad/ detach), weight decay too large; model accidentally in eval mode (BatchNorm/Dropout frozen).
-  \item \emph{Batching/runtime}: batch size too small/large; exploding gradients with silent NaNs (check gradient norms, enable anomaly detection).
-\end{itemize}
+If the loss plateaus or oscillates in early epochs, the usual culprits are mis-specified learning rates (too small for progress or too large causing overshoot; try an LR range test or warmup), data/label problems (missing normalization, label noise, leakage, or faulty preprocessing/augmentations), and initialization–activation mismatches (e.g., large weights with sigmoid saturating quickly). Practical issues also arise from optimization setup (wrong loss reduction/weights, detached gradients, excessive weight decay, or inadvertently training in eval mode so BatchNorm/Dropout are frozen). Finally, batching and runtime stability matter: extreme batch sizes and exploding gradients can inject NaNs; monitoring gradient norms and enabling anomaly detection help isolate the cause.

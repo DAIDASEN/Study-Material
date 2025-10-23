@@ -1,160 +1,232 @@
-import os
-import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-# --- Adam Optimizer Implementation ---
-class Adam:
-    def __init__(self, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
-        self.learning_rate = learning_rate
-        self.beta1 = beta1
-        self.beta2 = beta2
-        self.epsilon = epsilon
-        self.m = None
-        self.v = None
-        self.t = 0
+# Set seed for reproducibility (as in A1)
+np.random.seed(42)
 
-    def update(self, params, grads):
-        if self.m is None:
-            self.m = [np.zeros_like(p) for p in params]
-            self.v = [np.zeros_like(p) for p in params]
+# --- Functions from A1 (Logistic Regression) ---
 
-        self.t += 1
-        updated_params = []
+def generate_data(n_samples=1000, n_features=100, n_test=100):
+    """Generates a linearly separable dataset with noise."""
+    # Class 0
+    mean0 = np.ones(n_features) * -0.5
+    cov0 = np.eye(n_features)
+    X0 = np.random.multivariate_normal(mean0, cov0, n_samples)
+    y0 = np.zeros(n_samples)
+    
+    # Class 1
+    mean1 = np.ones(n_features) * 0.5
+    cov1 = np.eye(n_features)
+    X1 = np.random.multivariate_normal(mean1, cov1, n_samples)
+    y1 = np.ones(n_samples)
+    
+    # Combine training data
+    X_train = np.vstack((X0, X1))
+    y_train = np.hstack((y0, y1)).reshape(-1, 1)
+    
+    # Shuffle training data
+    indices = np.arange(X_train.shape[0])
+    np.random.shuffle(indices)
+    X_train = X_train[indices]
+    y_train = y_train[indices]
+    
+    # Generate testing data (approx 50/50 split)
+    n_test_per_class = n_test // 2
+    X_test0 = np.random.multivariate_normal(mean0, cov0, n_test_per_class)
+    y_test0 = np.zeros(n_test_per_class)
+    X_test1 = np.random.multivariate_normal(mean1, cov1, n_test - n_test_per_class)
+    y_test1 = np.ones(n_test - n_test_per_class)
+    
+    X_test = np.vstack((X_test0, X_test1))
+    y_test = np.hstack((y_test0, y_test1)).reshape(-1, 1)
+    
+    return X_train, y_train, X_test, y_test
 
-        for i in range(len(params)):
-            # Update biased first moment estimate
-            self.m[i] = self.beta1 * self.m[i] + (1 - self.beta1) * grads[i]
-            # Update biased second raw moment estimate
-            self.v[i] = self.beta2 * self.v[i] + (1 - self.beta2) * (grads[i] ** 2)
-
-            # Compute bias-corrected first moment estimate
-            m_hat = self.m[i] / (1 - self.beta1 ** self.t)
-            # Compute bias-corrected second raw moment estimate
-            v_hat = self.v[i] / (1 - self.beta2 ** self.t)
-
-            # Update parameters
-            param_update = self.learning_rate * m_hat / (np.sqrt(v_hat) + self.epsilon)
-            updated_params.append(params[i] - param_update)
-
-        return updated_params
-
-# --- SGD Optimizer Implementation ---
-class SGD:
-    def __init__(self, learning_rate=0.0001):
-        self.learning_rate = learning_rate
-
-    def update(self, params, grads):
-        updated_params = []
-        for i in range(len(params)):
-            param_update = self.learning_rate * grads[i]
-            updated_params.append(params[i] - param_update)
-        return updated_params
-
-# --- Logistic Regression Model (from A1) ---
 def sigmoid(z):
+    """Sigmoid activation function."""
     return 1 / (1 + np.exp(-z))
 
-def logistic_regression(X, y, optimizer, epochs=1000):
-    n_samples, n_features = X.shape
-    weights = np.zeros(n_features)
-    bias = 0
-    losses = []
+def compute_loss(y, y_hat):
+    """Binary Cross-Entropy Loss."""
+    m = y.shape[0]
+    # Add epsilon for numerical stability (to avoid log(0))
+    epsilon = 1e-9
+    loss = -1/m * np.sum(y * np.log(y_hat + epsilon) + (1 - y) * np.log(1 - y_hat + epsilon))
+    return loss
 
-    for epoch in range(epochs):
-        # Linear model
-        linear_model = np.dot(X, weights) + bias
-        y_predicted = sigmoid(linear_model)
+def forward(X, W, b):
+    """Forward pass: computes y_hat."""
+    z = np.dot(X, W) + b
+    y_hat = sigmoid(z)
+    return y_hat
 
-        # Compute loss
-        loss = - (1 / n_samples) * np.sum(y * np.log(y_predicted) + (1 - y) * np.log(1 - y_predicted))
-        losses.append(loss)
+def backward(X, y, y_hat):
+    """Backward pass: computes gradients."""
+    m = X.shape[0]
+    dz = y_hat - y
+    dW = 1/m * np.dot(X.T, dz)
+    db = 1/m * np.sum(dz)
+    return dW, db
 
-        # Compute gradients
-        dw = (1 / n_samples) * np.dot(X.T, (y_predicted - y))
-        db = (1 / n_samples) * np.sum(y_predicted - y)
+def accuracy(y, y_pred):
+    """Calculates prediction accuracy."""
+    y_pred_class = (y_pred > 0.5).astype(int)
+    return np.mean(y_pred_class == y) * 100
 
-        # Update parameters
-        params = [weights, bias]
-        grads = [dw, db]
-        weights, bias = optimizer.update(params, grads)
+# --- Optimizer Implementations ---
 
-        if epoch % 100 == 0:
-            print(f'Epoch {epoch}: Loss = {loss:.4f}')
-
-    return losses
-
-# --- Main Execution ---
-if __name__ == '__main__':
-    out_dir = os.path.join(os.path.dirname(__file__), 'generated')
-    os.makedirs(out_dir, exist_ok=True)
-    # Generate some synthetic data for demonstration
-    np.random.seed(42)
-    X_train = np.random.rand(100, 2) * 10
-    # Create a linear decision boundary: y = 1 if x1 + x2 > 10, else 0
-    y_train = (X_train[:, 0] + X_train[:, 1] > 10).astype(int)
-
-    # Add a bias term to X_train for simplicity in the model function
-    X_b = np.c_[np.ones((X_train.shape[0], 1)), X_train]
-
-    # --- Train with Adam ---
-    print("--- Training with Adam Optimizer ---")
-    adam_optimizer = Adam(learning_rate=0.01) # A higher LR is often used for Adam
-    # Re-implementing the logistic regression logic to fit the optimizer class structure
+def train_sgd(X_train, y_train, X_test, y_test, epochs, learning_rate):
+    """Trains logistic regression using (Batch) SGD."""
     n_samples, n_features = X_train.shape
-    adam_weights = np.zeros(n_features)
-    adam_bias = 0
-    adam_losses = []
+    
+    # Initialize parameters
+    W = np.zeros((n_features, 1))
+    b = 0.0
+    
+    train_loss_history = []
+    test_loss_history = []
+    
+    for epoch in range(epochs):
+        # Forward pass (Training)
+        y_hat_train = forward(X_train, W, b)
+        train_loss = compute_loss(y_train, y_hat_train)
+        train_loss_history.append(train_loss)
+        
+        # Backward pass (Gradients)
+        dW, db = backward(X_train, y_train, y_hat_train)
+        
+        # --- SGD Update Rule ---
+        W -= learning_rate * dW
+        b -= learning_rate * db
+        
+        # Evaluate on test set
+        y_hat_test = forward(X_test, W, b)
+        test_loss = compute_loss(y_test, y_hat_test)
+        test_loss_history.append(test_loss)
+        
+        if (epoch + 1) % 100 == 0:
+            print(f"SGD Epoch {epoch+1}/{epochs}, Train Loss: {train_loss:.4f}, Test Loss: {test_loss:.4f}")
 
-    for epoch in range(1000):
-        linear_model = np.dot(X_train, adam_weights) + adam_bias
-        y_predicted = sigmoid(linear_model)
-        loss = - (1 / n_samples) * np.sum(y_train * np.log(y_predicted) + (1 - y_train) * np.log(1 - y_predicted))
-        adam_losses.append(loss)
-        dw = (1 / n_samples) * np.dot(X_train.T, (y_predicted - y_train))
-        db = (1 / n_samples) * np.sum(y_predicted - y_train)
-        [adam_weights, adam_bias] = adam_optimizer.update([adam_weights, adam_bias], [dw, db])
+    return W, b, train_loss_history, test_loss_history
 
-    # --- Train with SGD ---
-    print("\n--- Training with SGD Optimizer ---")
-    sgd_optimizer = SGD(learning_rate=1e-4)
-    sgd_weights = np.zeros(n_features)
-    sgd_bias = 0
-    sgd_losses = []
+def train_adam(X_train, y_train, X_test, y_test, epochs, alpha, delta, gamma, epsilon):
+    """Trains logistic regression using Adam optimizer."""
+    n_samples, n_features = X_train.shape
+    
+    # Initialize parameters
+    W = np.zeros((n_features, 1))
+    b = 0.0
+    
+    # --- Adam Initialization ---
+    m_W = np.zeros_like(W)
+    v_W = np.zeros_like(W)
+    m_b = 0.0
+    v_b = 0.0
+    t = 0  # Time step
+    
+    train_loss_history = []
+    test_loss_history = []
+    
+    for epoch in range(epochs):
+        t += 1  # Increment time step
+        
+        # Forward pass (Training)
+        y_hat_train = forward(X_train, W, b)
+        train_loss = compute_loss(y_train, y_hat_train)
+        train_loss_history.append(train_loss)
+        
+        # Backward pass (Gradients)
+        dW, db = backward(X_train, y_train, y_hat_train)
+        
+        # --- Adam Update Rule ---
+        
+        # 1. Update biased first moment estimate
+        m_W = delta * m_W + (1 - delta) * dW
+        m_b = delta * m_b + (1 - delta) * db
+        
+        # 2. Update biased second moment estimate
+        v_W = gamma * v_W + (1 - gamma) * (dW ** 2)
+        v_b = gamma * v_b + (1 - gamma) * (db ** 2)
+        
+        # 3. Compute bias-corrected first moment estimate
+        m_hat_W = m_W / (1 - delta ** t)
+        m_hat_b = m_b / (1 - delta ** t)
+        
+        # 4. Compute bias-corrected second moment estimate
+        v_hat_W = v_W / (1 - gamma ** t)
+        v_hat_b = v_b / (1 - gamma ** t)
+        
+        # 5. Update parameters
+        W -= alpha * m_hat_W / (np.sqrt(v_hat_W) + epsilon)
+        b -= alpha * m_hat_b / (np.sqrt(v_hat_b) + epsilon)
+        
+        # Evaluate on test set
+        y_hat_test = forward(X_test, W, b)
+        test_loss = compute_loss(y_test, y_hat_test)
+        test_loss_history.append(test_loss)
+        
+        if (epoch + 1) % 100 == 0:
+            print(f"Adam Epoch {epoch+1}/{epochs}, Train Loss: {train_loss:.4f}, Test Loss: {test_loss:.4f}")
 
-    for epoch in range(1000):
-        linear_model = np.dot(X_train, sgd_weights) + sgd_bias
-        y_predicted = sigmoid(linear_model)
-        loss = - (1 / n_samples) * np.sum(y_train * np.log(y_predicted) + (1 - y_train) * np.log(1 - y_predicted))
-        sgd_losses.append(loss)
-        dw = (1 / n_samples) * np.dot(X_train.T, (y_predicted - y_train))
-        db = (1 / n_samples) * np.sum(y_predicted - y_train)
-        [sgd_weights, sgd_bias] = sgd_optimizer.update([sgd_weights, sgd_bias], [dw, db])
+    return W, b, train_loss_history, test_loss_history
 
+# --- Plotting Function ---
 
-    # --- Plotting the results ---
-    plt.figure(figsize=(7, 4))
-    plt.plot(adam_losses, label='Adam Optimizer (lr=0.01)')
-    plt.plot(sgd_losses, label='SGD Optimizer (lr=1e-4)')
-    plt.title('Convergence Speed: Adam vs. SGD')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
+def plot_loss_comparison(sgd_history, adam_history, epochs):
+    """Plots the training loss curves for SGD and Adam."""
+    plt.figure(figsize=(10, 6))
+    plt.plot(range(epochs), sgd_history, label=f"SGD (lr={SGD_LR})", color="blue")
+    plt.plot(range(epochs), adam_history, label=f"Adam (lr={ADAM_ALPHA})", color="red")
+    plt.xlabel("Epoch")
+    plt.ylabel("Training Loss (Binary Cross-Entropy)")
+    plt.title("SGD vs. Adam Convergence Comparison")
     plt.legend()
     plt.grid(True)
-    plot_path = os.path.join(out_dir, 'convergence_comparison.png')
-    plt.tight_layout()
-    plt.savefig(plot_path, dpi=150)
+    plt.ylim(0, 0.7) # Start y-axis at 0 for better comparison
+    plt.show()
 
-    # Save brief summary (final losses)
-    summary = {
-        "adam_final_loss": float(adam_losses[-1]),
-        "sgd_final_loss": float(sgd_losses[-1])
-    }
-    with open(os.path.join(out_dir, 'question6_summary.json'), 'w', encoding='utf-8') as f:
-        json.dump(summary, f, indent=2)
+# --- Main Execution ---
 
-    # Write LaTeX snippet for inclusion
-    with open(os.path.join(out_dir, 'question6_summary.tex'), 'w', encoding='utf-8') as f:
-        f.write("% Auto-generated by question6.py\n")
-        f.write(f"Adam final loss: {summary['adam_final_loss']:.4f}\\\\\n")
-        f.write(f"SGD final loss: {summary['sgd_final_loss']:.4f}\\\n")
+if __name__ == "__main__":
+    # Hyperparameters
+    EPOCHS = 1000
+    
+    # SGD (as requested)
+    SGD_LR = 1e-4
+    
+    # Adam (default params)
+    ADAM_ALPHA = 0.001   # Learning rate (α)
+    ADAM_DELTA = 0.9     # First moment decay (δ)
+    ADAM_GAMMA = 0.999   # Second moment decay (γ)
+    ADAM_EPSILON = 1e-7  # Numerical stability (ε)
+
+    # 1. Generate Data
+    X_train, y_train, X_test, y_test = generate_data()
+    print(f"Data shapes: X_train: {X_train.shape}, y_train: {y_train.shape}, X_test: {X_test.shape}, y_test: {y_test.shape}")
+
+    # 2. Run SGD
+    print("\n--- Training with SGD ---")
+    W_sgd, b_sgd, train_loss_sgd, test_loss_sgd = train_sgd(
+        X_train, y_train, X_test, y_test, EPOCHS, SGD_LR
+    )
+
+    # 3. Run Adam
+    print("\n--- Training with Adam ---")
+    W_adam, b_adam, train_loss_adam, test_loss_adam = train_adam(
+        X_train, y_train, X_test, y_test, EPOCHS,
+        ADAM_ALPHA, ADAM_DELTA, ADAM_GAMMA, ADAM_EPSILON
+    )
+    
+    # 4. Calculate and Print Final Accuracy
+    y_pred_sgd = forward(X_test, W_sgd, b_sgd)
+    acc_sgd = accuracy(y_test, y_pred_sgd)
+    
+    y_pred_adam = forward(X_test, W_adam, b_adam)
+    acc_adam = accuracy(y_test, y_pred_adam)
+    
+    print("\n--- Final Results ---")
+    print(f"SGD (lr={SGD_LR}) Final Test Accuracy: {acc_sgd:.2f}%")
+    print(f"Adam (default) Final Test Accuracy: {acc_adam:.2f}%")
+
+    # 5. Plot Comparison
+    plot_loss_comparison(train_loss_sgd, train_loss_adam, EPOCHS)

@@ -1,15 +1,2 @@
 % Question 4 content (input-only)
-\textbf{Effects.}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Biased classifiers}: Decision boundaries skew toward majority class; accuracy may be misleading.
-    \item \emph{Poor minority recall/precision}: Elevated FN/FP for rare classes; unstable calibration.
-\end{itemize}
-
-\textbf{Alleviation (at least three).}
-\begin{itemize}[leftmargin=*]
-    \item \emph{Resampling}: Minority oversampling (e.g., SMOTE/ADASYN) or majority undersampling; combine with stratified batching.
-    \item \emph{Cost-sensitive learning}: Class-weighted losses (e.g., weighted cross-entropy, focal loss) to penalize minority errors more.
-    \item \emph{Data augmentation}: Targeted augmentations for minority classes to increase diversity and reduce overfitting.
-    \item \emph{Thresholding/metrics}: Tune decision thresholds per class; report AUROC, AUPRC, F1 instead of accuracy.
-    \item \emph{Ensembles}: Bagging/boosting with balanced sampling to improve minority robustness.
-\end{itemize}
+Severe class imbalance biases decision boundaries toward the majority and makes accuracy deceptively high while minority recall/precision collapse; calibration often degrades as well. Remedies combine data-level and loss-level strategies: resampling (minority oversampling such as SMOTE/ADASYN, or majority undersampling with stratified batching), cost-sensitive objectives (weighted cross-entropy or focal loss) that penalize minority errors more, and targeted augmentation to enlarge minority diversity. At evaluation time, per-class threshold tuning and reporting AUROC/AUPRC/F1 rather than raw accuracy give a truer picture; in practice, balanced bagging/boosting further improves robustness.

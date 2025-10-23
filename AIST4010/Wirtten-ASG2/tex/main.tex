@@ -16,24 +16,152 @@
 \maketitle
 
 \section{Question 1}
-\input{question1.tex}
+\textbf{Definitions.}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Vanishing gradients}: Backpropagated gradients decay exponentially across layers (often with saturating activations), yielding negligible updates in early layers.
+    \item \emph{Exploding gradients}: Backpropagated gradients grow exponentially, causing unstable updates and divergence.
+\end{itemize}
+
+\textbf{Mitigations (at least three).}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Proper initialization}: Xavier/Glorot for tanh; He/Kaiming for ReLU-family to preserve variance through layers.
+    \item \emph{Activation choice}: Prefer non-saturating activations (ReLU, LeakyReLU, GELU); avoid deep stacks of sigmoid/tanh.
+    \item \emph{Normalization}: BatchNorm/LayerNorm stabilize activations and gradients, enabling deeper networks and larger learning rates.
+    \item \emph{Gradient clipping}: Clip global norm or per-parameter norms to cap extreme updates (mainly for explosion).
+    \item \emph{Architectural aids}: Residual/skip connections and gating (e.g., LSTM) shorten gradient paths and mitigate decay.
+\end{itemize}
+
 
 \section{Question 2}
-\input{question2.tex}
+\textbf{Similarities.}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Locality and parameter sharing}: Convolutional kernels apply local receptive fields with shared weights.
+  \item \emph{Translation equivariance}: Feature maps shift consistently with input translations (exact under appropriate padding/stride settings).
+\end{itemize}
+
+\textbf{Differences.}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Data domain}: 2D conv on H$\times$W (e.g., images); 3D conv on H$\times$W$\times$D/T (e.g., volumes/videos).
+  \item \emph{Kernel sweep}: 2D slides over two axes; 3D slides over three axes, capturing volumetric or spatio-temporal patterns.
+  \item \emph{Compute/params}: 3D kernels incur higher cost and memory; risk of overfitting increases under limited data.
+  \item \emph{Use cases}: 2D for spatial cues (edges, textures); 3D for motion/shape continuity (temporal dynamics, 3D anatomy).
+  \item \emph{Design variants}: Factorized (2+1)D or separable spatio-temporal convolutions reduce cost while preserving accuracy in videos.
+\end{itemize}
+
 
 \section{Question 3}
-\input{question3.tex}
+\textbf{Symptoms.} Loss plateaus or oscillates in early epochs without downward trend.
+
+\textbf{Likely causes (examples).}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Learning rate mis-specified}: too low (minuscule updates) or too high (overshooting/oscillation). Consider LR range test or scheduler warmup.
+  \item \emph{Data/label issues}: missing normalization/standardization; severe label noise or class leakage; erroneous preprocessing/augmentations.
+  \item \emph{Initialization/activation mismatch}: poor initialization (symmetry, saturation), incompatible with activation (e.g., sigmoid + large weights).
+  \item \emph{Optimization setup}: wrong loss (e.g., missing reduction/weights), disabled gradient flow (requires\_grad/ detach), weight decay too large; model accidentally in eval mode (BatchNorm/Dropout frozen).
+  \item \emph{Batching/runtime}: batch size too small/large; exploding gradients with silent NaNs (check gradient norms, enable anomaly detection).
+\end{itemize}
 
 \section{Question 4}
-\input{question4.tex}
+\textbf{Effects.}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Biased classifiers}: Decision boundaries skew toward majority class; accuracy may be misleading.
+    \item \emph{Poor minority recall/precision}: Elevated FN/FP for rare classes; unstable calibration.
+\end{itemize}
+
+\textbf{Alleviation (at least three).}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Resampling}: Minority oversampling (e.g., SMOTE/ADASYN) or majority undersampling; combine with stratified batching.
+    \item \emph{Cost-sensitive learning}: Class-weighted losses (e.g., weighted cross-entropy, focal loss) to penalize minority errors more.
+    \item \emph{Data augmentation}: Targeted augmentations for minority classes to increase diversity and reduce overfitting.
+    \item \emph{Thresholding/metrics}: Tune decision thresholds per class; report AUROC, AUPRC, F1 instead of accuracy.
+    \item \emph{Ensembles}: Bagging/boosting with balanced sampling to improve minority robustness.
+\end{itemize}
+
 
 \section{Question 5}
-\input{question5.tex}
+% Question 5 (LeNet on Fashion-MNIST)
+\textbf{Setup.} We implement LeNet-5 in PyTorch and evaluate on Fashion-MNIST. Per the clarification, we focus on implementing two networks with different numbers of convolutional layers (in addition to a baseline). Optimizer: Adam with defaults from class (\(\alpha{=}0.001\), \(\beta_1{=}0.9\), \(\beta_2{=}0.999\), \(\epsilon{=}10^{-7}\)).
+
+\textbf{Results.} The table below is auto-generated after running the script. If not yet available, run the Python file noted at the end.
+
+\medskip
+\noindent\IfFileExists{generated/question5_results_table.tex}{%
+\begin{tabular}{@{}llc@{}}\toprule
+Experiment & Setting & Test Acc (\%) \ \midrule
+Conv layers & Baseline (Sigmoid, AvgPool) & 78.53 \ 
+Conv layers & More CONV (extra 3x3) & 77.16 \ 
+Conv layers & Less CONV (single conv) & 84.39 \ 
+\midrule
+\multicolumn{2}{l}{Best} & 84.39 \ \bottomrule
+\end{tabular}
+}{Pending: please run the script to generate results.}
+
+\medskip
+\textbf{Best result (this run).} \emph{Less CONV (single conv)} achieved \textbf{84.39\%} test accuracy, outperforming the baseline (78.53\%) and the deeper variant (77.16\%). Under a short training budget (5 epochs), the shallower model optimizes faster and generalizes better on Fashion-MNIST.
+
+\medskip
+\textbf{Reproduction.} From the \texttt{tex} folder, run: \texttt{python question5.py}. This will download data (if absent), run all experiments, and write outputs under \texttt{tex/generated/}.
+
 
 \section{Question 6}
-\input{question6.tex}
+% Question 6 (Adam vs. SGD for Logistic Regression)
+\textbf{Task.} Implement Adam in NumPy and compare its convergence speed with SGD (lr=$10^{-4}$) on a synthetic binary classification task.
+
+\textbf{Result.} The plot and brief summary are auto-generated after running the script.
+
+\medskip
+\noindent\IfFileExists{generated/convergence_comparison.png}{%
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.75\linewidth]{generated/convergence_comparison.png}
+	\end{figure}
+}{Pending: please run the script to generate the convergence plot.}
+
+\medskip
+\noindent\IfFileExists{generated/question6_summary.tex}% Auto-generated by question6.py
+Adam final loss: 0.1946\\
+SGD final loss: 0.6680\
+
+
+\medskip
+\textbf{Observation (this run).} Adam achieved a markedly lower final training loss (\(\approx 0.195\)) than SGD with lr=$10^{-4}$ (\(\approx 0.668\)), confirming faster and stronger convergence under the default Adam hyperparameters.
+
+\medskip
+\textbf{Reproduction.} From the \texttt{tex} folder, run: \texttt{python question6.py}. Outputs will be written under \texttt{tex/generated/}.
+
 
 \section{Question 7}
-\input{question7.tex}
+% Question 7 content (input-only)
+\textbf{Efficient Estimation of Word Representations in Vector Space (Word2Vec).}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Motivation}: Scalable training of high-quality word embeddings on web-scale corpora.
+    \item \emph{Novelty}: CBOW and Skip-gram objectives; efficient approximations (hierarchical softmax, negative sampling).
+    \item \emph{Intuition}: Distributional hypothesis—context prediction yields semantic/syntactic regularities in embedding space.
+    \item \emph{Implementation}: \href{https://code.google.com/archive/p/word2vec/}{official archive}.
+\end{itemize}
+
+\textbf{Attention Is All You Need (Transformer).}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Motivation}: Remove recurrence/convolution to improve parallelism and long-range dependency modeling in translation.
+    \item \emph{Novelty}: Pure self-attention encoder–decoder, multi-head attention, positional encoding, scaled dot-product.
+    \item \emph{Intuition}: Each token attends to all others, capturing global dependencies with parallel computation.
+    \item \emph{Implementation}: \href{https://github.com/tensorflow/tensor2tensor}{Tensor2Tensor}.
+\end{itemize}
+
+\textbf{BERT: Pre-training of Deep Bidirectional Transformers.}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Motivation}: Learn deeply bidirectional language representations adaptable to diverse NLU tasks.
+    \item \emph{Novelty}: Masked Language Modeling and Next Sentence Prediction pretraining objectives.
+    \item \emph{Intuition}: Conditioning on both left and right context yields richer token representations transferable to downstream tasks.
+    \item \emph{Implementation}: \href{https://github.com/google-research/bert}{google-research/bert}.
+\end{itemize}
+
+\textbf{MSA Transformer.}
+\begin{itemize}[leftmargin=*]
+    \item \emph{Motivation}: Exploit multiple sequence alignments to predict protein structural signals (e.g., contacts).
+    \item \emph{Novelty}: Row/column attention across sequences and aligned positions; captures co-evolutionary patterns.
+    \item \emph{Intuition}: Correlated mutations imply spatial proximity; attention over MSAs models these dependencies.
+    \item \emph{Implementation}: \href{https://github.com/facebookresearch/esm}{facebookresearch/esm} (ESM suite).
+\end{itemize}
 
 \end{document}
