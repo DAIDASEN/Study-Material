@@ -108,7 +108,7 @@ def run_experiment(model_name, model_instance, device, train_loader, test_loader
     Runs a full training and evaluation experiment for a given model.
     """
     print("-" * 50)
-    print(f"🚀 Starting Experiment: {model_name}")
+    print(f"Starting Experiment: {model_name}")
     print("-" * 50)
     
     # Deep copy the model instance to avoid weight leakage between experiments
@@ -135,9 +135,9 @@ def run_experiment(model_name, model_instance, device, train_loader, test_loader
             print(f"  Epoch: {epoch:2d} | Test Loss: {test_loss:.4f} | Test Acc: {test_acc:.2f}%")
 
     end_time = time.time()
-    print(f"✅ Finished Experiment: {model_name}")
-    print(f"   Best Test Accuracy: {best_acc:.2f}%")
-    print(f"   Total Time: {end_time - start_time:.2f}s")
+    print(f"Finished Experiment: {model_name}")
+    print(f"Best Test Accuracy: {best_acc:.2f}%")
+    print(f"Total Time: {end_time - start_time:.2f}s")
     print("-" * 50 + "\n")
     
     return best_acc
@@ -486,7 +486,7 @@ if __name__ == "__main__":
 
     # --- 5. Final Report ---
     print("\n" + "=" * 50)
-    print("🏆 FINAL EXPERIMENT RESULTS 🏆")
+    print("FINAL EXPERIMENT RESULTS")
     print("=" * 50)
     
     # Find the best result
@@ -500,6 +500,6 @@ if __name__ == "__main__":
             best_setting = setting
             
     print("-" * 50)
-    print(f"🥇 Best Result: {best_setting}")
-    print(f"🥇 Best Accuracy: {best_acc:.2f}%")
+    print(f"Best Result: {best_setting}")
+    print(f"Best Accuracy: {best_acc:.2f}%")
     print("=" * 50)
