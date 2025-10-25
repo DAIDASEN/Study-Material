@@ -1,0 +1,161 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "neurips_2025.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "checklist.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "drawio/framework.drawio"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eval-figures/GSM8K-vineppo-iter.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eval-figures/SPO-chain-short.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eval-figures/SPO-tree-short.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eval-figures/Segment-interval-var.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/Estimiation-method.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/SPO-Chain.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/SPO-Tree.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/SPO-framework-new.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/SPO-framework.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/adv_method.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/chain-like-sampling.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/compare-baselines-short-CoT.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/deepseek-math-7b-num-sampling-points.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/deepseek-math-7b.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/episode_generation_time.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/grpo-train-accuracy.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/grpo-train-num-unique-responses.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/grpo-val-accuracy.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/gsm8k_accuracy_vs_granularity.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/hybrid_ppo.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/num_sampling_points.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/pipeline.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/pipeline2.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/policy_iteration.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/prob_mask.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/qwen-math-wall_time_accuracy.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/segment.drawio.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/segment.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/segment_interval.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/segment_method.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/token_visualization.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/tree-like-sampling.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/tree-structure-wall_time_accuracy.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/wall_time_accuracy.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "main.bib"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

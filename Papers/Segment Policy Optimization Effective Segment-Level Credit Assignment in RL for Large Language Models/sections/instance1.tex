@@ -1,0 +1,37 @@
+\vspace{-0.2cm}
+\section{SPO-Chain for Short CoT}
+\label{sec:chain-like-spo-for-short-cot-scenario}
+\vspace{-0.2cm}
+
+For short Chain-of-Thought (CoT) scenarios, where the computational overhead of MC sampling is low and segments typically involve a small number of tokens, we designed a tailored instance of SPO by taking into account these characteristics, which we refer to as \textbf{SPO-chain}. The core features of SPO-chain lie in its cutpoint-based segment partition, chain-based segment advantage estimation, and policy optimization via policy gradient with probability masks.
+
+\noindent\textbf{(1) Adaptive Cutpoint-based Segment Partition.}
+\label{subsec:segment-partition-based-on-fixed-cutpoint-intervals}
+The fixed token count partition strategy faces a critical issue in short CoT scenarios that the number of tokens in each segment is not very large. 
+If the token probabilities \(\pi_\theta(y_t|s_t)\) within a segment are high (close to $1$), the $V$ values estimated at the beginning and end of the segment will not differ significantly. This can lead to unnecessary partitioning, ultimately resulting in a waste of sampling budget. To address this, we propose an adaptive cutpoint-based partition strategy. Specifically, we first identify the \textit{cutpoints}, defined as positions where token probabilities drop below a pre-defined threshold \(\rho\), so that we have the set of all cutpoints defined as
+\( \mathcal U_\theta = \{t< T \mid \pi_{\theta}(y_t|s_t) < \rho\} \). These cutpoints represent positions where the model's reasoning trajectory could diverge, thus potentially inducing changes in $V$ values. For better credit assignment, we prefer each segment to contain fewer cutpoints. Then, given a fixed segment count \(K\), we find a partition that reflects this principle by solving the following optimization problem: \(\min_{\{t_k\}_{k=1}^{K}} \sum_{k=1}^{K}|\mathcal U_\theta \cap[t_k,t_{k+1})|^2\). It can be shown that the optimal solution evenly distributes cutpoints across segments (assuming \(|\mathcal{U}_\theta|\) is divisible by \(K\) for simplicity), that is, 
+\[ \left|\mathcal U_\theta\cap[t_k,t_{k+1})\right |=\frac{|\mathcal U_\theta|}{K}, \qquad  \forall k \le K \] 
+which corresponds to partitioning the trajectory such that each segment contains the same number of cutpoints, as shown in Figure \ref{fig:pipeline}. A practical example is provided in Appendix \ref{appendix:segment_partition_example}. Our experiments further show that this partition strategy would lead to a superior performance (see our comparison of different segment partition strategies in Section \ref{sec:experiments_on_spo_chain}).
+
+\noindent\textbf{(2) Chain-based Segment Advantage Estimation.}
+\label{subsec:chain-like-segment-advantage-estimaiton}
+In the short CoT scenario, the computational overhead of MC estimation is generally manageable. Thus, we adopt a simple, chain-based MC sampling approach as shown in Figure \hyperref[fig:sampling_method]{2(a)}. Specifically, at each segment boundary state \( s_{t_k} = [\boldsymbol x, \boldsymbol y_{<t_k}] \), we independently sample \( N \) trajectories from the policy \(\pi_{\theta}\), i.e. \( \boldsymbol\tau_{t_k}^{(j)} \sim \pi_{\theta}(\cdot|s_{t_k}), j=1,\dots, N \) and then estimate the value of such a state by averaging the returns from these sampled trajectories, i.e., \( \hat V(s_{t_k}) = \frac{1}{N}\sum_{j=1}^{N}\mathcal{R}(\boldsymbol x, [\boldsymbol y_{<t_k},\boldsymbol\tau_{t_k}^{(j)}]) \). The estimated advantage $\hat A^{\mathrm{seg}}_k$ of each segment \(k\) is computed by taking the difference between the state values at consecutive segment boundaries $\hat A_k^{\mathrm{seg}} = \hat V(s_{t_{k+1}}) - \hat V(s_{t_k})$ following Equation \eqref{eq:segA}.
+
+\noindent\textbf{(3) Policy Gradient with Token-Probability Masks.}
+\label{subsec:policy-optimization-using-ppo-loss-with-prob-mask}
+Policy gradient methods have become mainstream for training LLMs using RL. Accordingly, we adopt a policy gradient-based approach to optimize the policy. For example, once we have computed the segment advantage $A_k^{\mathrm{seg}}$, we can assign it to all tokens within the segment and obtain the token-level advantage \(A_t\), then adopt the PPO loss in Equation \eqref{eq:PPO} to optimize the policy. However, since the changes in  \( V \) values between segments are primarily caused by tokens at cutpoints, we assign the segment advantage $A_k^{\mathrm{seg}}$ only to these critical tokens. Formally, our policy is trained by minimizing the following loss:
+\begin{equation}
+\begin{aligned}\label{eq:PPO_prob_mask}
+&\mathcal{J}_{\text{SPO}}^{\text{chain}}(\theta) 
+= \mathbb{E}_{\substack{\boldsymbol x \sim \mathcal D, \, [\text{seg}_1,\dots,\text{seg}_K] \sim \pi_{\theta_{old}}}} \\
+&\Bigg\{
+    \frac{1}{Z} \sum_{k=1}^{K} \sum_{t = t_k}^{t_{k+1}-1} \bigg[ M_t\cdot\min\Big( 
+        r_t(\theta) \hat A_k^{\mathrm{seg}}, \,
+        \mathrm{clip}\big(r_t(\theta), 1 - \epsilon, 1 + \epsilon\big) \hat A_k^{\mathrm{seg}} 
+    \Big) - \beta D_{\mathrm{KL}}(\pi_{\theta}\|\pi_{\text{ref}})\bigg]
+\Bigg\},
+\end{aligned}
+\end{equation}
+where \(M_t\) is the token probability mask whose value is $1$ if \(\pi_{\theta_{old}}(a_t|s_t) < \rho\) and \(0\) otherwise, i.e., \( M_t:= \mathbb{I}\big(\pi_{\theta_{old}}(a_t|s_t) < \rho\big) \). In addition, \( Z \) is a normalization term that equals the total number of tokens where the mask \( M_t \) is $1$: \(Z = \sum_{t=1}^{T}M_t\). This approach further enhances credit assignment within each segment by concentrating the advantage signals on fewer critical tokens. Our experiments demonstrate that this method improves the accuracy (refer to our ablation study on the probability-mask optimization strategy in Section \ref{sec:experiments_on_spo_chain}). 
+
+

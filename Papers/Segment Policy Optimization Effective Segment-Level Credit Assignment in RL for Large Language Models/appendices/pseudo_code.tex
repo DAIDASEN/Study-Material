@@ -1,0 +1,83 @@
+\section{Pseudo-code of Tree-Structured Advantage Estimation Method}
+\label{appendix:pseudo-code-of-tree-structured-advantage-estimation-method}
+
+We efficiently construct the tree using Python's asyncio library. For the detailed algorithm procedure, please refer to  Algorithm \ref{alg:tree-structured-advantage-estimation-method-pseudo} below.  
+
+\begin{algorithm}[htbp]
+  \caption{Tree-structured Advantage Estimation Method}
+  \label{alg:tree-structured-advantage-estimation-method-pseudo}
+  \begin{algorithmic}[1]   %
+  
+    \Procedure{ConstructTree}{$prompt$,\;$max\_depth$,\;$structure$,\;$M$,\;$instance,\;adv\_method$} 
+      \State \textbf{create root node:}
+        \State\hspace{\algorithmicindent} $root.text \leftarrow prompt$
+        \State\hspace{\algorithmicindent} $root.full\_text \leftarrow prompt$
+        \State\hspace{\algorithmicindent} $root.depth \leftarrow 0$
+      \State \textbf{await} \Call{Build}{$root,\;prompt,\;0,\;max\_depth,\;structure,\;M,\;instance$}
+      \State \Call{ComputeAdvantage}{$root,\;None,\;adv\_method$}
+      \State \Return $root$
+    \EndProcedure
+
+    \Procedure{Build}{$node,\;prefix,\;depth,\;max\_depth,\;structure,\;M,\;instance$}
+      \If{$depth \ge \;max\_depth$}
+        \State $node.reward \leftarrow$ \Call{reward\_function}{$prefix,\;node.text,\;instance$}
+        \State \Return
+      \EndIf
+
+      \State $K \leftarrow structure[depth]$
+      \If{$depth < max\_depth - 1$}
+        \State $max\_tokens \leftarrow M$
+      \Else
+        \State $max\_tokens \leftarrow \text{None}$
+      \EndIf
+
+      \State $children \leftarrow$ \textbf{await} \Call{Expand}{$prefix,\;depth,\;K,\;max\_tokens$}
+      \State $node.children \leftarrow children$
+
+      \State initialize empty list $expansion\_tasks$      
+
+      \For{each $child$ in $children$}
+        \If{$child.finish\_reason \neq \text{"length"}$}
+          \State $child.reward \leftarrow$ \Call{reward\_function}{$prefix,\;child.text,\;instance$}
+        \Else
+            \State create async task $t \leftarrow$ \parbox[t]{0.8\linewidth}{%
+            \Call{Build}{$child,\;child.full\_text,\;depth+1,\;max\_depth,$\\
+                        $structure,\;M,\;instance$}}
+            \State append $t$ to $expansion\_tasks$
+        \EndIf
+      \EndFor
+
+      \State \textbf{await} \Call{gather}{$expansion\_tasks$}
+
+      \State $node.reward \leftarrow$ mean(rewards of $node.children$)
+      \State $node.reward\_std \leftarrow$ std(rewards of $node.children$)
+    \EndProcedure
+
+    \Procedure{Expand}{$prefix,\;depth,\;K,\;max\_tokens$}
+      \State construct LLM prompt from template using $prefix$
+      \State create async task calling LLM API requesting $K$ responses, each limited to $max\_tokens$
+      \State $responses \leftarrow$ \textbf{await} $task$
+      \State initialize empty list $children$
+      \For{each $response$ in $responses$}
+        \State \textbf{create new node} $child$:
+          \State\hspace{\algorithmicindent} $child.text \leftarrow response.text$
+          \State\hspace{\algorithmicindent} $child.finish\_reason \leftarrow response.finish\_reason$
+          \State\hspace{\algorithmicindent} $child.full\_text \leftarrow \text{concatenate\_texts}(prefix,\,child.text)$
+        \State append $child$ to $children$
+      \EndFor
+      \State \Return $children$
+    \EndProcedure
+
+    \Procedure{ComputeAdvantage}{$node,\;parent,\;adv\_method$}
+    
+      \If{$parent \text{ is not } None$}
+          \If{$adv\_method = \text{"RLOO"}$}
+              \State $node.advantage \leftarrow node.reward - parent.reward$
+          \ElsIf{$adv\_method = \text{"GRPO"}$}
+               \State $node.advantage \leftarrow (node.reward - parent.reward)/parent.reward\_std$
+          \EndIf
+      \EndIf
+    \EndProcedure
+
+  \end{algorithmic}
+\end{algorithm}

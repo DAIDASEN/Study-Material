@@ -1,0 +1,16 @@
+\section{Incorporate Process Reward}
+\label{appendix:incorporate_process_reward}
+
+Our framework is compatible with the process reward. Inspired by the work in \cite{setlur2024rewardingprogressscalingautomated}, we adopt the current policy's BoN as the prover policy \(\mu\) and utilize its advantage as the process reward. Specifically, the gradient is computed as follows:
+\[
+\nabla_{\pi}\ell(\pi)=\sum_{h=1}^{H}\nabla_{\pi}\log\pi(a_h \mid s_h)\cdot\left(Q^{\pi}(s_h,a_h)+\alpha\cdot A^{\mu}(s_h,a_h)\right)
+\]
+Unlike the aforementioned work, our method does not require training a separate reward model (PAV). Given that the adopted prover policy \(\mu\) is the current policy’s BoN, we can compute its value function \(V^{\mu}(s_h)\) from the value function of the current policy \(V^{\pi}(s_h)\):
+\[
+V^{\mu}(s_h) = 1 - (1 - V^{\pi}(s_h))^N,
+\]
+where \(N\) is the number of MC samples. Then, the prover policy’s advantage \(A^{\mu}(s_h,a_h)\) can be easily computed as follows:
+\[
+A^{\mu}(s_h,a_h) = V^{\mu}(s_{h+1}) - V^{\mu}(s_h).
+\]
+Thus, we can directly integrate process rewards into our framework using MC samples generated from the current policy, simplifying the overall algorithm and effectively circumventing potential issues that arise from introducing a separate reward model, such as fitting errors and reward hacking.

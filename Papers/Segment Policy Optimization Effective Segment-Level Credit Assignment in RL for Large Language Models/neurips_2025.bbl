@@ -1,0 +1,193 @@
+\begin{thebibliography}{10}
+
+\bibitem{ahmadian2024basicsrevisitingreinforcestyle}
+A.~Ahmadian, C.~Cremer, M.~Gall{\'{e}}, M.~Fadaee, J.~Kreutzer, O.~Pietquin, A.~{\"{U}}st{\"{u}}n, and S.~Hooker.
+\newblock Back to basics: Revisiting reinforce-style optimization for learning from human feedback in llms.
+\newblock In L.~Ku, A.~Martins, and V.~Srikumar, editors, {\em Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), {ACL} 2024, Bangkok, Thailand, August 11-16, 2024}, pages 12248--12267. Association for Computational Linguistics, 2024.
+
+\bibitem{bartoldson2025trajectorybalanceasynchronydecoupling}
+B.~R. Bartoldson, S.~Venkatraman, J.~Diffenderfer, M.~Jain, T.~Ben-Nun, S.~Lee, M.~Kim, J.~Obando-Ceron, Y.~Bengio, and B.~Kailkhura.
+\newblock Trajectory balance with asynchrony: Decoupling exploration and learning for fast, scalable llm post-training.
+\newblock {\em CoRR}, abs/2503.18929, 2025.
+
+\bibitem{chen2024alphamathzeroprocesssupervision}
+G.~Chen, M.~Liao, C.~Li, and K.~Fan.
+\newblock Alphamath almost zero: Process supervision without process.
+\newblock In A.~Globersons, L.~Mackey, D.~Belgrave, A.~Fan, U.~Paquet, J.~M. Tomczak, and C.~Zhang, editors, {\em Advances in Neural Information Processing Systems 38: Annual Conference on Neural Information Processing Systems 2024, NeurIPS 2024, Vancouver, BC, Canada, December 10 - 15, 2024}, 2024.
+
+\bibitem{Slow_Thinking_with_LLMs_3}
+Z.~Chen, Y.~Min, B.~Zhang, J.~Chen, J.~Jiang, D.~Cheng, W.~X. Zhao, Z.~Liu, X.~Miao, Y.~Lu, L.~Fang, Z.~Wang, and J.-R. Wen.
+\newblock An empirical study on eliciting and improving r1-like reasoning models.
+\newblock {\em arXiv preprint arXiv:2503.04548}, 2025.
+
+\bibitem{cobbe2021trainingverifierssolvemath}
+K.~Cobbe, V.~Kosaraju, M.~Bavarian, M.~Chen, H.~Jun, L.~Kaiser, M.~Plappert, J.~Tworek, J.~Hilton, R.~Nakano, C.~Hesse, and J.~Schulman.
+\newblock Training verifiers to solve math word problems.
+\newblock {\em CoRR}, abs/2110.14168, 2021.
+
+\bibitem{cui2025processreinforcementimplicitrewards}
+G.~Cui, L.~Yuan, Z.~Wang, H.~Wang, W.~Li, B.~He, Y.~Fan, T.~Yu, Q.~Xu, W.~Chen, J.~Yuan, H.~Chen, K.~Zhang, X.~Lv, S.~Wang, Y.~Yao, X.~Han, H.~Peng, Y.~Cheng, Z.~Liu, M.~Sun, B.~Zhou, and N.~Ding.
+\newblock Process reinforcement through implicit rewards.
+\newblock {\em CoRR}, abs/2502.01456, 2025.
+
+\bibitem{deepseekai2025deepseekr1incentivizingreasoningcapability}
+DeepSeek{-}AI, D.~Guo, D.~Yang, H.~Zhang, J.~Song, R.~Zhang, R.~Xu, Q.~Zhu, S.~Ma, P.~Wang, X.~Bi, X.~Zhang, X.~Yu, Y.~Wu, Z.~F. Wu, Z.~Gou, Z.~Shao, Z.~Li, Z.~Gao, A.~Liu, B.~Xue, B.~Wang, B.~Wu, B.~Feng, C.~Lu, C.~Zhao, C.~Deng, C.~Zhang, C.~Ruan, D.~Dai, D.~Chen, D.~Ji, E.~Li, F.~Lin, F.~Dai, F.~Luo, G.~Hao, G.~Chen, G.~Li, H.~Zhang, H.~Bao, H.~Xu, H.~Wang, H.~Ding, H.~Xin, H.~Gao, H.~Qu, H.~Li, J.~Guo, J.~Li, J.~Wang, J.~Chen, J.~Yuan, J.~Qiu, J.~Li, J.~L. Cai, J.~Ni, J.~Liang, J.~Chen, K.~Dong, K.~Hu, K.~Gao, K.~Guan, K.~Huang, K.~Yu, L.~Wang, L.~Zhang, L.~Zhao, L.~Wang, L.~Zhang, L.~Xu, L.~Xia, M.~Zhang, M.~Zhang, M.~Tang, M.~Li, M.~Wang, M.~Li, N.~Tian, P.~Huang, P.~Zhang, Q.~Wang, Q.~Chen, Q.~Du, R.~Ge, R.~Zhang, R.~Pan, R.~Wang, R.~J. Chen, R.~L. Jin, R.~Chen, S.~Lu, S.~Zhou, S.~Chen, S.~Ye, S.~Wang, S.~Yu, S.~Zhou, S.~Pan, and S.~S. Li.
+\newblock Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning.
+\newblock {\em CoRR}, abs/2501.12948, 2025.
+
+\bibitem{openr1}
+H.~Face.
+\newblock Open r1: A fully open reproduction of deepseek-r1, January 2025.
+
+\bibitem{foster2025learningreasonfrontierlearnability}
+T.~Foster and J.~Foerster.
+\newblock Learning to reason at the frontier of learnability.
+\newblock {\em CoRR}, abs/2502.12272, 2025.
+
+\bibitem{hendrycks2021measuringmathematicalproblemsolving}
+D.~Hendrycks, C.~Burns, S.~Kadavath, A.~Arora, S.~Basart, E.~Tang, D.~Song, and J.~Steinhardt.
+\newblock Measuring mathematical problem solving with the math dataset.
+\newblock {\em CoRR}, abs/2103.03874, 2021.
+
+\bibitem{openai2024openaio1card}
+A.~Jaech, A.~Kalai, A.~Lerer, A.~Richardson, A.~El{-}Kishky, A.~Low, A.~Helyar, A.~Madry, A.~Beutel, A.~Carney, A.~Iftimie, A.~Karpenko, A.~T. Passos, A.~Neitz, A.~Prokofiev, A.~Wei, A.~Tam, A.~Bennett, A.~Kumar, A.~Saraiva, A.~Vallone, A.~Duberstein, A.~Kondrich, A.~Mishchenko, A.~Applebaum, A.~Jiang, A.~Nair, B.~Zoph, B.~Ghorbani, B.~Rossen, B.~Sokolowsky, B.~Barak, B.~McGrew, B.~Minaiev, B.~Hao, B.~Baker, B.~Houghton, B.~McKinzie, B.~Eastman, C.~Lugaresi, C.~Bassin, C.~Hudson, C.~M. Li, C.~de~Bourcy, C.~Voss, C.~Shen, C.~Zhang, C.~Koch, C.~Orsinger, C.~Hesse, C.~Fischer, C.~Chan, D.~Roberts, D.~Kappler, D.~Levy, D.~Selsam, D.~Dohan, D.~Farhi, D.~Mely, D.~Robinson, D.~Tsipras, D.~Li, D.~Oprica, E.~Freeman, E.~Zhang, E.~Wong, E.~Proehl, E.~Cheung, E.~Mitchell, E.~Wallace, E.~Ritter, E.~Mays, F.~Wang, F.~P. Such, F.~Raso, F.~Leoni, F.~Tsimpourlas, F.~Song, F.~von Lohmann, F.~Sulit, G.~Salmon, G.~Parascandolo, G.~Chabot, G.~Zhao, G.~Brockman, G.~Leclerc, H.~Salman, H.~Bao, H.~Sheng, H.~Andrin,
+  H.~Bagherinezhad, H.~Ren, H.~Lightman, H.~W. Chung, I.~Kivlichan, I.~O'Connell, I.~Osband, I.~C. Gilaberte, and I.~Akkaya.
+\newblock Openai o1 system card.
+\newblock {\em CoRR}, abs/2412.16720, 2024.
+
+\bibitem{kazemnejad2024vineppounlockingrlpotential}
+A.~Kazemnejad, M.~Aghajohari, E.~Portelance, A.~Sordoni, S.~Reddy, A.~C. Courville, and N.~L. Roux.
+\newblock Vineppo: Unlocking {RL} potential for {LLM} reasoning through refined credit assignment.
+\newblock {\em CoRR}, abs/2410.01679, 2024.
+
+\bibitem{lightman2023letsverifystepstep}
+H.~Lightman, V.~Kosaraju, Y.~Burda, H.~Edwards, B.~Baker, T.~Lee, J.~Leike, J.~Schulman, I.~Sutskever, and K.~Cobbe.
+\newblock Let's verify step by step.
+\newblock In {\em The Twelfth International Conference on Learning Representations, {ICLR} 2024, Vienna, Austria, May 7-11, 2024}. OpenReview.net, 2024.
+
+\bibitem{lin2025rho1tokensneed}
+Z.~Lin, Z.~Gou, Y.~Gong, X.~Liu, Y.~Shen, R.~Xu, C.~Lin, Y.~Yang, J.~Jiao, N.~Duan, and W.~Chen.
+\newblock Rho-1: Not all tokens are what you need.
+\newblock {\em CoRR}, abs/2404.07965, 2024.
+
+\bibitem{lin2025cppoacceleratingtraininggroup}
+Z.~Lin, M.~Lin, Y.~Xie, and R.~Ji.
+\newblock Cppo: Accelerating the training of group relative policy optimization-based reasoning models.
+\newblock {\em CoRR}, abs/2503.22342, 2025.
+
+\bibitem{liu2025understandingr1zeroliketrainingcritical}
+Z.~Liu, C.~Chen, W.~Li, P.~Qi, T.~Pang, C.~Du, W.~S. Lee, and M.~Lin.
+\newblock Understanding r1-zero-like training: A critical perspective.
+\newblock {\em CoRR}, abs/2503.20783, 2025.
+
+\bibitem{luo2024improvemathematicalreasoninglanguage}
+L.~Luo, Y.~Liu, R.~Liu, S.~Phatale, H.~Lara, Y.~Li, L.~Shu, Y.~Zhu, L.~Meng, J.~Sun, and A.~Rastogi.
+\newblock Improve mathematical reasoning in language models by automated process supervision.
+\newblock {\em CoRR}, abs/2406.06592, 2024.
+
+\bibitem{deepscaler2025}
+M.~Luo, S.~Tan, J.~Wong, X.~Shi, W.~Y. Tang, M.~Roongta, C.~Cai, J.~Luo, L.~E. Li, R.~A. Popa, and I.~Stoica.
+\newblock Deepscaler: Surpassing o1-preview with a 1.5b model by scaling rl.
+\newblock \url{https://github.com/PraMamba/DeepScaleR}, 2025.
+
+\bibitem{ma2023letsrewardstepstep}
+Q.~Ma, H.~Zhou, T.~Liu, J.~Yuan, P.~Liu, Y.~You, and H.~Yang.
+\newblock Let's reward step by step: Step-level reward model as the navigators for reasoning.
+\newblock {\em CoRR}, abs/2310.10080, 2023.
+
+\bibitem{noukhovitch2025asynchronousrlhffasterefficient}
+M.~Noukhovitch, S.~Huang, S.~Xhonneux, A.~Hosseini, R.~Agarwal, and A.~Courville.
+\newblock Asynchronous rlhf: Faster and more efficient off-policy rl for language models.
+\newblock {\em CoRR}, abs/2410.18252, 2025.
+
+\bibitem{ouyang2022traininglanguagemodelsfollow}
+L.~Ouyang, J.~Wu, X.~Jiang, D.~Almeida, C.~L. Wainwright, P.~Mishkin, C.~Zhang, S.~Agarwal, K.~Slama, A.~Ray, J.~Schulman, J.~Hilton, F.~Kelton, L.~Miller, M.~Simens, A.~Askell, P.~Welinder, P.~Christiano, J.~Leike, and R.~Lowe.
+\newblock Training language models to follow instructions with human feedback.
+\newblock {\em CoRR}, abs/2203.02155, 2022.
+
+\bibitem{qu2025optimizingtesttimecomputemeta}
+Y.~Qu, M.~Y.~R. Yang, A.~Setlur, L.~Tunstall, E.~E. Beeching, R.~Salakhutdinov, and A.~Kumar.
+\newblock Optimizing test-time compute via meta reinforcement fine-tuning.
+\newblock {\em CoRR}, abs/2503.07572, 2025.
+
+\bibitem{rafailov2024rqlanguagemodel}
+R.~Rafailov, J.~Hejna, R.~Park, and C.~Finn.
+\newblock From \emph{r} to q\({}^{\mbox{*}}\): Your language model is secretly a q-function.
+\newblock {\em CoRR}, abs/2404.12358, 2024.
+
+\bibitem{rafailov2024directpreferenceoptimizationlanguage}
+R.~Rafailov, A.~Sharma, E.~Mitchell, C.~D. Manning, S.~Ermon, and C.~Finn.
+\newblock Direct preference optimization: Your language model is secretly a reward model.
+\newblock In A.~Oh, T.~Naumann, A.~Globerson, K.~Saenko, M.~Hardt, and S.~Levine, editors, {\em Advances in Neural Information Processing Systems 36: Annual Conference on Neural Information Processing Systems 2023, NeurIPS 2023, New Orleans, LA, USA, December 10 - 16, 2023}, 2023.
+
+\bibitem{schulman2018highdimensionalcontinuouscontrolusing}
+J.~Schulman, P.~Moritz, S.~Levine, M.~I. Jordan, and P.~Abbeel.
+\newblock High-dimensional continuous control using generalized advantage estimation.
+\newblock In Y.~Bengio and Y.~LeCun, editors, {\em 4th International Conference on Learning Representations, {ICLR} 2016, San Juan, Puerto Rico, May 2-4, 2016, Conference Track Proceedings}, 2016.
+
+\bibitem{schulman2017proximalpolicyoptimizationalgorithms}
+J.~Schulman, F.~Wolski, P.~Dhariwal, A.~Radford, and O.~Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock {\em CoRR}, abs/1707.06347, 2017.
+
+\bibitem{setlur2024rewardingprogressscalingautomated}
+A.~Setlur, C.~Nagpal, A.~Fisch, X.~Geng, J.~Eisenstein, R.~Agarwal, A.~Agarwal, J.~Berant, and A.~Kumar.
+\newblock Rewarding progress: Scaling automated process verifiers for llm reasoning.
+\newblock {\em CoRR}, abs/2410.08146, 2024.
+
+\bibitem{shao2024deepseekmathpushinglimitsmathematical}
+Z.~Shao, P.~Wang, Q.~Zhu, R.~Xu, J.~Song, M.~Zhang, Y.~K. Li, Y.~Wu, and D.~Guo.
+\newblock Deepseekmath: Pushing the limits of mathematical reasoning in open language models.
+\newblock {\em CoRR}, abs/2402.03300, 2024.
+
+\bibitem{singh2024humandatascalingselftraining}
+A.~Singh, J.~D. Co{-}Reyes, R.~Agarwal, A.~Anand, P.~Patil, X.~Garcia, P.~J. Liu, J.~Harrison, J.~Lee, K.~Xu, A.~T. Parisi, A.~Kumar, A.~A. Alemi, A.~Rizkowsky, A.~Nova, B.~Adlam, B.~Bohnet, G.~F. Elsayed, H.~Sedghi, I.~Mordatch, I.~Simpson, I.~Gur, J.~Snoek, J.~Pennington, J.~Hron, K.~Kenealy, K.~Swersky, K.~Mahajan, L.~Culp, L.~Xiao, M.~L. Bileschi, N.~Constant, R.~Novak, R.~Liu, T.~Warkentin, Y.~Qian, Y.~Bansal, E.~Dyer, B.~Neyshabur, J.~Sohl{-}Dickstein, and N.~Fiedel.
+\newblock Beyond human data: Scaling self-training for problem-solving with language models.
+\newblock {\em Trans. Mach. Learn. Res.}, 2024, 2024.
+
+\bibitem{credit-assignment-def}
+R.~S. Sutton and A.~G. Barto.
+\newblock {\em Reinforcement learning - an introduction}.
+\newblock Adaptive computation and machine learning. {MIT} Press, 1998.
+
+\bibitem{kimiteam2025kimik15scalingreinforcement}
+K.~Team, A.~Du, B.~Gao, B.~Xing, C.~Jiang, C.~Chen, C.~Li, C.~Xiao, C.~Du, C.~Liao, C.~Tang, C.~Wang, D.~Zhang, E.~Yuan, E.~Lu, F.~Tang, F.~Sung, G.~Wei, G.~Lai, H.~Guo, H.~Zhu, H.~Ding, H.~Hu, H.~Yang, H.~Zhang, H.~Yao, H.~Zhao, H.~Lu, H.~Li, H.~Yu, H.~Gao, H.~Zheng, H.~Yuan, J.~Chen, J.~Guo, J.~Su, J.~Wang, J.~Zhao, J.~Zhang, J.~Liu, J.~Yan, J.~Wu, L.~Shi, L.~Ye, L.~Yu, M.~Dong, N.~Zhang, N.~Ma, Q.~Pan, Q.~Gong, S.~Liu, S.~Ma, S.~Wei, S.~Cao, S.~Huang, T.~Jiang, W.~Gao, W.~Xiong, W.~He, W.~Huang, W.~Wu, W.~He, X.~Wei, X.~Jia, X.~Wu, X.~Xu, X.~Zu, X.~Zhou, X.~Pan, Y.~Charles, Y.~Li, Y.~Hu, Y.~Liu, Y.~Chen, Y.~Wang, Y.~Liu, Y.~Qin, Y.~Liu, Y.~Yang, Y.~Bao, Y.~Du, Y.~Wu, Y.~Wang, Z.~Zhou, Z.~Wang, Z.~Li, Z.~Zhu, Z.~Zhang, Z.~Wang, Z.~Yang, Z.~Huang, Z.~Huang, Z.~Xu, and Z.~Yang.
+\newblock Kimi k1.5: Scaling reinforcement learning with llms.
+\newblock {\em CoRR}, abs/2501.12599, 2025.
+
+\bibitem{wang2024mathshepherdverifyreinforcellms}
+P.~Wang, L.~Li, Z.~Shao, R.~Xu, D.~Dai, Y.~Li, D.~Chen, Y.~Wu, and Z.~Sui.
+\newblock Math-shepherd: Verify and reinforce llms step-by-step without human annotations.
+\newblock In L.~Ku, A.~Martins, and V.~Srikumar, editors, {\em Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), {ACL} 2024, Bangkok, Thailand, August 11-16, 2024}, pages 9426--9439. Association for Computational Linguistics, 2024.
+
+\bibitem{xie2024memorization}
+C.~Xie, Y.~Huang, C.~Zhang, D.~Yu, X.~Chen, B.~Y. Lin, B.~Li, B.~Ghazi, and R.~Kumar.
+\newblock On memorization of large language models in logical reasoning.
+\newblock {\em arXiv preprint arXiv:2410.23123}, 2024.
+
+\bibitem{qwen3technicalreport}
+A.~Yang, A.~Li, B.~Yang, B.~Zhang, B.~Hui, B.~Zheng, B.~Yu, C.~Gao, C.~Huang, C.~Lv, C.~Zheng, D.~Liu, F.~Zhou, F.~Huang, F.~Hu, H.~Ge, H.~Wei, H.~Lin, J.~Tang, J.~Yang, J.~Tu, J.~Zhang, J.~Yang, J.~Yang, J.~Zhou, J.~Zhou, J.~Lin, K.~Dang, K.~Bao, K.~Yang, L.~Yu, L.~Deng, M.~Li, M.~Xue, M.~Li, P.~Zhang, P.~Wang, Q.~Zhu, R.~Men, R.~Gao, S.~Liu, S.~Luo, T.~Li, T.~Tang, W.~Yin, X.~Ren, X.~Wang, X.~Zhang, X.~Ren, Y.~Fan, Y.~Su, Y.~Zhang, Y.~Zhang, Y.~Wan, Y.~Liu, Z.~Wang, Z.~Cui, Z.~Zhang, Z.~Zhou, and Z.~Qiu.
+\newblock Qwen3 technical report.
+\newblock {\em CoRR}, abs/2505.09388, 2025.
+
+\bibitem{yu2025dapoopensourcellmreinforcement}
+Q.~Yu, Z.~Zhang, R.~Zhu, Y.~Yuan, X.~Zuo, Y.~Yue, T.~Fan, G.~Liu, L.~Liu, X.~Liu, H.~Lin, Z.~Lin, B.~Ma, G.~Sheng, Y.~Tong, C.~Zhang, M.~Zhang, W.~Zhang, H.~Zhu, J.~Zhu, J.~Chen, J.~Chen, C.~Wang, H.~Yu, W.~Dai, Y.~Song, X.~Wei, H.~Zhou, J.~Liu, W.-Y. Ma, Y.-Q. Zhang, L.~Yan, M.~Qiao, Y.~Wu, and M.~Wang.
+\newblock Dapo: An open-source llm reinforcement learning system at scale.
+\newblock {\em CoRR}, abs/2503.14476, 2025.
+
+\bibitem{yuan2024advancingllmreasoninggeneralists}
+L.~Yuan, G.~Cui, H.~Wang, N.~Ding, X.~Wang, B.~Shan, Z.~Liu, J.~Deng, H.~Chen, R.~Xie, Y.~Lin, Z.~Liu, B.~Zhou, H.~Peng, Z.~Liu, and M.~Sun.
+\newblock Advancing {LLM} reasoning generalists with preference trees.
+\newblock In {\em The Thirteenth International Conference on Learning Representations, {ICLR} 2025, Singapore, April 24-28, 2025}. OpenReview.net, 2025.
+
+\bibitem{yuan2023scalingrelationshiplearningmathematical}
+Z.~Yuan, H.~Yuan, C.~Li, G.~Dong, C.~Tan, and C.~Zhou.
+\newblock Scaling relationship on learning mathematical reasoning with large language models.
+\newblock {\em CoRR}, abs/2308.01825, 2023.
+
+\bibitem{zhang2024restmctsllmselftrainingprocess}
+D.~Zhang, S.~Zhoubian, Z.~Hu, Y.~Yue, Y.~Dong, and J.~Tang.
+\newblock Rest-mcts*: {LLM} self-training via process reward guided tree search.
+\newblock In A.~Globersons, L.~Mackey, D.~Belgrave, A.~Fan, U.~Paquet, J.~M. Tomczak, and C.~Zhang, editors, {\em Advances in Neural Information Processing Systems 38: Annual Conference on Neural Information Processing Systems 2024, NeurIPS 2024, Vancouver, BC, Canada, December 10 - 15, 2024}, 2024.
+
+\end{thebibliography}

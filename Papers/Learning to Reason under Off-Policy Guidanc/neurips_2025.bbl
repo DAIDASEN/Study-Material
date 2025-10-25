@@ -1,0 +1,315 @@
+\begin{thebibliography}{10}
+
+\bibitem{o1}
+Aaron Jaech, Adam Kalai, Adam Lerer, Adam Richardson, Ahmed El-Kishky, Aiden Low, Alec Helyar, Aleksander Madry, Alex Beutel, Alex Carney, et~al.
+\newblock Openai o1 system card.
+\newblock {\em arXiv preprint arXiv:2412.16720}, 2024.
+
+\bibitem{r1}
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shirong Ma, Peiyi Wang, Xiao Bi, et~al.
+\newblock Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning.
+\newblock {\em arXiv preprint arXiv:2501.12948}, 2025.
+
+\bibitem{kimik1.5}
+Kimi Team, Angang Du, Bofei Gao, Bowei Xing, Changjiu Jiang, Cheng Chen, Cheng Li, Chenjun Xiao, Chenzhuang Du, Chonghua Liao, et~al.
+\newblock Kimi k1. 5: Scaling reinforcement learning with llms.
+\newblock {\em arXiv preprint arXiv:2501.12599}, 2025.
+
+\bibitem{cot}
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, brian ichter, Fei Xia, Ed~H. Chi, Quoc~V Le, and Denny Zhou.
+\newblock Chain of thought prompting elicits reasoning in large language models.
+\newblock In Alice~H. Oh, Alekh Agarwal, Danielle Belgrave, and Kyunghyun Cho, editors, {\em Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem{simplerl}
+Weihao Zeng, Yuzhen Huang, Wei Liu, Keqing He, Qian Liu, Zejun Ma, and Junxian He.
+\newblock 7b model and 8k examples: Emerging reasoning with reinforcement learning is both effective and efficient.
+\newblock \url{https://hkust-nlp.notion.site/simplerl-reason}, 2025.
+\newblock Notion Blog.
+
+\bibitem{drgrpo}
+Zichen Liu, Changyu Chen, Wenjun Li, Penghui Qi, Tianyu Pang, Chao Du, Wee~Sun Lee, and Min Lin.
+\newblock Understanding r1-zero-like training: A critical perspective.
+\newblock {\em arXiv preprint arXiv:2503.20783}, 2025.
+
+\bibitem{orz}
+Jingcheng Hu, Yinmin Zhang, Qi~Han, Daxin Jiang, Xiangyu Zhang, and Heung-Yeung Shum.
+\newblock Open-reasoner-zero: An open source approach to scaling up reinforcement learning on the base model, 2025.
+
+\bibitem{zhao2025echochamberrlposttraining}
+Rosie Zhao, Alexandru Meterez, Sham Kakade, Cengiz Pehlevan, Samy Jelassi, and Eran Malach.
+\newblock Echo chamber: Rl post-training amplifies behaviors learned in pretraining, 2025.
+
+\bibitem{rl_limits}
+Yang Yue, Zhiqi Chen, Rui Lu, Andrew Zhao, Zhaokai Wang, Yang Yue, Shiji Song, and Gao Huang.
+\newblock Does reinforcement learning really incentivize reasoning capacity in llms beyond the base model?, 2025.
+
+\bibitem{gandhi2025cognitivebehaviorsenableselfimproving}
+Kanishk Gandhi, Ayush Chakravarthy, Anikait Singh, Nathan Lile, and Noah~D. Goodman.
+\newblock Cognitive behaviors that enable self-improving reasoners, or, four habits of highly effective stars, 2025.
+
+\bibitem{llama32}
+{Meta AI}.
+\newblock Llama 3.2: Revolutionizing edge ai and vision with open, customizable models, September 2024.
+\newblock 15 minute read.
+
+\bibitem{grpo}
+Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y.~K. Li, Y.~Wu, and Daya Guo.
+\newblock Deepseekmath: Pushing the limits of mathematical reasoning in open language models, 2024.
+
+\bibitem{li2024numinamath}
+Jia Li, Edward Beeching, Lewis Tunstall, Ben Lipkin, Roman Soletskyi, Shengyi Huang, Kashif Rasul, Longhui Yu, Albert~Q. Jiang, Ziju Shen, et~al.
+\newblock Numinamath: The largest public dataset in ai4maths with 860k pairs of competition math problems and solutions.
+\newblock \url{https://huggingface.co/datasets/Numinamath}, 2024.
+\newblock Hugging Face repository, 13:9.
+
+\bibitem{dataset_olympiad}
+Chaoqun He, Renjie Luo, Yuzhuo Bai, Shengding Hu, Zhen Thai, Junhao Shen, Jinyi Hu, Xu~Han, Yujie Huang, Yuxiang Zhang, et~al.
+\newblock Olympiadbench: A challenging benchmark for promoting agi with olympiad-level bilingual multimodal scientific problems.
+\newblock In {\em Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pages 3828--3850, 2024.
+
+\bibitem{dataset_minerva}
+Aitor Lewkowycz, Anders Andreassen, David Dohan, Ethan Dyer, Henryk Michalewski, Vinay Ramasesh, Ambrose Slone, Cem Anil, Imanol Schlag, Theo Gutman-Solo, et~al.
+\newblock Solving quantitative reasoning problems with language models.
+\newblock {\em Advances in Neural Information Processing Systems}, 35:3843--3857, 2022.
+
+\bibitem{dataset_math}
+Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang, Dawn Song, and Jacob Steinhardt.
+\newblock Measuring mathematical problem solving with the math dataset.
+\newblock {\em arXiv preprint arXiv:2103.03874}, 2021.
+
+\bibitem{hacking1}
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and Dan Man{\'e}.
+\newblock Concrete problems in ai safety.
+\newblock {\em arXiv preprint arXiv:1606.06565}, 2016.
+
+\bibitem{hacking2}
+Joar Skalse, Nikolaus Howe, Dmitrii Krasheninnikov, and David Krueger.
+\newblock Defining and characterizing reward gaming.
+\newblock {\em Advances in Neural Information Processing Systems}, 35:9460--9471, 2022.
+
+\bibitem{hacking3}
+Leo Gao, John Schulman, and Jacob Hilton.
+\newblock Scaling laws for reward model overoptimization.
+\newblock In {\em International Conference on Machine Learning}, pages 10835--10866. PMLR, 2023.
+
+\bibitem{simplerl-zoo}
+Weihao Zeng, Yuzhen Huang, Qian Liu, Wei Liu, Keqing He, Zejun Ma, and Junxian He.
+\newblock Simplerl-zoo: Investigating and taming zero reinforcement learning for open base models in the wild, 2025.
+
+\bibitem{ppo}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem{policy_gradient}
+Richard~S Sutton, David McAllester, Satinder Singh, and Yishay Mansour.
+\newblock Policy gradient methods for reinforcement learning with function approximation.
+\newblock {\em Advances in neural information processing systems}, 12, 1999.
+
+\bibitem{trpo}
+John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz.
+\newblock Trust region policy optimization.
+\newblock In {\em International conference on machine learning}, pages 1889--1897. PMLR, 2015.
+
+\bibitem{prime}
+Ganqu Cui, Lifan Yuan, Zefan Wang, Hanbin Wang, Wendi Li, Bingxiang He, Yuchen Fan, Tianyu Yu, Qixin Xu, Weize Chen, et~al.
+\newblock Process reinforcement through implicit rewards.
+\newblock {\em arXiv preprint arXiv:2502.01456}, 2025.
+
+\bibitem{yu2025dapoopensourcellmreinforcement}
+Qiying Yu, Zheng Zhang, Ruofei Zhu, Yufeng Yuan, Xiaochen Zuo, Yu~Yue, Tiantian Fan, Gaohong Liu, Lingjun Liu, Xin Liu, Haibin Lin, Zhiqi Lin, Bole Ma, Guangming Sheng, Yuxuan Tong, Chi Zhang, Mofan Zhang, Wang Zhang, Hang Zhu, Jinhua Zhu, Jiaze Chen, Jiangjie Chen, Chengyi Wang, Hongli Yu, Weinan Dai, Yuxuan Song, Xiangpeng Wei, Hao Zhou, Jingjing Liu, Wei-Ying Ma, Ya-Qin Zhang, Lin Yan, Mu~Qiao, Yonghui Wu, and Mingxuan Wang.
+\newblock Dapo: An open-source llm reinforcement learning system at scale, 2025.
+
+\bibitem{reddi2016stochastic}
+Sashank~J Reddi, Ahmed Hefny, Suvrit Sra, Barnabas Poczos, and Alex Smola.
+\newblock Stochastic variance reduction for nonconvex optimization.
+\newblock In {\em ICML}, pages 314--323, 2016.
+
+\bibitem{meng2023off}
+Wenjia Meng, Qian Zheng, Gang Pan, and Yilong Yin.
+\newblock Off-policy proximal policy optimization.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial Intelligence}, volume~37, pages 9162--9170, 2023.
+
+\bibitem{openr1}
+Hugging Face.
+\newblock Open r1: A fully open reproduction of deepseek-r1, January 2025.
+
+\bibitem{numina_math_datasets}
+Jia LI, Edward Beeching, Lewis Tunstall, Ben Lipkin, Roman Soletskyi, Shengyi~Costa Huang, Kashif Rasul, Longhui Yu, Albert Jiang, Ziju Shen, Zihan Qin, Bin Dong, Li~Zhou, Yann Fleureau, Guillaume Lample, and Stanislas Polu.
+\newblock Numinamath.
+\newblock \url{[https://huggingface.co/AI-MO/NuminaMath-1.5](https://github.com/project-numina/aimo-progress-prize/blob/main/report/numina_dataset.pdf)}, 2024.
+
+\bibitem{qwen2.5_math}
+An~Yang, Beichen Zhang, Binyuan Hui, Bofei Gao, Bowen Yu, Chengpeng Li, Dayiheng Liu, Jianhong Tu, Jingren Zhou, Junyang Lin, Keming Lu, Mingfeng Xue, Runji Lin, Tianyu Liu, Xingzhang Ren, and Zhenru Zhang.
+\newblock Qwen2.5-math technical report: Toward mathematical expert model via self-improvement, 2024.
+
+\bibitem{qwen2.5}
+An~Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo~Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le~Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu~Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu.
+\newblock Qwen2.5 technical report.
+\newblock {\em arXiv preprint arXiv:2412.15115}, 2024.
+
+\bibitem{llama3}
+Meta Team.
+\newblock The llama 3 herd of models, 2024.
+
+\bibitem{arc}
+Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord.
+\newblock Think you have solved question answering? try arc, the ai2 reasoning challenge.
+\newblock {\em arXiv:1803.05457v1}, 2018.
+
+\bibitem{gpqa}
+David Rein, Betty~Li Hou, Asa~Cooper Stickland, Jackson Petty, Richard~Yuanzhe Pang, Julien Dirani, Julian Michael, and Samuel~R. Bowman.
+\newblock {GPQA}: A graduate-level google-proof q\&a benchmark.
+\newblock In {\em First Conference on Language Modeling}, 2024.
+
+\bibitem{mmlu_pro}
+Yubo Wang, Xueguang Ma, Ge~Zhang, Yuansheng Ni, Abhranil Chandra, Shiguang Guo, Weiming Ren, Aaran Arulraj, Xuan He, Ziyan Jiang, et~al.
+\newblock Mmlu-pro: A more robust and challenging multi-task language understanding benchmark.
+\newblock {\em arXiv preprint arXiv:2406.01574}, 2024.
+
+\bibitem{muennighoff2025s1}
+Niklas Muennighoff, Zitong Yang, Weijia Shi, Xiang~Lisa Li, Li~Fei-Fei, Hannaneh Hajishirzi, Luke Zettlemoyer, Percy Liang, Emmanuel Cand{\`e}s, and Tatsunori Hashimoto.
+\newblock s1: Simple test-time scaling.
+\newblock {\em arXiv preprint arXiv:2501.19393}, 2025.
+
+\bibitem{ye2025limo}
+Yixin Ye, Zhen Huang, Yang Xiao, Ethan Chern, Shijie Xia, and Pengfei Liu.
+\newblock Limo: Less is more for reasoning.
+\newblock {\em arXiv preprint arXiv:2502.03387}, 2025.
+
+\bibitem{why_distill}
+Xiao Hu, Xingyu Lu, Liyuan Mao, YiFan Zhang, Tianke Zhang, Bin Wen, Fan Yang, Tingting Gao, and Guorui Zhou.
+\newblock Why distillation can outperform zero-rl: The role of flexible reasoning, 2025.
+
+\bibitem{abdin2024phi4technicalreport}
+Marah Abdin, Jyoti Aneja, Harkirat Behl, Sébastien Bubeck, Ronen Eldan, Suriya Gunasekar, Michael Harrison, Russell~J. Hewett, Mojan Javaheripi, Piero Kauffmann, James~R. Lee, Yin~Tat Lee, Yuanzhi Li, Weishung Liu, Caio C.~T. Mendes, Anh Nguyen, Eric Price, Gustavo de~Rosa, Olli Saarikivi, Adil Salim, Shital Shah, Xin Wang, Rachel Ward, Yue Wu, Dingli Yu, Cyril Zhang, and Yi~Zhang.
+\newblock Phi-4 technical report, 2024.
+
+\bibitem{survey}
+Xiaoye Qu, Yafu Li, Zhaochen Su, Weigao Sun, Jianhao Yan, Dongrui Liu, Ganqu Cui, Daizong Liu, Shuxian Liang, Junxian He, Peng Li, Wei Wei, Jing Shao, Chaochao Lu, Yue Zhang, Xian-Sheng Hua, Bowen Zhou, and Yu~Cheng.
+\newblock A survey of efficient reasoning for large reasoning models: Language, multimodality, and beyond, 2025.
+
+\bibitem{opo}
+Yaru Hao, Li~Dong, Xun Wu, Shaohan Huang, Zewen Chi, and Furu Wei.
+\newblock On-policy rl with optimal reward baseline, 2025.
+
+\bibitem{zuo2025ttrl}
+Yuxin Zuo, Kaiyan Zhang, Shang Qu, Li~Sheng, Xuekai Zhu, Biqing Qi, Youbang Sun, Ganqu Cui, Ning Ding, and Bowen Zhou.
+\newblock Ttrl: Test-time reinforcement learning.
+\newblock {\em arXiv preprint arXiv:2504.16084}, 2025.
+
+\bibitem{pang2025bolt}
+Bo~Pang, Hanze Dong, Jiacheng Xu, Silvio Savarese, Yingbo Zhou, and Caiming Xiong.
+\newblock Bolt: Bootstrap long chain-of-thought in language models without distillation.
+\newblock {\em arXiv preprint arXiv:2502.03860}, 2025.
+
+\bibitem{fatemi2025concise}
+Mehdi Fatemi, Banafsheh Rafiee, Mingjie Tang, and Kartik Talamadupula.
+\newblock Concise reasoning via reinforcement learning.
+\newblock {\em arXiv preprint arXiv:2504.05185}, 2025.
+
+\bibitem{zhao2025absolutezero}
+Andrew Zhao, Yiran Wu, Yang Yue, Tong Wu, Quentin Xu, Yang Yue, Matthieu Lin, Shenzhi Wang, Qingyun Wu, Zilong Zheng, and Gao Huang.
+\newblock Absolute zero: Reinforced self-play reasoning with zero data.
+\newblock {\em arXiv preprint arXiv:2505.03335}, 2025.
+
+\bibitem{su2025trust}
+Xuerui Su, Shufang Xie, Guoqing Liu, Yingce Xia, Renqian Luo, Peiran Jin, Zhiming Ma, Yue Wang, Zun Wang, and Yuting Liu.
+\newblock Trust region preference approximation: A simple and stable reinforcement learning algorithm for llm reasoning.
+\newblock {\em arXiv preprint arXiv:2504.04524}, 2025.
+
+\bibitem{wen2025light}
+Liang Wen, Yunke Cai, Fenrui Xiao, Xin He, Qi~An, Zhenyu Duan, Yimin Du, Junchen Liu, Lifu Tang, Xiaowei Lv, et~al.
+\newblock Light-r1: Curriculum sft, dpo and rl for long cot from scratch and beyond.
+\newblock {\em arXiv preprint arXiv:2503.10460}, 2025.
+
+\bibitem{yang2025thinking}
+Wang Yang, Hongye Jin, Jingfeng Yang, Vipin Chaudhary, and Xiaotian Han.
+\newblock Thinking preference optimization.
+\newblock {\em arXiv preprint arXiv:2502.13173}, 2025.
+
+\bibitem{mnih2016asynchronous}
+Volodymyr Mnih, Adria~Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu.
+\newblock Asynchronous methods for deep reinforcement learning.
+\newblock In {\em International conference on machine learning}, pages 1928--1937. PmLR, 2016.
+
+\bibitem{mnih2013playing}
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, and Martin Riedmiller.
+\newblock Playing atari with deep reinforcement learning.
+\newblock {\em arXiv preprint arXiv:1312.5602}, 2013.
+
+\bibitem{fujimoto2018addressing}
+Scott Fujimoto, Herke Hoof, and David Meger.
+\newblock Addressing function approximation error in actor-critic methods.
+\newblock In {\em International conference on machine learning}, pages 1587--1596. PMLR, 2018.
+
+\bibitem{haarnoja2018soft}
+Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine.
+\newblock Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor.
+\newblock In {\em International conference on machine learning}, pages 1861--1870. Pmlr, 2018.
+
+\bibitem{sutton1999policy}
+Richard~S Sutton, David McAllester, Satinder Singh, and Yishay Mansour.
+\newblock Policy gradient methods for reinforcement learning with function approximation.
+\newblock {\em Advances in neural information processing systems}, 12, 1999.
+
+\bibitem{NFT}
+Huayu Chen, Kaiwen Zheng, Qinsheng Zhang, Ganqu Cui, Yin Cui, Haotian Ye, Tsung-Yi Lin, Ming-Yu Liu, Jun Zhu, and Haoxiang Wang.
+\newblock Bridging supervised learning and reinforcement learning in math reasoning.
+\newblock {\em arXiv preprint arXiv:2505.18116}, 2025.
+
+\bibitem{rafailov2023direct}
+Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher~D Manning, Stefano Ermon, and Chelsea Finn.
+\newblock Direct preference optimization: Your language model is secretly a reward model.
+\newblock {\em Advances in Neural Information Processing Systems}, 36:53728--53741, 2023.
+
+\bibitem{hao2025can}
+Yunzhuo Hao, Jiawei Gu, Huichen~Will Wang, Linjie Li, Zhengyuan Yang, Lijuan Wang, and Yu~Cheng.
+\newblock Can mllms reason in multimodality? emma: An enhanced multimodal reasoning benchmark.
+\newblock {\em arXiv preprint arXiv:2501.05444}, 2025.
+
+\bibitem{fu2025scaling}
+Tingchen Fu, Jiawei Gu, Yafu Li, Xiaoye Qu, and Yu~Cheng.
+\newblock Scaling reasoning, losing control: Evaluating instruction following in large reasoning models.
+\newblock {\em arXiv preprint arXiv:2505.14810}, 2025.
+
+\bibitem{scaling_law1}
+Joel Hestness, Sharan Narang, Newsha Ardalani, Gregory Diamos, Heewoo Jun, Hassan Kianinejad, Md~Mostofa~Ali Patwary, Yang Yang, and Yanqi Zhou.
+\newblock Deep learning scaling is predictable, empirically.
+\newblock {\em arXiv preprint arXiv:1712.00409}, 2017.
+
+\bibitem{scaling_law2}
+Tom Henighan, Jared Kaplan, Mor Katz, Mark Chen, Christopher Hesse, Jacob Jackson, Heewoo Jun, Tom~B Brown, Prafulla Dhariwal, Scott Gray, et~al.
+\newblock Scaling laws for autoregressive generative modeling.
+\newblock {\em arXiv preprint arXiv:2010.14701}, 2020.
+
+\bibitem{sutton2018reinforcement}
+Richard~S Sutton and Andrew~G Barto.
+\newblock {\em Reinforcement Learning: An Introduction}.
+\newblock MIT Press, 2 edition, 2018.
+
+\bibitem{significance_test}
+Philipp Koehn.
+\newblock Statistical significance tests for machine translation evaluation.
+\newblock In {\em Proceedings of the 2004 conference on empirical methods in natural language processing}, pages 388--395, 2004.
+
+\bibitem{papineni-etal-2002-bleu}
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu.
+\newblock {B}leu: a method for automatic evaluation of machine translation.
+\newblock In Pierre Isabelle, Eugene Charniak, and Dekang Lin, editors, {\em Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics}, pages 311--318, Philadelphia, Pennsylvania, USA, July 2002. Association for Computational Linguistics.
+
+\bibitem{setlur2025scaling}
+Amrith Setlur, Nived Rajaraman, Sergey Levine, and Aviral Kumar.
+\newblock Scaling test-time compute without verification or {RL} is suboptimal.
+\newblock In {\em ICLR 2025 Workshop: VerifAI: AI Verification in the Wild}, 2025.
+
+\bibitem{chu2025sftmemorizesrlgeneralizes}
+Tianzhe Chu, Yuexiang Zhai, Jihan Yang, Shengbang Tong, Saining Xie, Dale Schuurmans, Quoc~V. Le, Sergey Levine, and Yi~Ma.
+\newblock Sft memorizes, rl generalizes: A comparative study of foundation model post-training, 2025.
+
+\bibitem{vl-thinking2025}
+Hardy Chen, Haoqin Tu, Fali Wang, Hui Liu, Xianfeng Tang, Xinya Du, Yuyin Zhou, and Cihang Xie.
+\newblock Sft or rl? an early investigation into training r1-like reasoning large vision-language models.
+\newblock \url{https://github.com/UCSC-VLAA/VLAA-Thinking}, 2025.
+
+\end{thebibliography}

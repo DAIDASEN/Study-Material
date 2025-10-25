@@ -1,0 +1,212 @@
+\section{Model Output Example}
+\label{appendix:model_output_example}
+
+Compared to DeepSeek-R1-Distill-Qwen-1.5B, our optimized model demonstrates greater token efficiency, requiring fewer tokens to arrive at the correct answer (both models use greedy decoding). When the model's context length is limited, increased token efficiency significantly enhances performance.
+
+\begin{tcolorbox}[modelbox, title=Problem]
+What is the smallest positive integer $n$ such that $17n \equiv 1234 \pmod{7}?$
+\end{tcolorbox}
+
+\begin{tcolorbox}[modelbox, title=SPO-tree]
+Okay, so I need to find the smallest positive integer \( n \) such that \( 17n \equiv 1234 \pmod{7} \). Hmm, let me think about how to approach this. I remember that when dealing with congruences modulo a number, it's often helpful to simplify the coefficients modulo that number first. So, maybe I should start by reducing 17 and 1234 modulo 7.
+
+Let me recall that to find a number modulo 7, I can divide by 7 and find the remainder. So, let's start with 17. Dividing 17 by 7, 7 goes into 17 twice with a remainder. 2 times 7 is 14, and 17 minus 14 is 3. So, 17 is congruent to 3 modulo 7. That means \( 17 \equiv 3 \pmod{7} \). So, the equation \( 17n \equiv 1234 \pmod{7} \) simplifies to \( 3n \equiv 1234 \pmod{7} \).
+
+Now, I need to find \( 1234 \) modulo 7. Let me do that. 1234 divided by 7. Hmm, 7 times 176 is 1232 because 176 times 7 is 1232. So, 1234 minus 1232 is 2. Therefore, \( 1234 \equiv 2 \pmod{7} \). So, now the equation is \( 3n \equiv 2 \pmod{7} \).
+
+Alright, so I have \( 3n \equiv 2 \pmod{7} \). I need to solve for \( n \). To do that, I think I need to find the multiplicative inverse of 3 modulo 7. The multiplicative inverse of 3 is a number \( x \) such that \( 3x \equiv 1 \pmod{7} \). Once I have that, I can multiply both sides of the equation by \( x \) to get \( n \equiv 2x \pmod{7} \).
+
+So, let me find the inverse of 3 modulo 7. Let's try numbers from 1 upwards:
+
+- \( 3 \times 1 = 3 \equiv 3 \pmod{7} \) → Not 1.
+- \( 3 \times 2 = 6 \equiv 6 \pmod{7} \) → Not 1.
+- \( 3 \times 3 = 9 \equiv 2 \pmod{7} \) → Not 1.
+- \( 3 \times 4 = 12 \equiv 5 \pmod{7} \) → Not 1.
+- \( 3 \times 5 = 15 \equiv 1 \pmod{7} \) → Yes! So, 5 is the inverse because 3*5=15, which is 1 mod 7.
+
+Great, so the inverse of 3 mod 7 is 5. Therefore, multiplying both sides of \( 3n \equiv 2 \pmod{7} \) by 5 gives:
+
+\( 5 \times 3n \equiv 5 \times 2 \pmod{7} \)
+
+Simplifying, \( 15n \equiv 10 \pmod{7} \). But 15 mod 7 is 1, because 7*2=14, so 15-14=1. Similarly, 10 mod 7 is 3, because 7*1=7, 10-7=3. So, this simplifies to:
+
+\( 1n \equiv 3 \pmod{7} \)
+
+Which means \( n \equiv 3 \pmod{7} \). So, the smallest positive integer \( n \) that satisfies this is 3. Let me just verify that.
+
+Calculating \( 17*3 = 51 \). Then, 51 mod 7: 7*7=49, so 51-49=2. And 1234 mod 7 is 2, as we found earlier. So, 51 mod 7 is 2, which matches 1234 mod 7. So, yes, 3 is the correct answer.
+
+**Final Answer**
+The smallest positive integer \( n \) is \boxed{3}.
+
+
+To find the smallest positive integer \( n \) such that \( 17n \equiv 1234 \pmod{7} \), we start by simplifying the coefficients modulo 7.
+
+First, we reduce 17 modulo 7:
+\[
+17 \div 7 = 2 \text{ remainder } 3 \implies 17 \equiv 3 \pmod{7}
+\]
+Thus, the equation \( 17n \equiv 1234 \pmod{7} \) simplifies to:
+\[
+3n \equiv 1234 \pmod{7}
+\]
+
+Next, we reduce 1234 modulo 7:
+\[
+1234 \div 7 = 176 \text{ remainder } 2 \implies 1234 \equiv 2 \pmod{7}
+\]
+So, the equation becomes:
+\[
+3n \equiv 2 \pmod{7}
+\]
+
+To solve for \( n \), we need the multiplicative inverse of 3 modulo 7. Testing values, we find that:
+\[
+3 \times 5 = 15 \equiv 1 \pmod{7}
+\]
+Thus, the inverse of 3 modulo 7 is 5. Multiplying both sides of \( 3n \equiv 2 \pmod{7} \) by 5:
+\[
+5 \times 3n \equiv 5 \times 2 \pmod{7} \implies 15n \equiv 10 \pmod{7}
+\]
+Simplifying, since \( 15 \equiv 1 \pmod{7} \) and \( 10 \equiv 3 \pmod{7} \):
+\[
+n \equiv 3 \pmod{7}
+\]
+
+The smallest positive integer \( n \) is 3. Verifying, \( 17 \times 3 = 51 \equiv 2 \pmod{7} \) and \( 1234 \equiv 2 \pmod{7} \), confirming the solution.
+
+\[
+\boxed{3}
+\]
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[modelbox, title=DeepSeek-R1-Distill-Qwen-1.5B]
+Okay, so I have this problem here: find the smallest positive integer \( n \) such that \( 17n \equiv 1234 \pmod{7} \). Hmm, modular arithmetic, right? I remember that congruences modulo 7 mean that when you divide \( 17n - 1234 \) by 7, there's no remainder. So, basically, \( 17n \) and \( 1234 \) leave the same remainder when divided by 7. 
+
+First, maybe I should simplify both sides of the congruence modulo 7. That is, find what \( 17 \) is equivalent to modulo 7, and what \( 1234 \) is equivalent to modulo 7. That should make the equation easier to handle.
+
+Starting with 17 modulo 7. Let me divide 17 by 7. 7 goes into 17 twice, which is 14, and the remainder is 3. So, \( 17 \equiv 3 \pmod{7} \). That simplifies the left side of the congruence to \( 3n \).
+
+Now, the right side is 1234 modulo 7. Hmm, 1234 is a big number, so I need a systematic way to find its remainder when divided by 7. Maybe I can break it down digit by digit or use some divisibility rules. Alternatively, I can use the fact that 10 is congruent to 3 modulo 7, so powers of 10 can be simplified.
+
+Wait, another approach: I can divide 1234 by 7 and find the remainder. Let me do that. 7 goes into 12 once, with a remainder of 5. Bring down the 3 to make 53. 7 goes into 53 seven times, which is 49, leaving a remainder of 4. Bring down the 4 to make 44. 7 goes into 44 six times, which is 42, leaving a remainder of 2. So, 1234 divided by 7 is 176 with a remainder of 2. Therefore, \( 1234 \equiv 2 \pmod{7} \).
+
+So now, the congruence simplifies to \( 3n \equiv 2p \mod{7} \). Okay, so I need to solve for \( n \) in this equation. That is, find the smallest positive integer \( n \) such that when multiplied by 3 and then divided by 7, the remainder is 2.
+
+To solve \( 3n \equiv 2 \pmod{7} \), I think I need to find the multiplicative inverse of 3 modulo 7. The multiplicative inverse of 3 is a number \( x \) such that \( 3x \equiv 1 \pmod{7} \). Once I have that, I can multiply both sides of the congruence by \( x \) to isolate \( n \).
+
+So, let's find the inverse of 3 modulo 7. I can test numbers from 1 upwards to see which one satisfies \( 3x \equiv 1 \pmod{7} \).
+
+- \( 3 \times 1 = 3 \equiv 3 \pmod{7} \) → Not 1.
+- \( 3 \times 2 = 6 \equiv 6 \pmod{7} \) → Not 1.
+- \( 3 \times 3 = 9 \equiv 2 \pmod{7} \) → Not 1.
+- \( 3 \times 4 = 12 \equiv 5 \pmod{7} \) → Not 1.
+- \( 3 \times 5 = 15 \equiv 1 \pmod{7} \) → Yes! That works.
+
+So, the inverse of 3 modulo 7 is 5. Therefore, multiplying both sides of the congruence \( 3n \equiv 2 \pmod{7} \) by 5 gives:
+
+\( 5 \times 3n \equiv 5 \times 2 \pmod{7} \)
+
+Simplifying the left side: \( 15n \equiv 2 \pmod{7} \). But 15 modulo 7 is 1, since 15 divided by 7 is 2 with a remainder of 1. So, this simplifies to:
+
+\( 1n \equiv 2 \pmod{7} \), which is just \( n \equiv 2 \pmod{7} \).
+
+Therefore, the smallest positive integer \( n \) that satisfies this congruence is 2. Let me double-check to make sure I didn't make a mistake.
+
+Plugging \( n = 2 \) back into the original equation: \( 17 \times 2 = 34 \). Now, 34 divided by 7 is 4 with a remainder of 6. Wait, but 1234 modulo 7 was 2, so 34 modulo 7 is 6, which is not equal to 2. Hmm, that's a problem. Did I do something wrong?
+
+Wait, hold on. Let me check my steps again. Maybe I messed up the inverse or the simplification.
+
+Starting over: \( 17n \equiv 1234 \pmod{7} \). I found that \( 17 \equiv 3 \pmod{7} \) and \( 1234 \equiv 2 \pmod{7} \). So, \( 3n \equiv 2 \pmod{7} \). Then, I found the inverse of 3 modulo 7 is 5 because \( 3 \times 5 = 15 \equiv 1 \pmod{7} \). So, multiplying both sides by 5: \( n \equiv 10 \pmod{7} \). But 10 modulo 7 is 3, so \( n \equiv 3 \pmod{7} \). Wait, so earlier I thought it was 2, but that was a mistake.
+
+Wait, no, let me recast that. If \( n \equiv 10 \pmod{7} \), then 10 divided by 7 is 1 with a remainder of 3, so \( n \equiv 3 \pmod{7} \). So, the smallest positive integer \( n \) is 3. Let me check that.
+
+Plugging \( n = 3 \) into \( 17n \): \( 17 \times 3 = 51 \). 51 divided by 7 is 7 with a remainder of 2. So, 51 modulo 7 is 2, which matches the right side of the congruence. So, that works.
+
+Wait, so earlier I thought the inverse was 5, but that led me to \( n \equiv 10 \pmod{7} \), which is 3. So, the correct answer is 3, not 2. I must have made a mistake in my initial calculation.
+
+Let me go through the inverse part again. So, to find the inverse of 3 modulo 7, I need a number \( x \) such that \( 3x \equiv 1 \pmod{7} \). Testing:
+
+- \( 3 \times 1 = 3 \equiv 3 \pmod{7} \)
+- \( 3 \times 2 = 6 \equiv 6 \pmod{7} \)
+- \( 3 \times 3 = 9 \equiv 2 \pmod{7} \)
+- \( 3 \times 4 = 12 \equiv 5 \pmod{7} \)
+- \( 3 \times 5 = 15 \equiv 1 \pmod{7} \)
+
+Yes, so 5 is the inverse. So, multiplying both sides by 5: \( 5 \times 3n \equiv 5 \times 2 \pmod{7} \), which is \( 15n \equiv 10 \pmod{7} \). But 15 modulo 7 is 1, so \( n \equiv 10 \pmod{7} \). 10 divided by 7 is 1 with a remainder of 3, so \( n \equiv 3 \pmod{7} \). So, the smallest positive integer is 3.
+
+Wait, so why did I get confused earlier? Because I thought 10 modulo 7 is 3, but I thought 10 was 3, but when I first thought of 10, I thought it was 3, but when I first thought of 10, I thought it was 3, but when I thought of 10, I thought it was 3, but when I thought of 10, I thought it was 3, but when I thought of 10, I thought it was 3, but when I thought of 10, I thought it was 3. Wait, no, that's not right.
+
+Wait, 10 divided by 7 is 1 with a remainder of 3, so 10 modulo 7 is 3. So, \( n \equiv 3 \pmod{7} \). So, the smallest positive integer is 3.
+
+Let me verify again: \( 17 \times 3 = 51 \). 51 divided by 7 is 7 with a remainder of 2. So, 51 modulo 7 is 2, which is equal to 1234 modulo 7, which is 2. So, that works.
+
+Wait, so earlier, when I thought I had 10 modulo 7, I thought it was 3, but I think I confused myself. So, the correct answer is 3.
+
+But just to make sure, let me try \( n = 3 \): \( 17 \times 3 = 51 \). 51 divided by 7 is 7*7=49, so 51-49=2. So, 51 mod7=2, which is equal to 1234 mod7=2. So, yes, that works.
+
+Wait, but earlier, when I thought of 10 modulo7, I thought it was 3, but that was a miscalculation. So, the correct inverse is 5, leading to \( n \equiv 10 \pmod{7} \), which is 3.
+
+So, the smallest positive integer is 3.
+
+But just to make sure, let me try \( n = 3 \) in the original equation: \( 17 \times 3 = 51 \). 51 mod7 is 2, which is equal to 1234 mod7, which is 2. So, yes, that works.
+
+Wait, but let me also check \( n = 3 - 7 = -4 \). But since we're looking for positive integers, 3 is the smallest.
+
+Alternatively, if I had a different inverse, but no, 5 is the inverse.
+
+Wait, but just to make sure, let me try \( n = 3 + 7 = 10 \). \( 17 \times 10 = 170 \). 170 divided by 7 is 24*7=168, so 170-168=2. So, 170 mod7=2, which is equal to 1234 mod7=2. So, that also works, but 10 is larger than 3, so 3 is the smallest.
+
+Therefore, the answer is 3.
+
+Wait, but hold on, in my initial calculation, I thought I had 10 modulo7=3, but I thought 10 was 3, but that was a confusion. So, the correct answer is 3.
+
+But just to make sure, let me try another approach. Maybe I can solve \( 3n \equiv 2 \pmod{7} \) by testing n=1,2,3,... until I find the smallest n that satisfies the equation.
+
+n=1: $3*1=3\equiv 3\neq 2 \pmod{7}$
+n=2: $3*2=6\equiv 6\neq 2 \pmod{7}$
+n=3: $3*3=9\equiv 2 \pmod{7}$. Yes! So, n=3 is the smallest positive integer.
+
+So, that confirms it. So, the answer is 3.
+
+Wait, but in my initial thought process, I thought I had 10 modulo7=3, but that was a miscalculation. So, the correct answer is 3.
+
+Therefore, the smallest positive integer n is 3.
+
+**Final Answer**
+The smallest positive integer \( n \) is \boxed{3}.
+
+
+To find the smallest positive integer \( n \) such that \( 17n \equiv 1234 \pmod{7} \), we start by simplifying both sides of the congruence modulo 7.
+
+First, we simplify \( 17 \mod 7 \):
+\[ 17 \div 7 = 2 \text{ remainder } 3 \]
+Thus, \( 17 \equiv 3 \pmod{7} \).
+
+Next, we simplify \( 1234 \mod 7 \). We can do this by dividing 1234 by 7 and finding the remainder:
+\[ 1234 \div 7 = 176 \text{ remainder } 2 \]
+Thus, \( 1234 \equiv 2 \pmod{7} \).
+
+This reduces our original congruence to:
+\[ 3n \equiv 2 \pmod{7} \]
+
+To solve for \( n \), we need the multiplicative inverse of 3 modulo7 . We find this by testing values:
+\[ 3 \times 5 = 15 \equiv 1 \pmod{7} \]
+Thus, the inverse of 3 modulo 7 is 5.
+
+Multiplying both sides of the congruence \( 3n \equiv 2 \pmod{7} \) by 5:
+\[ 5 \times 3n \equiv 5 \times 2 \pmod{7} \]
+\[ 15n \equiv 10 \pmod{7} \]
+Since \( 15 \equiv 1 \pmod{7} \), this simplifies to:
+\[ n \equiv 10 \pmod{7} \]
+\[ 10 \div 7 = 1 \text{ remainder } 3 \]
+Thus, \( n \equiv 3 \pmod{7} \).
+
+The smallest positive integer \( n \) is 3. Verifying, we find:
+\[ 17 \times 3 = 51 \]
+\[ 51 \div 7 = 7 \text{ remainder } 2 \]
+Thus, \( 51 \equiv 2 \pmod{7} \), confirming our solution.
+
+The smallest positive integer \( n \) is \(\boxed{3}\).
+\end{tcolorbox}

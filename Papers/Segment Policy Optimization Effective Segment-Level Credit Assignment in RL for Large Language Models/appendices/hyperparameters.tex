@@ -1,0 +1,148 @@
+\section{Hyperparameters and Compute Resources}
+\label{appendix:hyperparameter}
+
+Our code base is based on \cite{kazemnejad2024vineppounlockingrlpotential}. Most hyperparameters are the same as theirs. Here we list important hyperparameters in the following five tables. We perform SPO-chain and SPO-tree experiments with RhoMath 1.1B using a single A100 GPU (40GB). For the long-CoT experiments (2K and 4K context) using DeepSeek-R1-Distill-Qwen-1.5B, we use a single A100 GPU (80GB).
+
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{SPO-chain (int5) Rho \\ 1.1B on GSM8K}\\[4pt]
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        Hyperparameter & Value \\ \midrule
+        Target train batch size & 64 \\ 
+        Num episodes per iteration & 512 \\ 
+        Dataset samples per iteration & 64 \\
+        Samples (per prompt) & 8 \\
+        Cutpoint interval & 5 \\
+        K (MC samples) & 9 \\
+        M (Tokens per level) & - \\
+        Branch factors & - \\
+        Train policy temperature & 0.6 \\
+        Train policy top-p & 0.9 \\
+        Train context size & 2047 \\
+        Initial KL coef & 0.0001 \\
+        Learning rate & $1\times10^{-6}$ \\
+        Epochs per iteration & 2 \\
+        Prob mask threshold & 0.9 \\
+        Eval. context size & 2047\\
+        Eval. temperature & 0.35 \\
+        Eval. top-p & 0.9 \\
+        Eval. samples & 16 \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{SPO-tree (6-6-6) Rho \\ 1.1B on GSM8K}\\[4pt]
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        Hyperparameter & Value \\ \midrule
+        Target train batch size & 128 \\ 
+        Num episodes per iteration & 512 \\ 
+        Dataset samples per iteration & 16 \\
+        Samples (per prompt) & - \\
+        Cutpoint interval & - \\
+        K (MC samples) & - \\
+        M (Tokens per level) & 30 \\
+        Branch factors & [6,6,6] \\
+        Train policy temperature & 0.6 \\
+        Train policy top-p & 0.9 \\
+        Train context size & 2047 \\
+        Initial KL coef & 0.0001 \\
+        Learning rate & $1\times10^{-6}$ \\
+        Epochs per iteration & 1 \\
+        Prob mask threshold & 0.9 \\
+        Eval. context size & 2047\\
+        Eval. temperature & 0.35 \\
+        Eval. top-p & 0.9 \\
+        Eval. samples & 16 \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}\\[15pt]
+
+
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{GRPO DeepSeek-R1-Distill-Qwen \\ 1.5B on MATH}\\[4pt]
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        Hyperparameter & Value \\ \midrule
+        Target train batch size & 128 \\ 
+        Num episodes per iteration & 512 \\ 
+        Dataset samples per iteration & 64 \\
+        Samples (per prompt) & 8 \\
+        Cutpoint interval & - \\
+        K (MC samples) & - \\
+        M (Tokens per level) & - \\
+        Branch factors & - \\
+        Train policy temperature & 0.6 \\
+        Train policy top-p & 1 \\
+        Train context size & 2048 => 4096 \\
+        Initial KL coef & 0.0001 \\
+        Learning rate & $1\times10^{-6}$ \\
+        Epochs per iteration & 1 \\
+        Prob mask threshold & No prob mask \\
+        Eval. context size & 2048 => 4096 \\
+        Eval. temperature & 0 \\
+        Eval. top-p & 0.9 \\
+        Eval. samples & 1 \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{SPO-tree (6-6-6) DeepSeek-R1-Distill-Qwen \\ 1.5B on MATH}\\[4pt]
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        Hyperparameter & Value \\ \midrule
+        Target train batch size & 128 \\ 
+        Num episodes per iteration & 1024 \\ 
+        Dataset samples per iteration & 16 \\
+        Samples (per prompt) & - \\
+        Cutpoint interval & - \\
+        K (MC samples) & - \\
+        M (Tokens per level) & 600 \\
+        Branch factors & [6,6,6] \\
+        Train policy temperature & 0.6 \\
+        Train policy top-p & 1 \\
+        Train context size & 2048 => 4096 \\
+        Initial KL coef & 0.0001 \\
+        Learning rate & $1\times10^{-6}$ \\
+        Epochs per iteration & 1 \\
+        Prob mask threshold & 0.9 \\
+        Eval. context size & 2048 => 4096 \\
+        Eval. temperature & 0 \\
+        Eval. top-p & 0.9 \\
+        Eval. samples & 1 \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{SPO-chain (int5=>10) DeepSeekMath \\ 7B on MATH}\\[4pt]
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        Hyperparameter & Value \\ \midrule
+        Target train batch size & 64 \\ 
+        Num episodes per iteration & 512 \\ 
+        Dataset samples per iteration & 64 \\
+        Samples (per prompt) & 8 \\
+        Cutpoint interval & 10 => 5 \\
+        K (MC samples) & 9 \\
+        M (Tokens per level) & - \\
+        Branch factors & - \\
+        Train policy temperature & 0.6 \\
+        Train policy top-p & 0.9 \\
+        Train context size & 4095 \\
+        Initial KL coef & 0.0001 \\
+        Learning rate & $1\times10^{-6}$ \\
+        Epochs per iteration & 2 \\
+        Prob mask threshold & 0.9 \\
+        Eval. context size & 4095 \\
+        Eval. temperature & 0.35 \\
+        Eval. top-p & 0.9 \\
+        Eval. samples & 16 \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}

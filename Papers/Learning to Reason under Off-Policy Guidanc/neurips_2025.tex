@@ -1,0 +1,1068 @@
+\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2025
+
+
+% ready for submission
+% \usepackage{neurips_2025}
+\usepackage[preprint,nonatbib]{neurips_2025}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2025}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{neurips_2025}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+% \usepackage{caption}
+% \captionsetup{labelformat=simple, labelsep=none}
+% \renewcommand{\figurename}{}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\tcbuselibrary{skins}
+
+% table of content for appendix
+% \usepackage{minitoc}
+% \dominitoc  % Initialize minitoc
+\usepackage{tocbibind}  % For adding things to TOC
+\usepackage{titletoc}   % For partial TOC
+% \setlength{\parskip}{2pt} % Adjust this value as needed
+\setlength{\parskip}{4pt}
+% \usepackage{titlesec}
+% \titlespacing{\paragraph}{0pt}{3pt}{3pt}
+\usepackage{enumitem}
+\usepackage{caption}
+
+
+%%%%%%%%%%%%%%%%%% zw %%%%%%%%%%%%%%%%%%
+\usepackage{amsthm}
+\usepackage{bm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newcommand{\var}{\mathbb{V}\text{ar}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%% hzc %%%%%%%%%%%%%%%%%%
+\tcbuselibrary{breakable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{colortbl}
+\definecolor{my_green}{RGB}{51,102,0}
+\definecolor{my_purple}{RGB}{160, 43, 147}
+\definecolor{my_blue}{RGB}{15, 158, 213}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{wrapfig}
+
+\NewDocumentCommand{\ganqu}
+{ mO{} }{\textcolor{blue}{\textsuperscript{\textit{ganqu}}\textsf{\textbf{\small[#1]}}}}
+% yafu
+\NewDocumentCommand{\yafu}
+{ mO{} }{\textcolor{cyan}{\textsuperscript{\textit{yafu}}\textsf{\textbf{\small[#1]}}}}
+
+\NewDocumentCommand{\jianhao}
+{ mO{} }{\textcolor{red}{\textsuperscript{\textit{jianhao}}\textsf{\textbf{\small[#1]}}}}
+
+\newcommand{\m}[1]{\texttt{#1}}
+\newcommand{\normalrow}{\rowcolor{gray!30}}
+\definecolor{deltaBg}{RGB}{220,230,255} % subtle blue-grey
+\newcommand{\rowhighlight}{\rowcolor{deltaBg}}
+% \title{Imitate to Illuminate: \\
+% Leveraging Off-Policy in On-Policy RL \\ 
+% for Large Reasoning Models}
+
+% \title{
+% % Imitate to Illuminate: \\
+% Learning to Reason with Off-Policy Guidance \\
+% for Large Reasoning Models}
+
+% \title{
+% Mixed GRPO: Can Off-Policy Data Catalyze On-Policy Training?}
+
+% \title{ 
+% Can Off-Policy Data Catalyze On-Policy Training? Learning to Reason under Off-Policy Guidance}
+\title{Learning to Reason under Off-Policy Guidance}
+
+% \title{Learning to Reason can be Effective under Off-Policy Guidance}
+
+
+% Leveraging Off-Policy Traces for On-Policy Reasoning}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+\author{
+    Jianhao Yan\textsuperscript{2}\textsuperscript{1}\thanks{\quad Equal contributions. Work was done during Jianhao Yan's internship at Shanghai AI Laboratory. \\ \quad Yafu Li is the Project Lead.} \quad Yafu Li\textsuperscript{1}\footnotemark[1]\quad
+    \textbf{Zican Hu}\textsuperscript{3}\textsuperscript{1}\quad \textbf{Zhi Wang}\textsuperscript{3} \quad
+    \textbf{Ganqu Cui}\textsuperscript{1} \quad  \textbf{Xiaoye Qu}\textsuperscript{1} \quad  \\
+    \textbf{Yu Cheng}\textsuperscript{\textbf{4}} \hspace{-1mm}\footnotemark[2] \quad \textbf{Yue Zhang}\textsuperscript{\textbf{2}}\thanks{\quad Corresponding authors.}\\
+    \textsuperscript{1} Shanghai AI Laboratory 
+    \textsuperscript{2} Westlake University 
+    \textsuperscript{3} Nanjing University \\
+    \textsuperscript{4} The Chinese University of Hong Kong \\
+   Corresponding to: \texttt{chengyu@cse.cuhk.edu.hk}, \texttt{yue.zhang@wias.org.cn}
+}
+
+
+
+% \author{%
+%   Jianhao Yan\thanks{Equal Contribution. Work was done during Jianhao Yan's internship at Shanghai AI Laboratory.} \\
+%   Westlake University \\
+%   Shanghai AI Laboratory 
+%   \And
+%   Yafu Li\thanks{Equal Contribution. Project Lead.} \\
+%   Shanghai AI Laboratory \\
+%   \And
+%   Zican Hu \\
+%   Nanjing University \\
+%   \AND
+%   Zhi Wang \\
+%   Nanjing University \\
+%   \And
+%   Ganqu Cui \\
+%   Shanghai AI Laboratory \\
+%   \And
+%   Xiaoye Qu \\
+%   Shanghai AI Laboratory \\
+%   \And
+%   Yu Cheng\thanks{Corresponding Authors.} \\
+%   The Chinese University of Hong Kong \\
+%   \texttt{chengyu@cse.cuhk.edu.hk} \\
+%   \And
+%   Yue Zhang\footnotemark[3] \\
+%   Westlake University \\
+%   \texttt{yue.zhang@wias.org.cn} \\
+%   % \ganqu{make author list more compact}
+% }
+
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{center}
+\vspace{-26pt}
+  \textbf{Project Page:} \href{https://github.com/ElliottYan/LUFFY}{\textcolor{blue}{https://github.com/ElliottYan/LUFFY}}
+\end{center}
+
+\begin{abstract}
+
+
+
+
+Recent advances in large reasoning models (LRMs) demonstrate that sophisticated behaviors such as multi-step reasoning and self-reflection can emerge via reinforcement learning with verifiable rewards~(\textit{RLVR}). 
+However, existing \textit{RLVR} approaches are inherently ``on-policy'', limiting learning to a model's own outputs and failing to acquire reasoning abilities beyond its initial capabilities. 
+To address this issue, we introduce \textbf{LUFFY} (\textbf{L}earning to reason \textbf{U}nder o\textbf{FF}-polic\textbf{Y} guidance), a framework that augments \textit{RLVR} with off-policy reasoning traces. 
+LUFFY dynamically balances imitation and exploration by combining off-policy demonstrations with on-policy rollouts during training. 
+Specifically, LUFFY combines the Mixed-Policy GRPO framework, which has a theoretically guaranteed convergence rate, alongside policy shaping via regularized importance sampling to avoid superficial and rigid imitation during mixed-policy training. 
+Compared with previous RLVR methods, LUFFY achieves an over \textbf{+6.4} average gain across six math benchmarks and an advantage of over \textbf{+6.2} points in out-of-distribution tasks.
+Most significantly, we show that LUFFY successfully trains weak models in scenarios where on-policy RLVR completely fails. These results provide compelling evidence that LUFFY transcends the fundamental limitations of on-policy RLVR and demonstrates the great potential of utilizing off-policy guidance in RLVR.
+\end{abstract}
+
+
+
+
+\section{Introduction}
+
+
+% the importance of R1-like rule-based RL training.
+Recent breakthroughs in large reasoning models, including OpenAI-o1~\cite{o1}, DeepSeek-R1~\cite{r1}, and Kimi-1.5~\cite{kimik1.5}, have demonstrated remarkable capabilities in complex reasoning tasks. These models have shown unprecedented proficiency in generating extensive Chains-of-Thought (CoT, \cite{cot}) responses and exhibiting sophisticated behaviors, such as self-reflection and self-correction. Particularly noteworthy is how these achievements have been realized through \textit{reinforcement learning with purely verifiable rewards}~(RLVR), as demonstrated by recent efforts including Deepseek R1~\cite{r1,simplerl,drgrpo,orz}. 
+The emergence of long CoT reasoning and self-reflection capabilities through such straightforward reward mechanisms, termed the ``aha moment'', represents a significant advancement in the field. 
+
+% ELLIOTT: I think we can discuss on-policy reinforcement learning and various approaches in LLM and LRMs. However, current baselines are all RLVR methods. 
+
+% However, the reinforcement learning methods behind the success are inherently on-policy, which use rule-based verifier to score self-generated rollouts and reinforce those with higher rewards. 
+
+Nevertheless, the reinforcement learning methods behind the success have a fundamental limitation worth highlighting: 
+it is inherently on-policy, constraining learning exclusively to the model’s self-generated outputs through iterative trials and feedback cycles.
+Despite showing promising results, on-policy RL is bounded by the base LLM itself~\cite{zhao2025echochamberrlposttraining,rl_limits}. 
+In essence, reinforcement learning under this setting amplifies existing behaviors rather than introducing genuinely novel cognitive capacities. 
+Recent study~\cite{gandhi2025cognitivebehaviorsenableselfimproving} corroborates this constraint, demonstrating that models like Llama 3.2~\cite{llama32} quickly reach performance plateaus under RL training precisely because they lack certain foundational cognitive behaviors necessary for further advancement.
+This inherent limitation provokes critical questions about the effectiveness and scope of RL for reasoning: 
+\textit{How can we empower LLMs to acquire reasoning behaviors surpassing their initial cognitive boundaries?}
+
+% One crucial paradigm behind the success is known as \textit{RLVR}~\cite{r1,simplerl,drgrpo,orz}, which applies reinforcement learning to base language models directly, eliciting reasoning potentials using models' own rollouts. 
+% Nevertheless, it has a fundamental limitation worth highlighting: 
+% it is inherently ``on-policy'', constraining learning exclusively to the model’s self-generated outputs through iterative trials and feedback cycles.
+% Despite showing promising results, RLVR is bounded by the base LLM itself~\cite{zhao2025echochamberrlposttraining}. 
+% In essence, reinforcement learning under this setting amplifies existing behaviors rather than introducing genuinely novel cognitive capacities. 
+% Recent study~\cite{gandhi2025cognitivebehaviorsenableselfimproving} corroborates this constraint, demonstrating that models like Llama 3.2~\cite{llama32} quickly reach performance plateaus under RLVR training precisely because they lack certain foundational cognitive behaviors necessary for further advancement.
+
+% This raises fundamental questions about learning with RLVR paradigm: 
+% How can we enable LLMs to learn behaviors beyond their initial capabilities? 
+% One straightforward paradigm is to supervised-fine-tune (SFT) models with reasoning traces from stronger reasoning models like Deepseek-R1~\cite{r1,limomuennighoff2025s1,ye2025limo}, demonstrating competitive performance of imitation learning. 
+In this paper, we introduce \textbf{LUFFY}: \textbf{L}earning to reason \textbf{U}nder o\textbf{FF}-polic\textbf{Y} guidance, addressing this issue by introducing external guidance from a stronger policy~(e.g., from DeepSeek-R1). 
+The strong policy serves as guidance for diverging the training trajectory beyond the limitations of the model's initial capabilities. Unlike on-policy RL, where the model can only learn from its own generations, our approach leverages off-policy learning to expose the model to reasoning patterns and cognitive structures that might otherwise remain inaccessible. This external guidance functions as a form of cognitive scaffolding, allowing the model to observe and internalize reasoning strategies from a more capable teacher model, thereby expanding its reasoning repertoire beyond what self-improvement alone could achieve.
+
+% We introduce \textbf{LUFFY}: \textbf{L}earning to reason \textbf{U}nder o\textbf{FF}-polic\textbf{Y} guidance. 
+In particular, LUFFY extends on GRPO~\cite{grpo} to \textit{Mixed-Policy GRPO} by introducing a new off-policy objective with importance sampling to calibrate policy gradient, and combining off-policy reasoning traces with models' on-policy roll-outs during advantage computation, as illustrated in Figure~\ref{fig:intro}. 
+Intuitively, since off-policy traces consistently obtain positive rewards, LUFFY enables the model to selectively imitate these high-quality reasoning traces when its own roll-outs fail to achieve correctness, while preserving the capacity for self-driven exploration whenever its generated reasoning steps are successful. 
+In this way, LUFFY achieves a dynamic and adaptive equilibrium between imitation and exploration. 
+% {\color{red}maybe change to Mixed-Policy GRPO}
+% LUFFY is built on the Mixed-Policy GRPO framework that incorporates 
+% with a theoretically guaranteed convergence rate. 
+% However, naively combining off-policy traces can lead to overly rapid convergence and entropy collapse, causing the model to latch onto superficial patterns rather than acquiring genuine reasoning capabilities. 
+% To address these issues, we introduce \textit{policy shaping via regularized importance sampling}, which amplifies learning signals for low-probability yet crucial actions under off-policy guidance. 
+% This mechanism encourages the model to preserve exploration throughout training, ultimately enabling it to internalize deeper and more generalizable reasoning behaviors.
+To avoid overly rapid convergence and entropy collapse, causing the model to latch onto superficial patterns rather than acquiring genuine reasoning capabilities, we further introduce \textit{policy shaping via regularized importance sampling}, which amplifies learning signals for low-probability yet crucial actions under off-policy guidance. 
+This mechanism encourages the model to preserve exploration throughout training, ultimately enabling it to internalize deeper and more generalizable reasoning behaviors.
+
+
+% Moreover, this process implicitly forms a learning curriculum: imitation of off-policy demonstrations dominates in the early training phases, progressively giving way to autonomous exploration as the model's competence improves.
+% To further avoid rigid and superficial imitation, we propose policy shaping via regularized importance sampling, which assigns more weights to low-probability yet crucial actions, maintaining continuous exploration throughout the learning process.
+% introduce
+% group: imitate % explore, dynamic balance
+% shaping to learn low-probability tokens, support continuous exploration
+
+% novel techniques for off-policy knowledge injection in language models. 
+% While we demonstrate our method using the off-policy Deepseek-R1 dataset, the key innovation lies in xxx. 
+
+
+
+
+% results: benchmark & analysis
+% As shown in Figure~\ref{fig:results_bar}, 
+% {\color{red} modify this paragraph}
+
+LUFFY achieves significant improvements of \textbf{+6.4} points on average compared with previous RLVR methods, across AIME24/25~\cite{li2024numinamath}, AMC~\cite{li2024numinamath}, OlympiadBench~\cite{dataset_olympiad}, Minerva~\cite{dataset_minerva}, and MATH-500~\cite{dataset_math} benchmarks, establishing the effectiveness of off-policy learning in RLVR paradigms. 
+Moreover, LUFFY demonstrates superior generalization capability, i.e., an advantage of over \textbf{+6.2} points on average, on out-of-distribution tasks, where other off-policy methods fall short.
+Critically, we show that LUFFY successfully trains weak foundation models, i.e., LLaMA3.1-8B, while on-policy RL fails, providing evidence of LUFFY transcending the limitation of model capacity. 
+Our in-depth analyses demonstrate that LUFFY encourages the model to imitate high-quality reasoning traces while maintaining exploration of its own sampling space, resulting in more reliable and generalizable reasoning capabilities.
+% This aligns with our deeper analysis, revealing that LUFFY assimilates off-policy reasoning behaviors flexibly and effectively, while SFT confines the model to rigid memorization of external reasoning patterns, hindering generalization and exploration.
+
+% \begin{tcolorbox}[
+%     center,
+%     arc=0mm,
+%     boxrule=1pt,
+%     colback=blue!6!white,
+%     colframe=black,
+%     colbacktitle=black,
+%     attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+%     boxed title style={boxrule=0pt,colframe=white}
+% ]
+ % \verb|[BOS_TOKEN]| 
+% \noindent\textbf{Our Contributions}
+% {\color{red} text contributions seem messy}
+Our contributions can be summarized as: 
+\vspace{-0.5\baselineskip}
+\begin{itemize}
+% [leftmargin=1pt]
+\setlength{\topsep}{1pt}      % Space before first item and after last item
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{1pt}
+\setlength{\parsep}{1pt}
+\item We introduce \textbf{LUFFY}, an approach that incorporates off-policy guidance into GRPO and integrates policy shaping through regularized importance sampling to address entropy collapse, effectively transcending the limitations of on-policy RL. (Sec. \ref{sec:method})
+\item We empirically demonstrate LUFFY's effectiveness across various foundation models, achieving an average gain of \textbf{+6.4} points across six math benchmarks and \textbf{+6.2} points on out-of-distribution tasks against previous RLVR methods, establishing a new \textit{state-of-the-art} on RLVR with Qwen2.5-Math-7B. (Sec. \ref{sec:main})
+\item We demonstrate that LUFFY \textit{successfully} trains weaker foundation models where On-Policy RL \textit{fails}. Specifically, while On-Policy RL can only train Llama3.1-8B on simplified datasets, LUFFY effectively trains these models across varying difficulty levels, overcoming capability-based limitations~(Sec. \ref{sec:luffy_succeed}).
+\end{itemize}
+
+
+ % This aligns with our analysis showing that LUFFY learns off-policy traces more flexibly, while SFT tends to constrain the model within rigid reasoning patterns, hindering generalization and exploration.
+% In addition, LUFFY can successfully generalize to other out-of-distribution tasks beyond reasoning, while SFT fails. 
+% This corroborates with our further analysis that LUFFY learns off-policy traces more effectively, whereas SFT locks model in rigid off-policy reasoning structures and impedes effective generalization and exploration. 
+
+
+% \section{Preliminary}
+% % In this section, we discuss our approach.
+
+\section{Reinforcement Learning with Verifiable Rewards}
+
+% In this section, we first introduce the background of reinforcement learning with verifiable rewards~(RLVR). 
+
+\paragraph{Verifiable Reward Function.} 
+The verifiable reward emphasizes the comparison between the extracted answer from the models' output and the predefined golden answer. For instance, the model is instructed to output the final answer in a certain format, e.g., \verb|\boxed{}|, and a regex function is used to extract the answer from \verb|\boxed{}|. Formally, given a model's output $\tau$ to question $q$, the reward is defined by, 
+\begin{equation}
+    R(\tau) = 
+    \begin{cases} 
+        1 & \text{if } {\tau} \text{ outputs the correct final answer to } {q} \\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+This reward design avoids the risk of reward hacking~\cite{hacking1,hacking2,hacking3} to a great extent and thus leads to successful scaling of RL training~\cite{r1}. 
+
+
+\paragraph{Group Relative Policy Optimization~(GRPO).}
+% Due to the success of Deepseek-R1~\cite{r1}, GRPO~\cite{grpo} becomes the de facto approach with RLVR training. 
+% GRPO~\cite{grpo} demonstrates exceptional performance across various tasks, especially in the paradigm of RLVR~\cite{r1,simplerl-zoo,drgrpo}. 
+GRPO~\cite{grpo} shows exceptional performance in various tasks, especially to enable effective scaling within the RLVR paradigm~\cite{r1,simplerl-zoo,drgrpo}.
+% Compared to the widely used PPO~\cite{ppo}, 
+It uses the reward scores of $N$ sampled solutions from a query to estimate the advantage and thus remove the need for an additional value model. 
+% Formally, we denote the policy model before and after the update as $\pi_{\theta_{\text{old}}}$ and $\pi_{\theta}$. 
+Formally, we denote the policy model before and after the update as $\pi_{\theta_{\text{old}}}$ and $\pi_{\theta}$, where both represent probability distributions over possible actions/tokens at each position.
+Given a question $q$, a set of sampled solutions $\tau_i$ generated by $\pi_{\theta_{\text{old}}}$, and the reward function $R(\cdot)$, the advantage $A_i$ of each in GRPO is computed by normalized rewards inside the group, 
+\begin{gather}
+    A_i = \frac{R(\tau_i) - \text{mean}(\{R(\tau_i) \mid \tau_i \sim \pi_{\theta_{\text{old}}}(\tau), i = 1,2,\ldots,N\})}{\color{black}\text{std}(\{R(\tau_i) \mid \tau_i \sim \pi_{\theta_{\text{old}}}(\tau), i = 1,2,\ldots,N\})},
+\end{gather}
+Then, the RL objective is inherited from the clipped RL objective proposed by PPO~\cite{ppo}, 
+\begin{equation}
+\begin{gathered}
+\mathcal{J}_{\text{GRPO}}(\theta) = \frac{1}{\sum_{i=1}^N {\color{black}|\tau_i|}} \sum_{i=1}^N \sum_{t=1}^{|\tau_i|} \text{CLIP}(r_{i,t}(\theta), A_i, \epsilon) - \beta \cdot \mathbb{D}_{\text{KL}}[\pi_\theta \| \pi_{\text{ref}}]. \\%+ \gamma \cdot \mathcal{H}(\pi_{\theta}),  \\
+% \text{where } {r_{i,t}(\theta) = \frac{\pi_\theta(\tau_{i,t} | q, \tau_{i,<t})}{\pi_{\theta_{\text{old}}}(\tau_{i,t} | q, \tau_{i,<t})}}.
+\end{gathered}
+\label{eq:grpo}
+\end{equation}
+where ${r_{i,t}(\theta) = {\pi_\theta(\tau_{i,t} | q, \tau_{i,<t})}/{\pi_{\theta_{\text{old}}}(\tau_{i,t} | q, \tau_{i,<t})}}$ is a importance sampling term to calibrate the gradient based on policy gradient theory~\cite{policy_gradient}, as the solutions are generated by $\pi_{\theta_{\text{old}}}$ instead of $\pi_\theta$. 
+
+% In the RL objective, GRPO follows PPO, using the importance sampling~($r_{i,t}$ in Eq.\ref{eq:grpo}) to calibrate the gradient 
+% \textcolor{red}{The clipped objective} 
+
+The KL divergence $\mathbb{D}_{\text{KL}}$ and the clipped surrogate objective $\text{CLIP}(r, A, \epsilon) = \min[r\cdot{A}, \text{clip}(r; 1-\epsilon, 1+\epsilon)\cdot{A}]$ empirically ensures that the current policy $\pi_\theta$ is within the trust region~\cite{trpo} of the old policy $\pi_{\theta_{\text{old}}}$. 
+We loosely categorize this method as \textit{On-Policy RL}, indicating that the model is optimized using samples drawn from distributions closely aligned with its current policy. Nevertheless, recent practices~\cite{prime,yu2025dapoopensourcellmreinforcement,orz} have increasingly omitted the KL divergence term, making these methods somewhat less ``On-Policy''.
+
+
+
+
+\section{Learning to Reason under Off-Policy Guidance}
+\label{sec:method}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/off-GRPO.v3.drawio.pdf}
+    % \caption{\textbf{LUFFY}: \textbf{L}earning to reason \textbf{U}nder o\textbf{FF}-polic\textbf{Y} guidance.
+    % }
+    % \vspace{-10pt}
+    \caption{
+    % Learning to reason under off-policy guidance. 
+    % Overview of LUFFY. 
+    Overview: LUFFY integrates off-policy reasoning traces into reinforcement learning by combining them with on-policy rollouts. Policy shaping emphasizes low-probability but crucial actions, enabling a balance between imitation and exploration for more generalizable reasoning.
+    }
+    \vspace{-15pt}
+    \label{fig:intro}
+\end{figure}
+
+
+To facilitate exploration beyond the model's own capabilities, we incorporate \textit{off-policy guidance}, i.e., off-the-shelf reasoning trajectories generated by a stronger reasoning model such as Deepseek R1, into the RLVR learning. 
+We expect the model to learn generalizable knowledge from off-policy beyond superficial imitation and maintain effective and efficient exploration as in RLVR training. 
+In the following sections, we introduce \textbf{LUFFY}: \textbf{mixed-policy GRPO} (\S~\ref{sec:mix-grpo}) with \textbf{policy shaping} (\S\ref{sec:shaping}).
+The former one adaptively integrates off-policy trajectories into advantage estimation while the latter encourages continuous exploration throughout training.
+
+% In the following sections, we 
+% In the following sections, we first illustrate Mixed-policy GRPO -- our proposed framework that extends GRPO with off-policy guidance, alongside the implementation and theoretical analysis. 
+% Then, we introduce LUFFY, leveraging policy shaping to mitigate entropy collapse and encourage continuous exploration.
+
+
+
+\subsection{Mixed-Policy GRPO}
+\label{sec:mix-grpo}
+We incorporate off-policy rollouts in GRPO by adding them directly to the group of on-policy rollouts generated by the model itself.
+% Intuitively, if the 
+Provided an off-policy distribution $\pi_{\phi}$, this would affect the advantage computations in the following way, 
+% \begin{equation}
+%     \begin{gathered}
+% \hat{A}_i = \frac{\tau_i - \text{mean}(\mathcal{G}_{\text{on}} \cup \mathcal{G}_{\text{off}})}{\text{std}(\mathcal{G}_{\text{on}} \cup \mathcal{G}_{\text{off}})}, \\
+% \text{where }\mathcal{G}_{\text{on}} = \{\tau_i \mid \tau_i \sim \pi_\theta(\tau), i = 1,2,\ldots,N_{\text{on}}\}, ~\mathcal{G}_{\text{off}} = \{\tau_j \mid \tau_j \sim \pi_\phi(\tau), j = 1,2,\ldots,N_{\text{off}}\}.
+% \end{gathered}
+% \end{equation}
+
+
+\begin{equation}
+    \begin{gathered}
+\hat{A}_i = \frac{R(\tau_i) - \text{mean}(\mathcal{G}_{\text{on}} \cup \mathcal{G}_{\text{off}})}{\text{std}(\mathcal{G}_{\text{on}} \cup \mathcal{G}_{\text{off}})}, 
+\end{gathered}
+\end{equation}
+
+\text{where } $\mathcal{G}_{\text{on}} = \{R(\tau_i) \mid \tau_i \sim \pi_{\theta_{\text{old}}}(\tau), i = 1,2,\ldots,N_{\text{on}}\} \text{ and }\mathcal{G}_{\text{off}} = \{R(\tau_j) \mid \tau_j \sim \pi_\phi(\tau), j = 1,2,\ldots,N_{\text{off}}\}$. 
+As the quality of off-policy rollouts is high (yielding high rewards), this group computation naturally assigns a higher advantage to off-policy rollouts when the model struggles to generate correct solutions independently. Once the model begins producing successful reasoning traces, on-policy rollouts take precedence, thereby encouraging self-driven exploration.
+% Intuitively, the model leans on off-policy guidance when it struggles to generate correct solutions independently, while on-policy rollouts take precedence once the model begins producing successful reasoning traces, thereby encouraging self-driven exploration.
+% \textcolor{red}{more description of eq.2}
+
+% $\pi_{\theta}$ and $\pi_{\phi}$ denote on-policy and off-policy distributions, respectively. 
+Extending from the GRPO objective~(Eq. \ref{eq:grpo}), we introduce the off-policy objective to incorporate off-policy rollouts. 
+Similar to GRPO and PPO~\cite{ppo,grpo}, we introduce an importance sampling term $\hat{r}_{j,t}(\theta, \phi) = \pi_{\theta}(\tau_{j,t} | q, \tau_{j,<t}) / \pi_{\phi}(\tau_{j,t} | q, \tau_{j,<t})$ to calibrate gradient estimates~\cite{policy_gradient}. 
+We refer to this approach as \textit{Mixed-Policy GRPO}: 
+% and refer to this approach as \textit{Mixed-Policy GRPO}: 
+% However, this mixed advantage computation introduces bias into the estimate of the policy gradient algorithm~\cite{policy_gradient}, which assumes the rollouts are generated by model's own policy. In our preliminary experiments, we find that this bias leads to a huge performance drop in the training process. 
+% The biased gradient estimation leads to a huge performance drop in the early stage of the training~(Section xx).
+% \textcolor{red}{Thus, we introduce an importance-sampling term into the objective to correct the gradient estimation}, 
+% Therefore, we introduce another importance sampling term $\hat{r}_{j,t}(\theta, \phi) = \pi_{\theta}(\tau_{j,t} | q, \tau_{j,<t}) / \pi_{\phi}(\tau_{j,t} | q, \tau_{j,<t})$ to calibrate gradient estimates and 
+
+% \begin{equation}
+%     \begin{gathered}
+%         \mathcal{J}_{\text{Mixed}}(\theta) = \frac{1}{Z} (\underbrace{\sum_{j=1}^{N_{\text{off}}} \sum_{t=1}^{|\tau_j|} 
+%         \min[\hat{r}_{j,t}(\theta, \phi)\hat{A}_j, \text{clip}(\hat{r}_{j,t}(\theta, \phi); 1-{\epsilon}, 1+{\epsilon})\hat{A}_j]}_{\text{off-policy objective}}
+%         \\ + \underbrace{\sum_{i=1}^{N_{\text{on}}} \sum_{t=1}^{|\tau_i|} \min[r_{i,t}(\theta)\hat{A}_i, \text{clip}(r_{i,t}(\theta); 1-\epsilon, 1+\epsilon)\hat{A}_i])}_\text{on-policy objective},   \\      
+%         \text{where } \hat{r}_{j,t}(\theta, \phi) = \frac{\pi_{\theta}(\tau_{j,t} | q, \tau_{j,<t})}{\pi_{\phi}(\tau_{j,t} | q, \tau_{j,<t})} \text{ and }{r_{i,t}(\theta) = \frac{\pi_\theta(\tau_{i,t} | q, \tau_{i,<t})}{\pi_{\theta_{\text{old}}}(\tau_{i,t} | q, \tau_{i,<t})}}.
+%     \end{gathered}
+% \end{equation}
+\begin{equation}
+    \begin{gathered}
+        \mathcal{J}_{\text{Mixed}}(\theta) = \frac{1}{Z} (\underbrace{\sum_{j=1}^{N_{\text{off}}} \sum_{t=1}^{|\tau_j|} 
+        \text{CLIP}(\hat{r}_{j,t}(\theta, \phi),\hat{A}_j, \epsilon)}_{\text{off-policy objective}}
+        + \underbrace{\sum_{i=1}^{N_{\text{on}}} \sum_{t=1}^{|\tau_i|} \text{CLIP}(r_{i,t}(\theta),\hat{A}_i, \epsilon)}_\text{on-policy objective},   \\      
+    \end{gathered}
+\label{eq:mixed_obj}
+\end{equation}
+
+where $\hat{r}_{j,t}(\theta, \phi) = {\pi_{\theta}(\tau_{j,t} | q, \tau_{j,<t})}/{\pi_{\phi}(\tau_{j,t} | q, \tau_{j,<t})} \text{ and }{r_{i,t}(\theta) = {\pi_\theta(\tau_{i,t} | q, \tau_{i,<t})}/{\pi_{\theta_{\text{old}}}(\tau_{i,t} | q, \tau_{i,<t})}}.$
+$Z=\sum_{j=1}^{N_{\text{off}}} {|\tau_j|}+\sum_{i=1}^{N_{\text{on}}} {|\tau_i|}$ is the normalization factor. 
+
+
+The newly introduced importance sampling term $\hat{r}_{j,t}$ contrasts with the importance sampling term $r_{i,t}$ used in on-policy RL (Eq.~\ref{eq:grpo}), where the denominator corresponds to the pre-update roll-out model policy $\pi_{\theta_{old}}$.
+Since the divergence between $\pi_{\theta}$ and $\pi_{\theta_{\text{old}}}$ is typically much smaller than that between $\pi_{\theta}$ and the off-policy policy $\pi_{\phi}$, the off-policy importance sampling ratio $\hat{r}_{j,t}$ tends to be smaller, serving to calibrate gradient estimates from a distinct distribution.
+
+
+%%%%%%%%%%%%%%%%%%%%% zw %%%%%%%%%%%%%%%%%%%%%%%
+Based on the theoretical analysis of stochastic gradient descent in nonconvex optimization~\cite{reddi2016stochastic}, we give a convergence analysis in Theorem~\ref{thm:convergence} to show that our importance-weighted policy gradient estimator in Eq.~(\ref{eq:mixed_obj}) stabilizes and converges to a stationary point, and the convergence rate is $O(1/\sqrt{K})$, where $K$ is the total number of iterations. The proof can be found in Appendix~\ref{app:convergence}.
+
+
+\setcounter{theorem}{0}
+\begin{theorem}\label{thm:convergence}
+Suppose the objective function of the policy gradient algorithm $J\in\mathcal{J}_n$, where $\mathcal{J}_n$ is the class of finite-sum Lipschitz smooth functions, has $\sigma$-bounded gradients, and the importance weight $w=\pi_{\bm{\theta}}/\pi_{\bm{\phi}}$ is clipped to be bounded by $[\underline{w}, \overline{w}]$.
+Let $\alpha_k=\alpha=c/\sqrt{K}$ where $c = \sqrt{\frac{2(J(\bm{\theta}^*)-J(\bm{\theta}^0))}{L\sigma^2\underline{w}\overline{w}}}$, and $\bm{\theta}^*$ is an optimal solution. 
+Then, the iterates of our algorithm in Eq.~(\ref{eq:mixed_obj}) satisfy:
+\begin{eqnarray}
+\min_{0\le k\le K-1}\mathbb{E}[||\nabla J(\bm{\theta}^k)||^2] \le \sqrt{\frac{2(J(\bm{\theta}^*)-J(\bm{\theta}^0))L\overline{w}}{K\underline{w}}}\sigma. \nonumber
+\end{eqnarray}
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%In practice, we assume that $\pi_{\phi}$ is always 1, which facilitates convenient incorporation of existing off-policy trajectories, e.g., reasoning traces from DeepSeek-R1. In addition, we omit the clip operation for the off-policy rollouts, as the clip operation will be imbalanced when $\pi_{\phi}=1$.
+The importance sampling ratio in off-policy learning typically involves $\pi_\phi$, representing the behavior policy's probability in off-policy trajectories~\cite{meng2023off}. 
+Theoretically, our derivations and guarantees hold for any well-defined $\pi_\phi$ distribution. 
+In practice, to facilitate direct integration of high-quality demonstrations from large, powerful models (e.g., DeepSeek-R1), we adopt $\pi_\phi=1$ for computational efficiency. 
+This practical choice not only avoids the complexity caused by \textit{different tokenization} between the on-policy and off-policy models. It also facilitates the easy incorporation of \textit{off-the-shelf datasets} without recomputation of $\pi_\phi$, as well as preserving theoretical guarantees. 
+% The choice preserves theoretical guarantees but also simplifies the implementation while capturing the essence of expert behaviors.
+We omit the clip operation for the off-policy rollouts, as the clip operation will be imbalanced when $\pi_{\phi}=1$.
+% The follow subsections illustrate \textbf{LUFFY}, which integrates policy shaping into Mixed-Policy GRPO.
+
+
+% \begin{figure}[t]
+%     \centering
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figs/entropy_func.pdf}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figs/reshape_grad.pdf}
+%     \end{minipage}
+%     \caption{\textbf{Illustration of policy shaping functions: }Left is the value of reshape function over probability $p$, and the right is the gradient of different reshape functions.}
+%     \label{fig:reshape_illustration}
+% \end{figure}
+
+\subsection{Policy Shaping via Regularized Importance Sampling}
+\label{sec:shaping}
+% \subsection{Policy shaping for Balancing Off-policy and On-policy Learning}
+
+While Mixed-Policy GRPO incorporates off-policy guidance successfully via group computation and importance sampling, a new practical challenge emerges: Mixed-Policy GRPO accelerates convergence but significantly reduces exploration (Figure~\ref{fig:entropy_func}, left). 
+Specifically, entropy collapses much faster than in on-policy RL, indicating increasingly deterministic rollouts and a diminished capacity for exploring diverse reasoning trajectories.
+
+This originates from the ``hacking'' of the Mixed-Policy objective. 
+When combining both learning off-policy and on-policy signals, the model tends to quickly converge toward reinforcing off-policy tokens that are also likely in the on-policy $\pi_{\theta}$ distribution, and ignoring off-policy tokens that are deviated from the model's original policy, i.e., low-probability tokens that may represent essential reasoning capabilities the model has yet to acquire. 
+We empirically analyze this issue in detail in Section~\ref{sec:train_dynamics}.
+% \ganqu{think we need to elaborate more on this. how do we validate, by theory or experiments? can we show some statistics to support this claim?}
+
+% \begin{wrapfigure}{r}{0.4\textwidth}
+%   \centering
+%   \vspace{-80pt}
+%   \includegraphics[width=\linewidth]{figs/entropy.pdf}
+%   % \vspace{-20pt}
+%   \caption{\textbf{Entropy of models' generated probabilities during training.}}
+%   \label{fig:gsm8k}
+%   % \vspace{-35pt}
+% \end{wrapfigure}
+
+
+To address this issue, we introduce \textit{policy shaping via regularized importance sampling}, a technique that re-weights the gradient of off-policy distributions to enhance learning from low-probability tokens. In particular, our approach replaces the importance sampling ratio $\hat{r}_{j,t}(\theta, \phi)$ with $f(\hat{r}_{j,t}(\theta, \phi))$, where $f(\cdot)$ represents a transformation function that alters the dynamics between off-policy and on-policy distributions, thereby increasing gradient emphasis on tokens with low probability in the model's standard distribution.
+Recall that we omit the clip operation for the off-policy rollouts. The loss function with policy shaping can be written as below: 
+\begin{equation}
+    \begin{gathered}
+        \mathcal{J}_{\text{SHAPING}}(\theta) = \frac{1}{Z} (\sum_{j=1}^{N_{\text{off}}} \sum_{t=1}^{|\tau_j|} 
+        f(\hat{r}_{j,t}(\theta, \phi))\cdot \hat{A}_j
+         + \sum_{i=1}^{N_{\text{on}}} \sum_{t=1}^{|\tau_i|} \text{CLIP}(r_{i,t}(\theta),\hat{A}_i, \epsilon), \\
+        % \text{where } \hat{r}_{j,t}(\theta, \phi) = \frac{\pi_{\theta}(\tau_{j,t} | q, \tau_{j,<t})}{\pi_{\phi}(\tau_{j,t} | q, \tau_{j,<t})} \text{ and }{r_{i,t}(\theta) = \frac{\pi_\theta(\tau_{i,t} | q, \tau_{i,<t})}{\pi_{\theta_{\text{old}}}(\tau_{i,t} | q, \tau_{i,<t})}}.
+    \end{gathered}
+    \label{eq:reshape}
+\end{equation} 
+% {\color{red} add some intuition. }
+% Intuitively, this shaping function amplifies the gradient of low-probability actions of the off-policy distribution, forcing the model not to overlook these actions. 
+
+To further illustrate the meaning of shaping function $f$, we derive the gradient of off-policy objective, 
+\begin{equation}
+\begin{aligned}
+    % \nabla_{\theta} \mathcal{J}_{\text{SHAPING-OFF}}(\theta) &=  \mathbb{E}_{\tau \sim \pi_{\phi}}\left[ \nabla_{\theta}f(\frac{\pi_{\theta}}{\pi_\phi}) \cdot \hat{A}_j  \right]\\
+    % &= \mathbb{E}_{\tau \sim \pi_{\phi}}\left[f'(\frac{\pi_{\theta}}{\pi_\phi}) \frac{1}{\pi_{\phi}} \nabla_{\theta}\pi_{\theta} \cdot \hat{A}_j \right]\\
+    \nabla_{\theta} \mathcal{J}_{\text{SHAPING-OFF}}(\theta)= \mathbb{E}_{\tau \sim \pi_{\phi}}[f'(\pi_{\theta}) \underbrace{\frac{\pi_{\theta}}{\pi_{\phi}} \nabla_{\theta}\log \pi_{\theta} \cdot \hat{A}_j}_{\text{importance sampling}}.]\\
+    % \text{replace}~\pi_\phi=1
+    % &=\mathbb{E}_{\tau\sim \pi_{\phi}} [F(\pi_{\theta}) \cdot \underbrace{\frac{\pi_{\theta}}{\pi_{\phi}} \nabla_{\theta}\log \pi_{\theta} \cdot \hat{A}_j].}_{\text{importance sampling}} \\
+    % &=\nabla_{\pi}f(\pi) \frac{1}{f(1)} \pi_{\theta}(1-\pi_{\theta}) \nabla_{\theta}M(\theta) \cdot \hat{A}_j. \\
+\end{aligned}
+\label{eq:grad}
+\end{equation}
+We write $\pi(\tau_{j, t}|q, \tau_{j,<t})$ as $\pi$ for simplicity.
+From Eq. \ref{eq:grad}, we can see $f'(\pi_{\theta})$ is a weighting function of the gradient. 
+The vanilla mixed-policy GRPO can be regarded as using a linear shaping function, i.e., $f(\pi) = \pi$, where the original importance sampling ratio ${\pi_{\theta}}/{\pi_{\phi}}$ is applied.
+% and we assume $\pi_{\phi}$ is always 1. 
+% If we set $f(\pi) = \pi$, $F(\pi_{\theta})$ becomes 1, and the gradient of importance sampling is recovered. 
+% {\color{red} JH: I refined the part before this sentence. NOTE: For now, I do not include softmax, thus Figure 3 right needs to be changed. Also, Theorem 2 needs to modify f(pi)/f(pi) to f(pi/pi).}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/entropy_func.pdf}
+    \vspace{-20pt}
+    \caption{\textbf{Left}: generation entropy during training; \textbf{Middle}: shaping function value w.r.t. action probability; \textbf{Right}: gradient weights w.r.t. action probability.}
+    \vspace{-15pt}
+    \label{fig:entropy_func}
+\end{figure}
+
+
+
+% For further insights on how $f'(\cdot)$ changes the model behavior, 
+We decompose the log probability and derive the gradient on each output logit~(action): 
+\begin{equation}
+\begin{aligned}
+    % \frac{\partial \mathcal{J}_{\text{SHAPING-OFF}}(\theta)}{\partial M_\theta(\tau'_{j,t})} &= \frac{1}{Z} \sum_{j=1}^{N_{\text{off}}} \sum_{t=1}^{|\tau_j|} 
+    &\frac{\partial \mathcal{J}_{\text{SHAPING-OFF}}(\theta)}{\partial M_\theta(\tau'_{j,t})} = \mathbb{E}_{\tau \sim \pi_{\phi}}\left[
+        f'(\pi_{\theta}) \, \pi_{\theta} \left[ \mathbb{I}(\tau'_{j,t} = \tau_{j,t}) - \pi_{\theta} \right] 
+     \cdot \hat{A}_j \right]
+     \\
+    \Rightarrow& |\frac{\partial \mathcal{J}_{\text{SHAPING-OFF}}(\theta)}{\partial M_\theta(\tau'_{j,t})}|  \leq  \mathbb{E}_{\tau \sim \pi_{\phi}}\left[
+        |f'(\pi_{\theta})| \, \pi_{\theta} \left( 1 - \pi_{\theta} \right)  \cdot |\hat{A}_j| \right],
+\end{aligned}
+\label{eq:softmax}
+\end{equation}
+where $\tau'_{j,t}$ is any possible action/token on in the action space at the $j$-th trajectory and $t$-th position, and $M_{\theta}(\tau)$ denotes the logits of that action. 
+The identity case represents the gradient when the action is the off-policy action $\tau=\tau'$, which elevates the probability of predicting the off-policy action.
+From Eq. \ref{eq:softmax}, if $f(\pi_\theta) = \pi_\theta$ and thus $f'(\pi_\theta)=1$, we can see that the scale of gradient is upper-bounded by $\pi_{\theta}(1-\pi_{\theta})$, leading to small values when $\pi_{\theta}\to 0$ and $\pi_{\theta}\to 1$. 
+We opt for $f(x) = x/(x+\gamma)$ as our shaping function (middle part of Figure~\ref{fig:entropy_func}), where $\gamma$ is set as 0.1. 
+% Considering the identity case ($\tau=\tau'$) and $\pi_{\phi}=1$, the gradient with policy shaping can be written as:
+% \begin{equation}
+% \Rightarrow \mathbb{E}_{\tau \sim \pi_{\phi}} \left[ 
+%         \frac{\gamma}{(\pi_{\theta}+\gamma)^2} \, \pi_{\theta} \left( 1 - \pi_{\theta} \right) 
+%         \cdot \hat{A}_j\right].
+% \label{eq:gradient}
+% \end{equation}
+As shown in Figure~\ref{fig:entropy_func} (Right), the shaping function reweights the gradients to assign more importance to low-probability actions, thereby improving learning from unfamiliar yet effective decisions from the off-policy traces.
+% The shaping function $f$~(Right of Figure \ref{fig:entropy_func}) corrects this inductive bias by recalibrating the gradient distribution, ensuring effective parameter updates even when probabilities approach extreme values, thereby improving learning from the off-policy distribution.
+
+Further, we provide an informal analysis on the variance of our importance weights regularized by $f(\cdot)$ in Appendix~\ref{app:variance}.
+With a first-order approximation and a special case derivation, we show that a smaller variance can be achieved for the sampling weights, thus proving more stable training for leveraging off-policy guidance.
+
+% Based on the theoretical analysis in adaptive importance sampling~\cite{korba2022adaptive}, we show in Theorem~\ref{thm:variance} that our regularized importance weights in Eq.~(\ref{eq:reg_weight}) can achieve reduced variance, thus providing more stable training for off-policy guidance.
+% The proof can be found in Appendix~\ref{app:variance}.
+
+
+% We mainly consider two shaping functions, $f(x)=\sqrt{x}$ and $f(x) = \frac{x}{x+0.1}$. Figure \ref{fig:reshape_illustration} demonstrates the value and gradient of shaping functions.
+% The reshape functions elevate the gradient of the low-probability region, thus preventing the model from overly concentrated on high probability. 
+
+
+
+% \subsection{Entropy Collapse and Policy shaping}
+% We identify a critical issue of off-policy learning - entropy collapse. 
+% As shown in Figure \ref{}, the entropy of 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% zw %%%%%%%%%%%%%%%%%%%%%%%%%
+% TO be added in next version.
+% \vspace{5em}
+
+% \begin{equation}\label{eq:reg_weight}
+%     f(w) = w(\tau)^{\eta} = \left( \frac{\pi_{\bm{\theta}}(\tau)}{\pi_{\bm{\phi}}(\tau)} \right)^\eta.
+% \end{equation}
+
+% Based on the theoretical analysis in adaptive importance sampling~\cite{korba2022adaptive}, we show in Theorem~\ref{thm:variance} that our regularized importance weights in Eq.~(\ref{eq:reg_weight}) can achieve reduced variance, thus providing more stable training for off-policy guidance.
+% The proof can be found in Appendix~\ref{app:variance}.
+% % {\color{red} for now, our exps mainly use p/p+0.1}, do we need to 
+
+% \begin{theorem}\label{thm:variance}
+% Suppose that $\pi_{\bm{\phi}}$ dominates $\pi_{\bm{\theta}}$ and define $w(\tau)=\pi_{\bm{\theta}}(\tau)/\pi_{\bm{\phi}}(\tau)$ with $\tau$ having density $\pi_{\bm{\phi}}$.
+% For all $\eta\in (0,1]$, it holds that
+% \begin{equation}
+% \mathbb{E}\left[w(\tau)^{\eta}\right] \leq 1~~~~\text{and}~~~~\var\left[w(\tau)^{\eta}\right] \leq \var\left[w(\tau)\right].
+% \end{equation}
+
+% If $\pi_{\bm{\phi}}\neq \pi_{\bm{\theta}}$, then both inequalities become equalities if and only if $\eta=1$.
+% \end{theorem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{Experimental Setup}
+\label{sec:setup}
+\vspace{-0.5\baselineskip}
+\paragraph{Dataset Construction.}
+Our training set is a subset of OpenR1-Math-220k~\cite{openr1}
+\footnote{\url{https://huggingface.co/datasets/open-r1/OpenR1-Math-220k}}, of which the prompts are collected from NuminaMath 1.5~\cite{numina_math_datasets}, and the off-policy reasoning traces are generated by Deepseek-R1~\cite{r1}. 
+We use the default subset, which contains 94k prompts, and we filter out generations that are longer than 8192 tokens and those that are verified wrong by \textit{Math-verify}\footnote{https://github.com/huggingface/Math-Verify}, resulting in 45k prompts and off-policy reasoning traces. 
+\vspace{-0.5\baselineskip}
+\paragraph{RL Practice.}
+We remove the KL loss term by setting $\beta=0$ and set the entropy loss coefficient to 0.01. 
+Following Dr.GRPO\cite{drgrpo}, we remove the length normalization and standard error normalization of GRPO loss (Eq.~\ref{eq:grpo}) for all experiments. 
+For policy shaping, we empirically set the $\gamma$ as 0.1 and study the value of $\gamma$ in Appendix \ref{app:hyper_study}.
+Our rollout batch size is 128, and the update batch size is 64. We use 8 rollouts per prompt. 
+Specifically, for on-policy RL, we use 8 on-policy rollouts. For our methods, we use 1 off-policy and 7 on-policy rollouts to ensure fairness. 
+We use temperature=1.0 for rollout generation. We use Math-Verify as our reward function and include no format or length reward. 
+We use Qwen2.5-Math-7B~\cite{qwen2.5_math} by default, following previous work~\cite{prime,simplerl,drgrpo}. In addition, we extend LUFFY to Qwen2.5-Math-1.5B~\cite{qwen2.5_math} and Qwen2.5-Instruct-7B~\cite{qwen2.5}, and LLaMA 3.1-8B~\cite{llama3}.
+% More training details can be found in Appendix \ref{app:exp_details}. 
+\vspace{-0.5\baselineskip}
+\paragraph{Evaluation.}
+For evaluation, we mainly focus on six widely used math reasoning benchmarks, including AIME 2024, AIME 2025, AMC~\cite{li2024numinamath}, Minerva~\cite{dataset_minerva}, OlympiadBench~\cite{dataset_olympiad}, and MATH-500~\cite{dataset_math}. 
+For AIME 2024, AIME 2025 and AMC, we report avg@32 as the test set is relatively small, and for the other three benchmarks, we report pass@1.
+As our RL training mainly focuses on math reasoning, we further validate the generalization capability on three out-of-distribution benchmarks, namely ARC-c~\cite{arc}(Open-Domain Reasoning), GPQA-diamond~\cite{gpqa}(Science Graduate Knowledge, denoted as GPQA$^{*}$), and MMLU-Pro~\cite{mmlu_pro}(Reasoning-focused Questions from Academic Exams and Textbooks). 
+We shuffle the multiple-choice options to avoid contamination. 
+For testing, the temperature is set as 0.6. 
+
+
+
+% \paragraph{Reward Function.} We use the rule-based reward, verified by Math-Verify. 
+% \begin{equation}
+%     R(q, \tau) = 
+%     \begin{cases} 
+%         1 & \text{if } {\tau} \text{ outputs the correct final answer to } {q} \\
+%         0 & \text{otherwise}
+%     \end{cases}
+% \end{equation}
+
+
+% overview.
+\vspace{-0.5\baselineskip}
+\paragraph{Baseline Methods.}
+For RLVR methods, we consider the following methods: (1) \textit{Simple-RL~\cite{simplerl}:} training from Qwen2.5-Math-7B using rule-based reward; (2) \textit{Oat-Zero~\cite{drgrpo}:} training from Qwen2.5-Math-7B and rule-based reward, proposing to remove the standard deviation in GRPO advantage computation and token-level normalization in policy loss computation;  (3) \textit{PRIME-Zero~\cite{prime}}: using policy rollouts and outcome labels through implict process rewards; (4) \textit{OpenReasonerZero~\cite{orz}: } a recent open-source implementation of RLVR methods.
+Except RLVR approaches from previous work, we consider two kinds of baselines with our setting (1) \textit{On-Policy RL} -- we train on-policy RL within RLVR paradigm using Dr.GRPO with the same reward and data. (2) \textit{Alternative Methods to Incorporate Off-Policy Guidance} -- We consider three methods, namely \m{SFT}, 
+we train the model with the same prompts and reasoning traces as LUFFY using SFT; \m{RL w/ SFT Loss}, using SFT loss during RL training; \m{SFT + RL}, two-stage training that continues RL training after SFT. For detailed setup for training these methods, we refer readers to Appendix \ref{app:exp_details}.
+
+\section{Experimental Results}
+\input{tables/main}
+
+% For more details, please refer to the Appendix. 
+
+
+
+
+% \begin{figure}[t]
+%     \centering
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figs/math_rewards.pdf}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figs/test_perf.pdf}
+%     \end{minipage}
+%     \caption{\textbf{Train reward and test performance.}}
+%     \label{fig:ablation}
+% \end{figure}
+
+
+
+
+% \subsection{Main Results}
+% \begin{table}[]
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{l|c|c|c|c|c|c}
+% \toprule
+% \textbf{Model} & \textbf{AIME 24} & \textbf{AMC} & \textbf{Minerva} & \textbf{Olympiad} & \textbf{MATH-500} & \textbf{Avg.} \\\midrule
+% Qwen2.5-Math-7B-Base & 11.46 & 33.58 & 13.97 & 16.44 & 46.20 & 24.33 \\
+% Qwen2.5-Math-7B-Instruct & 10.42 & 49.28 &34.93 & 43.40 &82.40 & 44.08 \\ \midrule
+% SimpleRL-Zero           & 26.56 & 57.53 & 26.47 & 37.78 & 77.60 & 45.19 \\
+% OpenReasoner-Zero       & 16.98 & 52.67 & 30.88 & 45.19 & 82.60 & 45.66 \\
+% PRIME-Zero              & 16.15 & 55.84 & 36.03 & 41.93 & 80.60 & 46.11 \\
+% Dr.GRPO                  & 33.96 & 59.45 & 32.72 & 42.22 & 78.40 & 49.35 \\\midrule
+% SFT                     & 26.88 & 59.60 & \textbf{38.24} & 53.33 & 83.00 & 52.21 \\
+% On-Policy RL            & 24.38 & 62.39 & 34.56 & 45.48 & 85.00 & 50.36 \\
+% Ours & \textbf{28.85} & \textbf{65.25} & 34.19 & \textbf{56.89} & \textbf{88.00} & \textbf{54.64} \\\bottomrule
+% \end{tabular}}
+% \vspace{0.5em}
+% \caption{\textbf{Main results:} Our method outperforms previous approaches with zero RL paradigm and achieves significant improvement over on-policy RL and SFT baselines.}
+% \label{tab:main_results}
+% \end{table}
+
+% \begin{table}[t]
+% \centering
+% \caption{Overall performance on six competition-level reasoning benchmarks based on Qwen2.5-Math-7B-Base. 
+% Our method outperforms previous approaches with zero RL paradigm and achieves significant improvement over on-policy RL and SFT baselines. Bold and underline represent the 1st and 2nd in performance.}
+% \label{tab:main_results}
+% \resizebox{\textwidth}{!}{
+% % \begin{tabular}{l|c|c|c|c|c|c}
+% \begin{tabular}{lccccccc}
+% \toprule
+% \textbf{Model} & \textbf{AIME 24} &\textbf{AIME 25} & \textbf{AMC} & \textbf{MATH-500} & \textbf{Minerva} & \textbf{Olympiad} & \textbf{Avg.} \\\midrule
+% Qwen2.5-Math~\cite{qwen2.5_math}          & 11.5          & 4.9           & 31.3          & 43.6          & 7.4           & 15.6          & 19.0          \\
+% Qwen2.5-Math-Instruct~\cite{qwen2.5_math} & 12.5          & 10.2          & 48.5          & 80.4          & 32.7          & 41.0          & 37.6          \\\midrule
+% SimpleRL-Zero~\cite{simplerl}         & 27.0          & 6.8           & 54.9          & 76.0          & 25.0          & 34.7          & 37.4          \\
+% OpenReasoner-Zero~\cite{orz}     & 16.5          & 15.0          & 52.1          & 82.4          & 33.1          & 47.1          & 41.0          \\
+% PRIME-Zero~\cite{prime}            & 17.0          & 12.8          & 54.0          & 81.4          & 39.0          & 40.3          & 40.7          \\
+% Oat-Zero~\cite{drgrpo}              & \textbf{33.4} & 11.9          & 61.2          & 78.0          & 34.6          & 43.4          & 43.7          \\\midrule
+% SFT                   & 22.2          & \underline{22.3}    & 52.8          & 82.6          & \textbf{40.8} & 43.7          & 44.1          \\
+% On-Policy RL          &25.1          & 15.3          & \underline{62.0}    & \underline{84.4}    & \underline{39.3}    & \underline{46.8}    & \underline{45.5}    \\
+% LUFFY                 & \underline{29.4}    & \textbf{23.1} & \textbf{65.6} & \textbf{87.6} & 37.5          & \textbf{57.2} & \textbf{50.1}\\\bottomrule
+% \end{tabular}}
+% \end{table}
+
+
+% \begin{table}[t]
+% \centering
+% \small
+% \caption{
+% Overall out-of-distribution performance on three benchmark datasets (based on Qwen2.5-Math-7B-Base). 
+% }
+% \label{tab:ood}
+% \resizebox{0.78\textwidth}{!}{
+% \begin{tabular}{lcccc}
+% \toprule
+% \textbf{Model}  &\textbf{ARC-c} & \textbf{GPQA-diamond} & \textbf{MMLU-Pro} & \textbf{Avg.} \\\midrule
+% Qwen2.5-Math-7B-Base~\cite{qwen2.5_math}          & 18.2          & 11.1          & 16.9          & 15.4          \\
+% Qwen2.5-Math-7B-Instruct~\cite{qwen2.5_math} & 70.3          & 24.7          & 34.1          & 43.0          \\\midrule
+% SimpleRL-Zero~\cite{simplerl}         & 30.2          & 23.2          & 34.5          & 29.3          \\
+% OpenReasoner-Zero~\cite{orz}     & 66.2          & 29.8          & \textbf{58.7}          & 51.6          \\
+% PRIME-Zero~\cite{prime}            & 73.3          & 18.2          & 32.7          & 41.4          \\
+% Oat-Zero~\cite{drgrpo}              & 70.1          & 23.7          & 41.7          & 45.2          \\\midrule
+% SFT                   & 75.2          & 24.7          & 42.7          & 47.5          \\
+% On-Policy RL                    & \textbf{82.3} & \textbf{40.4} & 49.3         & \underline{57.3}          \\
+% LUFFY                 & \underline{80.5}          & \underline{39.9}          & \underline{53.0} & \textbf{57.8} \\\bottomrule
+% % Qwen2.5-Math-7B-Base~\cite{qwen2.5_math}     & 16.7 & 9.1  & 10.4 & 12.1 \\
+% % Qwen2.5-Math-7B-Instruct~\cite{qwen2.5_math} & 70.8 & 27.3 & 34.5 & 44.2 \\\midrule
+% % SimpleRL-Zero~\cite{simplerl}            & 30.4 & 22.2 & 26.8 & 26.5 \\
+% % OpenReasoner-Zero~\cite{orz}        & 64.6 & 33.3 & 48.0 & 48.7 \\
+% % PRIME-Zero~\cite{prime}               & 71.8 & 10.6 & 27.9 & 36.8 \\
+% % Oat-Zero~\cite{drgrpo}                 & 71.3 & 17.2 & 36.2 & 41.6 \\\midrule
+% % SFT                      & 72.9 & 24.2 & 42.4 & 46.5 \\
+% % On-policy RL             & \textbf{81.9} & \textbf{38.4} & 37.6 & 52.6 \\
+% % LUFFY                     & 81.8 & 37.4 & \textbf{51.5} & \textbf{56.9} \\\bottomrule
+% \end{tabular}
+% }
+% \end{table}
+\subsection{Main Results}
+\label{sec:main}
+\paragraph{SOTA performance on RLVR with Qwen2.5-Math-7B.}
+Our main results are presented in Table~\ref{tab:main}. We first compare LUFFY against other RLVR methods and our RLVR replication. 
+All prior methods are built upon Qwen2.5-Math-7B base models, differing in dataset composition (source and difficulty) and optimization strategies, e.g., removing length and standard error normalization~\cite{drgrpo} or incorporating process-level rewards~\cite{prime}.
+Evaluated on six challenging competition-level benchmarks, \m{LUFFY} achieves an average score of \textbf{50.1}, significantly outperforming existing RLVR methods by a substantial margin of \textbf{+6.4} points, establishing a new state-of-the-art. 
+Notably, while \m{LUFFY} exhibits comparable performance in AIME 24, it demonstrates a significantly greater advantage on the newly released AIME 25 test set (+8.1), demonstrating its generalization to internalize nuanced reasoning behaviors from off-policy traces. 
+Compared to \m{On-Policy RL}, \m{LUFFY} improves performance by +4.6 points on average, demonstrating the benefit of integrating high-quality off-policy traces.
+
+Regarding out-of-distribution performance, \m{LUFFY} also demonstrates strong performance gain. Over three challenging out-of-distribution benchmarks, \m{LUFFY} achieves an average score of \textbf{57.8} and outperforms the best RLVR method \m{OpenReasoner-Zero} for \textbf{+6.2} points. These findings underscore the effectiveness of \m{LUFFY} in leveraging off-policy reasoning guidance for enhanced generalization across diverse, out-of-distribution tasks.
+
+% We further investigate the generalization capabilities of our method beyond mathematical reasoning, using three challenging out-of-distribution benchmarks, as summarized in Table~\ref{tab:ood}. 
+% \m{LUFFY} demonstrates considerable performance gains over previous RLVR practices. 
+% Although \m{SFT} achieves competitive results on mathematical reasoning tasks (Table~\ref{tab:main_results}), it struggles to generalize effectively to domains significantly different from its training distribution, such as
+% newly released AIME 2025, 
+% open-domain reasoning (ARC-C), graduate-level science knowledge (GPQA-diamond), and general academic knowledge (MMLU-Pro). 
+% In contrast, \m{LUFFY} matches the strong performance of \m{On-Policy RL} on ARC-C and GPQA-diamond and substantially outperforms it on the MMLU-Pro benchmark, achieving comparable average results. 
+% {\color{red} modify the description.} 
+% Notably, compared to Qwen2.5-Math-7B-Instruct, \m{LUFFY} achieves considerable improvements in both specialized reasoning tasks (+12.7 points on average, Table~\ref{tab:main_results}) and OOD tasks (+14.8 points on average), all while utilizing significantly less training data and computational resources. 
+% These findings underscore the effectiveness of \m{LUFFY} in leveraging off-policy reasoning guidance for enhanced generalization across diverse, out-of-distribution tasks.
+
+\paragraph{Comparing against other Off-Policy Learning Methods.}
+% \input{tables/compare}
+
+\begin{wrapfigure}{r}{0.50\textwidth}
+  \centering
+  \begin{minipage}{\linewidth}
+    \centering
+    \vspace{-10pt}
+    \captionof{table}{\textbf{Comparison of resource requirements between LUFFY and other off-policy methods.}}
+    \label{tab:comparision}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l l l}
+    \toprule
+    \textbf{Model} & \textbf{GPU Hours} & \textbf{Data Usage~(On/Off)} \\\midrule
+    \rowcolor[HTML]{D7E8E8}
+    \textbf{LUFFY} & 77 $\times$ 8 & ~~64K $\times$ 7~/~64K \\
+    \rowcolor[HTML]{D7E8E8}
+    \textbf{LUFFY$\dagger$} & 130 $\times$ 8 & 110K $\times$ 7~/~110K \\
+    \textbf{SFT} & 24 $\times$ 8 & \quad~~~~0\quad~~~/~~64K \\
+    \textbf{RL w/ SFT Loss}& 133 $\times$ 8 & ~~64K $\times$ 7~/~64K \\
+    \textbf{SFT+RL} & 130 $\times$ 8 & ~~64K $\times$ 8~/~135K \\\bottomrule
+    \end{tabular}
+    }
+  \end{minipage}
+  % \vspace{pt} % 控制表格和图片之间的间距
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{figs/other_models.pdf}
+    \vspace{-15pt}
+    \captionof{figure}{\textbf{Average performance on six mathematical reasoning benchmarks of LUFFY on different backbones (Details in Appendix~\ref{app:more_models})}}
+    \vspace{-10pt}
+    \label{fig:other_models}
+  \end{minipage}
+\end{wrapfigure}
+
+
+Comparing \m{LUFFY} against alternative methods to incorporate Off-Policy Guidance, we can see that \m{LUFFY} beats all three off-policy baselines in in-distribution math reasoning tasks and achieves substantial improvements over OOD tasks~(\textbf{+10.3 points}). 
+% {\color{red}change this sentence}
+% In particular, compared to \m{SFT}, our method achieves a notable improvement of \textbf{?} points on average, 
+% providing a more robust and effective alternative for \textit{distilling knowledge} from stronger LRMs, traditionally achieved through supervised fine-tuning~\cite{r1,muennighoff2025s1,ye2025limo}. 
+Compared to \m{SFT+RL}, LUFFY is advantageous in both in-distribution tasks~(+1.9 points) and out-of-distribution tasks~(+\textbf{16.1}), with only 59\% GPU hours and much less off-policy data usage~(Table \ref{tab:comparision}). 
+The additional GPU hours in \m{SFT+RL} and \m{RL w/ SFT Loss} are largely attributed to excessively long generations induced by rigid imitation from SFT (Appendix~\ref{app:analysis}), which substantially increase the computational overhead during the RL roll-out stage. 
+With matching GPU hours, \m{LUFFY$\dagger$} further enlarges the advantage, providing a more robust and effective alternative for \textit{distilling knowledge} from stronger LRMs, except for supervised fine-tuning~\cite{r1,muennighoff2025s1,ye2025limo}. 
+In particular, we notice the SFT training causes the model to learn superficial and rigid imitation of off-policy traces, and costs the model on out-of-distribution performance, while LUFFY \textit{selectively} and \textit{strategically} learn from off-policy traces~(Sec. \ref{sec:train_dynamics} and App. \ref{app:analysis}) to enhance its own policy rollouts. 
+
+% \begin{wrapfigure}{r}{0.5\textwidth}
+%   \centering
+%   \vspace{-25pt} 
+%   \includegraphics[width=\linewidth]{figs/other_models.pdf}
+%   \vspace{-20pt} 
+%   \caption{\textbf{Average performance on six 6 mathematical reasoning benchmarks of LUFFY on different backbones.}}
+%   \vspace{-10pt}
+%   \label{fig:other_models}
+% \end{wrapfigure}
+
+
+\paragraph{Extending LUFFY to More Models.}
+% \ganqu{I have some clarity questions: (1) is Qwen2.5-1.5B/LLaMA-3.1-8B base or instruct models? What does Instruct/SFT/On-policy RL/LUFFY mean in Figure 3? Which models are starting models?} solved
+We further investigate whether LUFFY can be applied to \textit{small models, instruction-tuned models, or weak models}. 
+To answer this question, we train LUFFY on three more models, i.e., Qwen2.5-Math-1.5B~(small models), Qwen2.5-Instruct-7B~(instruction-tuned models), and LLaMA-3.1-8B~(weak models), and compare with their respective Instruct models (black bar in Figure~\ref{fig:other_models}). 
+% \ganqu{minor: the order of models different from Figure 3} solved
+% In Figure \ref{fig:other_models}, 
+\m{LUFFY} achieves consistent and substantial improvements, surpassing both \m{SFT} and \m{On-Policy RL} for all three models, demonstrating the general applicability of LUFFY.
+Specifically, LUFFY improves over on-policy RL for +8.0 points on Qwen2.5-Math-1.5B, +3.6 points on Llama-3.1-8B, and +5.5 points on Qwen2.5-Instruct-7B. 
+% \yafu{Detailed experimental results can be found in Appendix \ref{app:more_models}. }
+
+\subsection{LUFFY Succeeds Where On-Policy Fails}
+\label{sec:luffy_succeed}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \vspace{-35pt} 
+  \includegraphics[width=\linewidth]{figs/train_rewards_llama.pdf}
+  \vspace{-10pt}
+  \caption{\textbf{Training rewards of LLaMA-3.1 8B on the Easy and Hard training set.}}
+  \label{fig:train_llama}
+  \vspace{-30pt}
+\end{wrapfigure}
+
+More interestingly, we observe that LUFFY can successfully train models in scenarios where on-policy RLVR fails. 
+We conduct experiments using LLaMA-3.1-8B on two subsets of varying difficulty (Easy and Hard), with details provided in Appendix~\ref{app:exp_details}.
+As shown in Figure~\ref{fig:train_llama}, on-policy reinforcement learning performs well on the Easy subset but fails on the Hard subset, where training rewards collapse to zero, since on-policy rollouts struggle to obtain positive feedback signals. 
+In contrast, LUFFY achieves stable reward improvements on both datasets, highlighting its robustness and its ability to \textit{overcome limitations imposed by model capacity}.
+% \ganqu{use easy and hard would be more direct?} solved
+% , with level-2 being more challenging than level-1. 
+% LUFFY works reasonably well with both levels of data, 
+% We show that LUFFY can transcend these limitations, enabling reinforcement learning to overcome the constraints imposed by weaker foundation models.
+
+
+
+% Thus, we train LLaMA-3.1 8B with two datasets of different difficulties, which are generated from subsets of the OpenR1 dataset according to the length of DeepSeek-R1's solution that leads to a correct answer.
+% % , i.e., 0-2k tokens~(dataset used in other LLaMA-3.1-8B experiments) and 0-4k tokens. 
+% We coin questions R1 can solve within 2k tokens as level-1 and those within 4k tokens as the level-2 dataset, respectively. 
+% Intuitively, the more tokens needed for Deepseek-R1 to generate a correct answer, the more difficult the question is. 
+
+
+
+% In Figure \ref{fig:train_llama}, we can see that the on-policy RL performs successfully with level-1 data, but it fails with level-2 data. 
+% % This corroborates recent results showing that if the foundation model does not fit the data's difficulty, RLVR collapses. 
+% In contrast, LUFFY works reasonably well with both levels of data, with decent slopes of reward improvements, demonstrating LUFFY's advantage of \textit{overcoming the limitation posed by models' capacity}. 
+
+
+% , and \m{Off-policy Reasoning Traces}. 
+\subsection{Training Dynamics}
+\label{sec:train_dynamics}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/train_rewards_length_box2.pdf}
+    \vspace{-15pt}
+    \caption{Training dynamics of LUFFY compared with on-policy RL. \textbf{Left}: outcome training rewards; \textbf{Middle}: generation length; \textbf{Right}: generation entropy.
+    % \ganqu{font can be bigger} solved
+    }
+    \vspace{-20pt}
+    \label{fig:train}
+\end{figure}
+
+\paragraph{Strategically Learning from Guidance.} 
+Figure \ref{fig:train} illustrate the training dynamics regarding training rewards, generation length and entropy for \m{On-Policy RL} and \m{LUFFY}. 
+% Throughout the training process (left part of Figure~\ref{fig:train}), \m{LUFFY} consistently attains higher training rewards than \m{On-Policy RL}, highlighting the advantage of leveraging off-policy guidance over relying solely on on-policy exploration. 
+Initially, \m{LUFFY} primarily imitates off-policy trajectories, as indicated by the increasing generation length gradually aligning with the off-policy reasoning traces (middle part of Figure~\ref{fig:train}). 
+At this early stage, imitation dominates, causing an initial performance dip (left part of Figure~\ref{fig:train}) as the model adjusts to external guidance and potentially sophisticated cognitive behaviors~\cite{why_distill}. 
+As training progresses, on-policy rollouts gradually become more prominent, fostering independent exploration within the model's own sampling space while effectively retaining insights gained from off-policy demonstrations. 
+This guided exploration brings growing advantages (training rewards) over \m{On-Policy RL}. 
+% Con
+uently, \m{LUFFY} achieves a dynamic balance between imitation and exploration, leading to more effective off-policy learning (Section~\ref{app:analysis}). 
+These results highlight that \m{LUFFY} selectively adopts valuable reasoning patterns rather than blindly imitating off-policy traces. 
+Such strategic off-policy learning is further evidenced in reasoning behaviors during inference, such as generation length and exploration (Appendix~\ref{app:analysis}).
+% Then, generation length stabilizes between 2500-3500 tokens, significantly shorter than the Off-policy Reasoning Traces (\~4000 tokens). 
+
+
+
+
+\paragraph{Maintaining Exploration.} 
+Figure \ref{fig:train} (Right) illustrates that \m{LUFFY} consistently sustains higher entropy compared to \m{On-Policy RL} throughout the entire training process. 
+Specifically, the generation entropy of \m{On-Policy RL} rapidly converges to nearly zero after approximately 200 steps, indicating a highly deterministic policy with limited exploration potential. 
+Conversely, the elevated entropy observed in \m{LUFFY} allows continuous exploration of less confident yet potentially superior policies, facilitating the discovery and learning of novel cognitive behaviors. 
+Interestingly, we observe entropy fluctuations and even occasional increases, such as between steps 200 and 250, reflecting ongoing exploration of low-probability but crucial actions, also referred to as \textit{pivotal tokens}~\cite{abdin2024phi4technicalreport,yu2025dapoopensourcellmreinforcement}. This strategic exploration enables the model to escape local optima, thus improving its convergence towards more globally optimal solutions.
+
+
+% and empirically we find it beneficial for the RL training. 
+% {\color{red} add more description and discussion. }
+
+
+% Compared to the length of Off-policy Reasoning Traces~(\~4000 tokens), \m{LUFFY} does not naïvely imitate 
+% Interestingly, this phase of imitation only introduces 
+
+
+
+% \paragraph{Better efficiency.} 
+% Figure \ref{} plots the generation length of our methods. Off-policy with and without importance sampling represent two extremes in terms of length, from about 1500 tokens to 5000 tokens per question. {\color{red} draw sft in this length plot}
+
+% LUFFY strikes a good balance between 
+
+% \subsection{Alternative Methods of Off-policy Integration}
+% \subsubsection{Comparison with Alternative Methods to Introduce Off-policy Guidance}
+
+% In this section, we compare LUFFY with other alternatives for incorporating off-policy guidance. We add two more baseline methods, namely \m{RL after SFT} and \m{RL with SFT Loss}. For RL after SFT, we use the heldout 
+% The results are shown in Table \ref{}. 
+
+
+% \subsection{Ablation Study}
+\subsection{Policy Shaping Encourages Continuous Exploration}
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \centering
+  \vspace{-20pt}
+  \includegraphics[width=\linewidth]{figs/test_perf_with_entropy1.pdf}
+  \vspace{-10pt}
+  \caption{\textbf{Effects of policy shaping.}}
+  \vspace{-10pt}
+  \label{fig:test_perf}
+  \vspace{-30pt}
+\end{wrapfigure}
+Figure~\ref{fig:test_perf} illustrates the validation performance over the course of training, shedding light on the impact of policy shaping.
+\m{Mixed-Policy} achieves rapid early gains, significantly outperforming \m{On-Policy RL} at the start. 
+However, its performance soon plateaus and eventually converges with \m{On-Policy RL}, whereas \m{LUFFY} continues to improve steadily.
+These trends are consistent with our earlier analysis of entropy collapse (Section~\ref{sec:shaping}), underscoring the role of policy shaping as an effective regularizer that prevents premature convergence and sustains performance gains in later stages of training.
+% Conversely, 
+% This benefit is further amplified when removing the on-policy clip, enabling parameter updates that support more aggressive and effective exploration.
+
+% Importantly, applying these enhancements without off-policy guidance (On-Policy + No Clip/Shaping) does not yield improvement, underscoring the necessity of external signals to acquire nuanced and generalizable reasoning skills.
+% {\color{red} todo: discuss ablation of shaping and no clip on On-Policy}
+
+
+
+
+% \begin{table}[]
+% \resizebox{\textwidth}{!}{
+% % \begin{tabular}{l|c|c|c|c|c|c}
+% \begin{tabular}{lcccccc}
+% & AIME 24 & AMC & Minerva & Olympiad & MATH-500 & Avg.  \\
+% On-Policy                          & 24.38        & 62.39    & 34.56        & 45.48         & 85.00    & 50.36 \\
+% Mixed-Policy  & 19.17 &63.86&34.93&51.41&84.17&50.71 \\
+% ~~~ + Shaping          & 28.85        & 62.01    & 33.09        & 55.11         & 86.00    & 53.01 \\
+% ~~~ + Shaping + NoClip & 28.85        & 65.25    & 34.19        & 56.89         & 88.00    & 54.65
+% \end{tabular}}
+% \caption{}
+% \label{tab:ablate}
+% \end{table}
+
+
+
+
+% \subsection{Out-of-distribution Performance}
+
+
+
+
+
+
+
+
+% These results collectively confirm that the integration of off-policy guidance via \m{LUFFY} generalizes effectively across different model architectures and scales, highlighting the robustness and versatility of our proposed approach for improving reasoning capabilities across diverse settings.
+
+
+% % We observe that naïvely adding the off-policy sample to the rollout group causes a huge performance drop in the early stage. The training reward drops to about 0.1 and then starts to increase. However, the train rewards of Off-policy GRPO lags behind the performance of on-policy GRPO through the whole training procedure.
+
+% Importance sampling
+
+% Figure \ref{} shows the entropy of LUFFY and  
+
+
+% % the ablation study from  We can see that 
+%  % We plot the training rewards measured by the outcome verifier and test accuracy in Figure 4.
+
+
+
+
+
+
+
+
+
+% To assess whether the models can explore beyond imitation, we further analyze their ability to discover correct reasoning paths under increased generation randomness. 
+% We report pass@8 accuracy on the combined AIME 2024 and AMC datasets, varying the temperature from 0.1 to 1.0. 
+% As shown in Figure~\ref{fig:temp}, both RL-based methods (\m{On-Policy RL} and \m{LUFFY}) exhibit strong exploratory capabilities, with accuracy improving as the temperature increases, showing promise in scaling test-time. 
+% In contrast, although \m{SFT} performs comparably to \m{LUFFY} under near-deterministic decoding (temperature 0.1), its performance deteriorates at higher temperatures, failing to uncover additional correct reasoning paths. 
+% This highlights the fragility and limited adaptability of \m{SFT}, 
+% which aligns with prior findings~\cite{chu2025sftmemorizesrlgeneralizes,vl-thinking2025} that suggest SFT tends to memorize reasoning patterns rather than learning generalizable reasoning capability.
+
+% same start point
+
+
+
+
+%%%%%%%%%%%%%%%%%% hzc %%%%%%%%%%%%%%%%%%
+% \clearpage
+\section{Related Work}
+
+\paragraph{RL for LRMs}
+Recent advances have demonstrated remarkable progress in enhancing LLMs' reasoning capabilities through RL approaches~\cite{r1, o1, kimik1.5, survey}, including DeepSeek-R1, OpenAI-o1, and Kimi-1.5.
+Subsequent work systematically investigate RL with purely verifiable rewards (RLVR)~\cite{simplerl,orz,prime,drgrpo,opo}, providing insights into how this approach enables complex reasoning.
+%Subsequent work systematically investigate the potential of reinforcement learning with purely verifiable rewards (RLVR)~\cite{simplerl,orz,prime,drgrpo}, providing deeper insights into how this approach enables complex reasoning abilities.
+Various advances have been proposed for reasoning enhancement. Test-time adaptation mechanisms~\cite{muennighoff2025s1,zuo2025ttrl} demonstrate potential in dynamic optimization, but remain bounded by inherent model knowledge. 
+While structured reasoning approaches~\cite{pang2025bolt,ye2025limo,fatemi2025concise,zhao2025absolutezero} have demonstrated that complex reasoning capabilities can emerge from strategically designed prompting and training strategies. The development of RL optimization techniques~\cite{su2025trust,wen2025light,yang2025thinking,drgrpo} has contributed novel training paradigms and optimization objectives that specifically target the enhancement of reasoning capabilities.
+However, recent studies~\cite{zhao2025echochamberrlposttraining,rl_limits} demonstrate that on-policy learning is limited by vast exploration space and primarily amplifies existing behaviors.
+Existing approaches optimize within model boundaries rather than expanding reasoning horizons.
+%Existing approaches primarily optimize within the model's inherent boundaries rather than expanding its reasoning horizons beyond initial limitations.
+Our approach leverages off-policy reasoning traces to transcend these cognitive constraints while preserving self-driven exploration capabilities.
+
+\paragraph{On-Policy and Off-Policy RL}Reinforcement learning algorithms are fundamentally distinguished by their approach to experience utilization during policy optimization.
+On-policy methods (e.g., TRPO~\cite{trpo}, A2C/A3C~\cite{mnih2016asynchronous}, PPO~\cite{ppo}) strictly update using trajectories from the current policy, ensuring training stability but potentially constraining the exploration space. In contrast, off-policy algorithms (e.g., DQN~\cite{mnih2013playing},TD3~\cite{fujimoto2018addressing}, SAC~\cite{haarnoja2018soft}) leverage experiences from diverse policies, offering superior sample efficiency while introducing optimization challenges due to distribution shift. Extending to LLM training, on-policy methods are more commonly adopted, with approaches like GRPO~\cite{grpo}, REINFORCE~\cite{sutton1999policy}, and PPO~\cite{ppo} demonstrating strong performance through various optimization techniques. 
+PRIME~\cite{prime} and NFT~\cite{NFT} models the implicit policy to utilize self-generated answers.
+Meanwhile, off-policy approaches such as DPO~\cite{rafailov2023direct} offer alternative optimization frameworks by reformulating preference learning as classification. To leverage advantages from both paradigms, our work bridges these approaches through policy shaping with regularized importance sampling, effectively combining on-policy optimization with off-policy guidance.
+
+
+\section{Conclusion}
+We presented \textbf{LUFFY}, a simple yet powerful framework that integrates off-policy reasoning guidance into the RLVR paradigm. 
+By dynamically balancing imitation and exploration, LUFFY effectively leverages external reasoning traces without sacrificing the model’s ability to discover novel solutions. 
+Our method outperforms strong baselines across competitive math benchmarks and generalizes robustly to out-of-distribution tasks, surpassing both on-policy RLVR and off-policy baselines. 
+These results highlight the promise of off-policy learning as a scalable and principled path toward building more general, capable, and self-improving reasoning models.
+Future work may focus on extending LUFFY to broader domains or modalities~\cite{hao2025can} and further refining policy shaping to maximize exploration under off-policy guidance. 
+
+%%%%%%%%%%%%%%%%%% zw %%%%%%%%%%%%%%%%%%
+\clearpage
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+
+\clearpage
+\appendix
+
+\input{appendix.tex}
+
+\end{document}

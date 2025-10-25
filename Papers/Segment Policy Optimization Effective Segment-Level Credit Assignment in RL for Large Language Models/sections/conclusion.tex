@@ -1,0 +1,7 @@
+\vspace{-0.2cm}
+\section{Conclusion}
+\label{sec:conclusion}
+\vspace{-0.2cm}
+
+In this work, we propose Segment Policy Optimization (SPO), a novel RL training framework for large language models (LLMs) that effectively addresses the limitations of existing RL approaches. SPO provides feedback at the segment level, offering finer granularity than trajectory-level methods for more precise credit assignment, while reducing the number of advantage estimation points compared to token-level approaches. This enables us to leverage Monte Carlo methods to obtain unbiased advantage estimates. Our experiments demonstrate that a small number of segment-level advantages can significantly outperform coarse trajectory-level advantages, validating the effectiveness of our framework. Due to limited computational resources, our current experiments in the long CoT scenario are limited to a maximum context size of 4K tokens. In the future, we plan to conduct additional experiments with larger context sizes. Additionally, our current experiments focus primarily on mathematical tasks. We plan to test the effectiveness of SPO in broader application scenarios, such as code generation and RLHF.
+
