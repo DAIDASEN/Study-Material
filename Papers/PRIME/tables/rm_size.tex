@@ -1,0 +1,17 @@
+\begin{table}[t]
+    \centering
+    \caption{Performance comparison of different reward models (Qwen2.5-7B-Base as policy model).}
+    % \footnotesize{*Avg@16 Acc with t=0.6 for AIME and AMC. Pass@1 Acc with t=0.6 for others*}
+    \resizebox{0.9\textwidth}{!}{
+    \begin{tabular}{l|ccccccc}
+    \toprule
+        \textbf{Reward Model} & \textbf{AIME 24} & \textbf{AIME 25} & \textbf{AMC} & \textbf{MATH} & \textbf{Minerva} & \textbf{OlympiadBench} & \textbf{Average} \\ \midrule
+        \textbf{Qwen2.5-3B} & 10.7 & 4.8 & 44.0 & 73.2 & 26.1 & 33.0 & 32.0 \\ 
+        \midrule
+        \textbf{Qwen2.5-7B} & 13.2 & 6.4 & 42.9 & 73.4 & 26.5 & 33.1 & 32.6 \\ 
+        \midrule
+        \textbf{Qwen2.5-14B} & 10.8 & 4.8 & 44.1 & 73.2 & 25.4 & 32.7 & 31.8 \\ \bottomrule
+    \end{tabular}
+    }
+    \label{tab:reward_model_comparison}
+\end{table}

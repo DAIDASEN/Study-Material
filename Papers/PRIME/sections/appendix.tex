@@ -1,0 +1,348 @@
+% \input{algos/prime}
+
+
+
+
+
+
+\newpage
+\section{Limitations}
+\label{sec:app_limitation}
+Due to resource constraints, we only conducted experiments on models up to 32B. Besides the main experiments of PRIME, we ran fewer steps for other ablation experiments, while we conduct comparison under the same step number for fairness. 
+
+% \section{The Scalability, Stability and Robustness of PRIME}
+
+% In this section, we show the scalability and stability of the prime method by comparing its performance with the outcome-reward-only reinforcement learning approach across various scenario.
+
+% \subsection{PRIME and OV only RLOO with More Training Steps}
+
+% \begin{figure}[thbp]
+%     \centering
+%     \begin{subfigure}{0.47\textwidth}
+%         \includegraphics[width=\textwidth]{figures/images/large_rollout_step.pdf}
+%         \caption{RL training with more training steps.}
+%         \label{fig:longer_train}
+%     \end{subfigure}
+%     \hspace{0.5cm}
+%     \begin{subfigure}{0.47\textwidth}
+%         \includegraphics[width=\textwidth]{figures/images/larger_rollout_number_2.pdf}
+%         \caption{RL training with larger rollout number.}
+%         \label{fig:larger_rollout_num}
+%     \end{subfigure}
+%     \caption{RL training with larger training steps and rollout number.}
+% \end{figure}
+
+% To validate the scalability and stability of PRIME with increased computational resources, we first conduct an extended training process. Specifically, we conduct RL training for 800 rollout steps (3200 gradient steps) with PRIME and RLOO with outcome-reward only. The training results, shown in Figure~\ref{fig:longer_train}, reveal that throughout the training, PRIME consistently exhibits stable growth and outperforms the outcome-reward-only RLOO with an improvement of ~3.7\%.
+
+% \subsection{PRIME and OV only RLOO with Larger Rollout Number}
+
+% Moreover, we conduct experiments to test PRIME's robustness under different settings. Specifically, we increased the number of responses sampled for each prompt from 8 to 16. The results in Figure~\ref{fig:larger_rollout_num} show that Prime achieved an even greater improvement of approximately 4.4\% compared to RLOO.
+
+
+
+
+
+
+\section{Additional Results}\label{sec:app_results}
+
+% \subsection{PRIME with Different Reward Models}
+
+\subsection{Reference Model Choice is Flexible} 
+
+\input{figures/comparision_of_policy_sft_ref}
+
+% We introduce online PRM, which updates with policy model rollouts and their corresponding verifier outcomes. Here we demonstrate the importance of online updates for PRMs. We compare two settings, where the online PRM is initialized by Eurus-2-7B-SFT and the offline PRM is EurusPRM-Stage1\hanbin{This seems to be the first mention of EurusPRM-Stage1, which may require a quote or additional explanation}. As shown in Figure \ref{fig:online_prm}, we can see that online PRM outperforms offline PRM by a large margin on both training and test sets. 
+
+
+%\subsection{Effect of Reference Policy}
+%\lifan{a bit confusing about reference policy and ref model for implicit prm. elaborate a bit before diving into details?}\ganqu{the same, merged. But this is not so imporatnt, consider moving to Appendix}
+\input{figures/effect_of_ref_policy}
+We implement two variants of our algorithms to explore the effect of reference model of implicit PRM, one using the initial SFT model as the reference model (SFT ref) while the other using the running policy's old logprobs as reference (policy ref), as shown in Figure~\ref{fig:policy_ref}. The policy ref simply adopts the old logprob of the policy model as  $\pi_{\text{ref}}$, while the SFT ref remains the initial SFT model for an additional $\pi_{\text{ref}}$ calculation. We compare their performance in this section. 
+
+From the training rewards in Figure \ref{fig:effect_of_ref_policy}, we find the two strategies are close and have pros and cons in different aspects: The Q value calculated by implicit PRM is the expectation under the distribution of the reference model. So the updating policy could natrually serve as the reference.
+On the other hand, KL divergence calculation is only allowed when the initial SFT model is retained.
+
+
+
+\input{figures/effect_of_single_double_forward}
+\subsection{Single-Forward v.s. Double-Forward}
+% \lifan{review current forward flow so we know what's single forward?}\lifan{and move to appendix?}
+Since our implicit PRM is concurrently updated in training, for each rollout stage, we can update the PRM before the policy model and use the updated PRM to re-calculate the process rewards, which we call the double-forward setting. We investigate the impact of double-forward in both the training and test phases. Our default setting applies single-forward, which uses process rewards from old PRMs. We plot PRM accuracy on rollouts and training rewards in Figure \ref{fig:single_double_forward}.
+
+
+% \input{tables/effect_of_single_double_forward}
+Accordingly, we find that double-forward could increase PRM accuracy, but the training rewards remain close between the two methods. %We also compare the average test accuracy of single and double-forward\hanbin{there is a simple table in our blog} in Table \ref{tab:effect_of_single_double}. Their performances are also close. Single double-forward brings more computation overhead, we recommend the single-forward setting in practice.
+
+
+\begin{wraptable}{r}{0.65\textwidth}
+\centering
+\caption{The comparison of resource requirements between Eurus-2-7B-PRIME and Qwen2.5-Math-7B-Instruct.}
+\label{tab:comparision}
+% \resizebox{0.65\textwidth}{!}{
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l >{\columncolor[HTML]{D7E8E8}}l l}
+\toprule
+\textbf{Model} & \textbf{Eurus-2-7B-PRIME} & \textbf{Qwen2.5-Math-7B-Instruct} \\ \midrule
+Base Model     & Qwen2.5-Math-7B           & Qwen2.5-Math-7B                  \\
+SFT Data       & 230K (open-source)        & 2.5M (open-source \& in-house)  \\
+RM Data        & 0                         & 618K (in-house)                 \\
+RM             & Eurus-2-7B-SFT            & Qwen2.5-Math-RM (72B)           \\
+RL Data        & 150K queries $\times$ 4 samples & 66K queries $\times$ 32 samples \\ \bottomrule
+\end{tabular}
+}
+\end{wraptable}
+
+\subsection{Results of Different RL Algorithms}
+\label{sec:diff_rl_algo}
+
+
+\input{figures/results}
+
+\input{tables/diff_rl_algo}
+% The results of different RL algorithms on Llama-3.1-8B are listed in Table \ref{tab:diff_rl_algo}. Since we use a different base model and dataset for the pilot study, the benchmarks used here are slightly different from the main experiments. From the results, we find that REINFORCE-like algorithms, despite being simpler than PPO, are strong enough to produce stable results. In this paper, we choose the best performing RLOO as our RL algorithm.
+
+We ablate PRIME and different RL algorithms with their variants and find that the PRIME algorithm achieves the best performance for several reasons. 
+
+First of all, We compare different REINFORCE-like advantage estimators including REINFORCE, GRPO, and RLOO, toggling the existence of implicit process reward. To make different algorithms compatible with the compound of outcome verifier reward and process reward, we accordingly make adaptions similar to Eq. \ref{eq:adv}. For GRPO, we have
+\begin{equation}
+        A^i_t = \underbrace{\frac{r_{o}\left(\mathbf{y}^i\right)-\text{mean}( r_o\left(\mathbf{y}^j\right))}{\text{std}( r_o\left(\mathbf{y}^j\right))}}_\text{GRPO with outcome rewards} + \underbrace{\sum_{s=t}^{|\mathbf{y}^i|} \gamma^{s-t} \cdot \left[\frac{r_\phi(y^i_s)-\text{mean}\left(\frac{r_\phi \left(\mathbf{y}^j\right)}{|\mathbf{y}^j|}\right)}{\text{std}\left(\frac{r_\phi \left(\mathbf{y}^j\right)}{|\mathbf{y}^j|}\right)}\right]}_\text{GRPO with implicit process rewards}.
+\end{equation}
+For REINFORCE, we have
+\begin{equation}
+A^i_t = \underbrace{r_o\left(\mathbf{y}^i\right)}_\text{REINFORCE with outcome rewards} + \underbrace{\sum_{s=t}^{|\mathbf{y}^i|} \gamma^{s-t} \cdot r_\phi(y^i_s)}_\text{REINFORCE with implicit process rewards}.
+\end{equation}
+As shown in Table \ref{tab:diff_rl_algo}, PRIME contributes consistently regardless of the policy update method, making it a generic algorithm. 
+
+\iffalse
+On top of that, a process reward model prevails in providing token-level signals compared to a value estimation model. On the one hand, apparently the PRIME algorithm with RLOO advantage estimator surpasses the PPO implementation with only the verifier outcome reward model. This means while both provide online updating token-level signals, the PRIME algorithm is essentially distinct from a TD error critic model. On the other hand, we can also derive a value model from \cite{yuan2024freeprocessrewardsprocess} and the corresponding advantage estimator. 
+% \zefan{do we need to add superscript i?}
+\begin{proposition}\label{prop:implicit_value} 
+Consider an autoregressive process with an outcome reward at the last step~($T$). Define the Q value as $q_\theta^t(\mathbf{y}_{<t}, y_t):= \sum_{i=1}^{t} \beta \log \frac{\pi_\theta(y_{i}|\mathbf{y}_{<i})}{\pi_\text{ref}(y_{i}|\mathbf{y}_{<i})}$. 
+\begin{equation}
+V_t(\mathbf{y}_{<t}) = q_\theta^{t-1}(\mathbf{y}_{<t-1},\mathbf{y}_{t-1})
+\end{equation}
+
+\begin{equation}
+\hat A^{\text{GAE}(1,\lambda)}_t = \lambda^{T-t} \cdot
+\left[ \underbrace{r_o\left(\mathbf{y}\right)}_\text{PPO with outcome rewards} - \quad q_\theta^t(\mathbf{y}_{<t}, y_t) 
+\right] + \sum_{s=0}^{T-t} \lambda^l \cdot r_\phi(y_s)
+\end{equation}
+
+\end{proposition}
+
+\begin{proof}
+We set $r_t=0$ for $t<T$ and $r_T=r_o\left(\mathbf{y}\right)$. The above definition of $q^t_\theta$ is the exponential average of undiscounted outcome reward, so we omit the discount factor $\gamma$ for brevity. 
+\begin{equation}
+\begin{aligned}
+V_t(\mathbf{y}_{<t}) =& q_\theta^{t-1}(\mathbf{y}_{<t-1}, y_{t-1}) - r_{t-1} \\
+=&q_\theta^{t-1}(\mathbf{y}_{<t-1}, y_{t-1}) \nonumber
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\delta_t:=&r_t+V_{t+1}(\mathbf{y}_{<t-1})-V_t(\mathbf{y}_{<t})\\
+=&
+\begin{cases}
+  r_\phi(y_t),& 0\leq t < T,\\
+  r_o(\mathbf{y})-q_\theta^{t-1}(\mathbf{y}_{<t-1}), & t = T.
+\end{cases} \nonumber
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\hat A^{\text{GAE}(1,\lambda)}_t = \sum_{s=0}^{T-t} \lambda^l \cdot \delta_{t+s} \nonumber
+\end{equation}
+\end{proof}
+
+Based on the above proposition, we implement PRIME as a value model instead of a reward model, keeping its initialization and online update. As shown in Table \ref{tab:diff_rl_algo}, PRIME performs better as a reward model rather than a value model. We hypothesize that this phenomenon is related to the benefit of using advantage as process reward~\cite{setlur2024rewarding} and leave this topic for future exploration. 
+\fi
+
+Moreover, the PPO variant of PRIME provides no performance gain, demonstrating that the additional computation cost from the critic model is redundant. This makes it possible to compensate for the expense of the process reward model by using REINFORCE-like algorithms with simpler advantage estimators. 
+
+Finally, we choose the best-performing RLOO as the advantage estimator in our algorithm. 
+
+
+
+
+% For PPO with value models,
+% \begin{equation}
+% \underbrace{r_o\left(\mathbf{y}^i\right)}_\text{PPO with outcome rewards} + \underbrace{\sum_{s=t}^{|\mathbf{y}^i|} \gamma^{s-t} \cdot r_\phi(y^i_s)}_\text{PPO with implicit process rewards} - V(\mathbf{y}_{<t})
+
+% For GRPO,
+
+
+% From the results, we find that REINFORCE-like algorithms, despite being simpler than PPO, are strong enough to produce stable results. In this paper, we choose the best-performing RLOO as our RL algorithm.
+
+
+\subsection{``Zero'' Experiments}
+\label{sec:app_zero}
+\input{figures/zero_7}
+\input{figures/zero_32}
+\citet{deepseekai2025deepseekr1incentivizingreasoningcapability} proposed DeepSeek-R1-Zero, which is directly trained from a base model with reinforcement learning. To further investigate the ``Zero'' setting, we also perform RL from Qwen2.5-Math-7B-Base and Qwen2.5-32B-Base~\citep{qwen2.5}, skipping the SFT phase. 
+We present the experimental results in Figure~\ref{fig:zero_7} and Figure~\ref{fig:zero_32}. The observations are as follows:
+
+(1) \textbf{RL from base model is suprisingly efficient and effective.} Comparing PRIME from Qwen2.5-Math-7B and Eurus-2-7B-SFT, the ``Zero'' setting converges much faster. This indicates that directly performing RL from a base model might be a strong alternative to the conventional SFT-RL pipeline.
+
+(2) \textbf{Larger models benefit more.} Comparing 7B and 32B models, we see that the 32B model gains more on both training rewards and test performance. This is aligned with the conclusion in \citet{deepseekai2025deepseekr1incentivizingreasoningcapability}.
+
+(3) \textbf{Saturation could be a potential issue.} Although PRIME-Zero obtains impressive performance gain, we find it quickly saturated at a very early stage (about 50 steps), which hinders further improvement like in \citet{deepseekai2025deepseekr1incentivizingreasoningcapability}. This is possibly attributed to the decrease of response diversity, and we leave this as future work.
+
+\subsection{Effect of Reward Model Size}
+In the main experiments, we set the reward model to be of the same size as the policy model by default. To further investigate the influence of reward model capacity, we conduct comparative experiments by fixing the policy model as Qwen2.5-7B-Base and varying the reward model among Qwen2.5-3B-Base, Qwen2.5-7B-Base, and Qwen2.5-14B-Base, other settings are aligned with the main experiment. The results are summarized in Table~\ref{tab:reward_model_comparison}. Overall, the results suggest that reward model size has limited influence: the 7B reward model achieves the best average performance, while larger (14B) or smaller (3B) reward models do not yield clear advantages.
+
+\input{tables/rm_size}
+
+\subsection{Comparison with VinePPO}
+% \paragraph{Comparison with VinePPO}
+
+VinePPO~\citep{kazemnejad2024vineppo} uses average return across trajectories to estimate the value within policy gradient update, instead of using value model in algorithm like PPO. 
+We adopt the same setting as VinePPO, using RhoMath 1.1B~\citep{lin2024rho1} as the base model and MATH dataset for training. We reproduced PRIME and VinePPO with 8 A800-80G for 96 steps with the same hyperparameters. It reveals that 
+
+(1) \textbf{PRIME is 11x more efficient than VinePPO.} As shown in Figure~\ref{fig:comp_vine}, VinePPO takes 13.94 hours for training, while PRIME only needs 1.22 hours. 
+
+(2) \textbf{PRIME also consistently outperforms VinePPO on the validation set.} As shown in the Table~\ref{tab:come_vine}, the validation accuracy of PRIME is higher than VinePPO at each validation step.
+
+
+\input{tables/comp_with_vineppo}
+
+\input{figures/more_comparison}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figures/images/train_rewards_wall.pdf}
+    \caption{\textbf{The effect of dense reward.} We compared PRIME and RLOO with outcome verifier (OV). The figure depicts training reward curves across wall clock, revealing better sample efficiency of PRIME. }
+    \label{fig:train_rewards_wall}
+\end{figure}
+ 
+
+\subsection{Comarison with DeepScaleR}
+
+DeepScaleR~\citep{deepscaler2025} introduces a three-stage training pipeline, with maximum allowed response length iteratively increased, from 8k (Stage 1) to 16k (Stage 2), finally to 24k (Stage 3). Through this iterative context lengthening, DeepScaleR achieve continuous performance gain. We run PRIME under the setting of DeepScaleR (base model, data, hyperparameters strictly follow the official settings). Due to resource limits, we only conduct the first (8k) stage training for 330 steps, yet PRIME achieves impressive results. 
+
+(1) \textbf{Model Performance.} Figure~\ref{fig:comp_dsr} presents the training accuracy curves of PRIME and DeepScaleR\footnote{Note that the provided training logs are broken according to this \href{https://github.com/agentica-project/deepscaler/issues/1}{issue}, so we estimated its training curve from the figure in the blog.}. PRIME achieves comparable training accuracy within 330 steps, which is only 1/3 the steps of DeepScaleR stage 1 (1040 steps). On testsets, as shown in Table~\ref{tab:comp_dsr}, PRIME consistently improves the performance of DeepSeek-R1-Distill-Qwen-1.5B by 3.1 points. This validates the effectiveness of PRIME on highly capable base models.
+
+(2) \textbf{Efficiency.} PRIME consumed 446.7 A800 GPU hours for this experiment. In contrast, DeepScaleR consumed 3800 A100 GPU hours in total, and the first stage roughly required $\sim$600 GPU hours. This means PRIME is also 25\% faster than DeepScaleR. Note that the advantage could be higher considering hardware differences (A800/A100).
+
+(3) \textbf{Computation Overhead.} Moreover, due to the long response length of the distill model, the overhead would be attributed more to the generation phase, narrowing down the extra time PRIME brings to about 18\%. This means that PRIME would be more suitable for long reasoning models.
+
+\input{tables/comp_with_scaler}
+
+% \input{tables/dense_rewards_results}
+
+% \subsection{Effect of dense rewards}
+% \label{sec:effeoc_of_dense_rewards}
+% Table ~\ref{tab:dense_rewards_results} shows the detailed results of PRIME and RLOO w/ outcome verifier (OV). We can see that at the same 240 steps, the model trained by PRIME is generally better than the model trained by outcome rewards, leading to a 4-point performance gap. PRIME could further enhance the model with more training steps. 
+
+
+
+% \subsection{Effect of Reference Policy}
+% \label{sec:effeoc_of_ref_policy}
+% We delve into the comparative analysis of different reference policy implementations. As shown in Figure \ref{fig:effect_of_ref_policy}, The left one (policy ref) simply adopts the old logprob of policy model as  $\pi_{\text{ref}}$, while the right one (SFT ref) remains the initial SFT model for an additional $\pi_{\text{ref}}$ calculation.
+
+% \subsection{``Zero'' Experiments}
+% \label{sec:app_zero}
+% \input{figures/zero_7}
+% \input{figures/zero_32}
+% \citet{deepseekai2025deepseekr1incentivizingreasoningcapability} proposed DeepSeek-R1-Zero, which is directly trained from a base model with reinforcement learning. To further investigate the ``Zero'' setting, we also perform RL from Qwen2.5-Math-7B-Base and Qwen2.5-32B-Base~\citep{qwen2.5}, skipping the SFT phase. 
+% We present the experimental results in Figure~\ref{fig:zero_7} and Figure~\ref{fig:zero_32}. The observations are as follows:
+
+% (1) \textbf{RL from base model is suprisingly efficient and effective.} Comparing PRIME from Qwen2.5-Math-7B and Eurus-2-7B-SFT, the ``Zero'' setting converges much faster. This indicates that directly performing RL from a base model might be a strong alternative to the conventional SFT-RL pipeline
+
+% (2) \textbf{Larger models benefit more.} Comparing 7B and 32B models, we see that the 32B model gains more on both training rewards and test performance. This is aligned with the conclusion in \citet{deepseekai2025deepseekr1incentivizingreasoningcapability}.
+
+% (3) \textbf{Saturation could be a potential issue.} Although PRIME-Zero obtains impressive performance gain, we find it quickly saturated at a very early stage (about 50 steps), which hinders further improvement like in \citet{deepseekai2025deepseekr1incentivizingreasoningcapability}. This is possibly attributed to the decrease of response diversity, and we leave this as future work.
+
+\section{Discussion on Implicit Process Reward}
+\label{sec:app_iprm}
+\subsection{Formulation Validity}
+As shown in \citet{yuan2024freeprocessrewardsprocess}, implicit process reward is a parameterization of reward modeling. 
+With such parameterization, the expectation of cumulative reward starting from the $y_t$ (i.e. q-value), $q_\phi^t(\mathbf{y}_{<t}, y_t) = \beta \log \mathbb{E}_{\pi_\text{ref}(\mathbf{y}|\mathbf{y}_{\leq t})} e^{\frac{1}{\beta}r_\phi(\mathbf{y})}$ would have closed-formed solution $q_\phi^t(\mathbf{y}_{<t}, y_t)= \sum_{i=1}^{t} \beta \log \frac{\pi_\phi(y_{i}|\mathbf{y}_{<i})}{\pi_\text{ref}(y_{i}|\mathbf{y}_{<i})}$.
+Therefore, despite the similarities between implicit process reward formulation to those of DPO~\citep{rafailov2024direct,rafailov2024r}, it is not derived from the optimal policy of entropy-regularized RL~\citep{DBLP:conf/aaai/ZiebartMBD08, DBLP:conf/icml/HaarnojaTAL17}. 
+
+\subsection{Loss Function}
+Since $\pi_\phi$ and $\pi_\text{ref}$ are language models which are inherently self-normalized, using cross-entropy loss brings about a minor issue that the minimum loss 0 cannot be reached. Therefore, the optimal solution would satisfy $\beta \log \frac{\pi_\phi^*(\mathbf{y})}{\pi_\text{ref}(\mathbf{y})}=r_o+c$ rather than $\beta \log \frac{\pi_\phi^*(\mathbf{y})}{\pi_\text{ref}(\mathbf{y})}=r_o$. This discrepancy would not affect RL, because PRIME uses relative reward, $r_\phi\left(\mathbf{y}^i\right)-\frac{1}{K-1} \sum_{j \neq i} r_\phi\left(\mathbf{y}^j\right)$, rather than the original reward from PRM. This means that even if the bias term is included, it would be canceled out in calculation since the bias term is only related with prompt $x$.
+
+To solve this issue, we can simply eliminate this value term by using the DPO loss. We have a pilot experiment comparing DPO and CE loss, as shown in Table~\ref{tab:ce_vs_dpo} and Figure~\ref{fig:dpo_vs_ce}. DPO and CE achieve similar results, and we chose CE for memory efficiency.
+
+
+\input{tables/dpo_vs_ce}
+\input{figures/dpo_vs_ce}
+% TODO: performance of dpo vs ce
+
+
+\subsection{Reward Shaping}
+Another view of PRIME is potential-based reward shaping~\citep{DBLP:conf/icml/NgHR99}. If we view the q-value as the potential function, the process reward exactly satisfies the definition of shaping reward ($\gamma=1$). PBRS does not affect the optimal policy, but does speed up learning, which is aligned with our results.
+
+\section{SFT Data \& Training Details}
+\label{sec:sft_data_training_details}
+\input{tables/actions}
+\input{tables/sft_data_stat}
+We first performed supervised finetuning for RL preparation. We focus on mathematical and coding problems in this paper. For models, we start with Qwen2.5-Math-7B-Base~\citep{yang2024qwen25mathtechnicalreportmathematical} for its great mathematical capabilities. 
+
+% \textbf{Data Format.} We designed an action-centric chain-of-thought reasoning framework, where the policy model chooses one of 7 actions at each step and stops after executing each action. \huayu{finished?}
+
+\looseness=-1
+% \textbf{Data Construction.}
+% To construct the SFT dataset, we collect reasoning instructions from several open-source datasets. For completion, we employed LLaMA-3.1-70B-Instruct~\citep{grattafiori2024llama3herdmodels} to answer the instructions, with a system prompt requesting the model to perform action-centric chain-of-thought. 
+% We finally obtained 230K SFT data, the detailed sources and statistics can be found in \S~\ref{sec:sft_data_training_details}.
+
+\textbf{Action-centric chain-of-thought reasoning.} We apply imitation learning (supervised finetuning) as a warmup stage to teach models to learn certain reasoning patterns. To this end, we first design an action-centric chain-of-thought reasoning framework.
+Table \ref{tab:actions} shows the actions in the action-centric chain-of-thought reasoning framework. When the model generates answers, it conducts multi-step reasoning and chooses one of the 7 actions at each step. The response begins with the ASSESS action and ends with the OUTPUT action.
+
+\textbf{Construction of the SFT dataset.} To construct the SFT dataset, we collect reasoning instructions from several open-source datasets. It is noteworthy that we did not include many datasets with ground-truth answers in SFT, even though they are of higher quality. However, we reserve them for later RL training. The reason is that we aim to use different datasets for SFT and RL to diversify the exploration in RL, and we consider ground-truth more essential in RL than in SFT.  For completion, we employ LLaMA-3.1-70B-Instruct to answer the instructions, with a system prompt requesting the model to perform an action-centric chain-of-thought. Table \ref{tab:sft_data_stat} summarizes the key statistics of the datasets used for SFT. The datasets span mathematics, coding, and biomedicine. We finally obtain 230K SFT data and the average response length is 1390 tokens.
+
+\textbf{SFT Training.}  During the SFT phase, we conduct full parameter fine-tuning with a learning rate of 1e-05, utilizing the AdamW optimizer alongside a cosine annealing learning rate schedule and a warmup ratio of 0.1. The batch size was set to 96, with a fixed random seed of 42. The model was trained on 230K datasets for 3 epochs.
+
+\textbf{SFT Results.}
+After finetuning, the performance of our SFT model is reported in Figure~\ref{fig:results}.
+Compared to baselines, Eurus-2-7B-SFT lags Qwen2.5-Math-7B-Instruct on all mathematics benchmarks.
+
+
+
+
+
+
+\section{RL Data Preprocessing}
+\label{sec:rl_data_process}
+\subsection{RL Data Collection and Preprocessing}
+
+We curate a high-quality RL training dataset of mathematics and coding problems with outcome verifiers (LaTeX answers for math and test cases for coding). For math, we source from NuminaMath-CoT~\citep{li2024numinamath},  which contains about 860K math problems. The problems span from Chinese high school mathematics to International Mathematical Olympiad competition questions. For coding, we source from APPS~\citep{apps}, CodeContests~\citep{li2022competition}, TACO~\citep{li2023taco}, and Codeforces\footnote{\url{https://huggingface.co/datasets/MatrixStudio/Codeforces-Python-Submissions}}. To further increase data quality, we conduct detailed cleaning and filtering. Finally, we retain 457k math problems and 27k coding problems.
+
+\subsection{Data Filtering and Question-Type Classification}
+
+The preprocessing pipeline employs a systematic rule-based approach to filter and classify mathematical problems to create a high-quality dataset with solvable problems, appropriate difficulty levels, and correct solutions. We exclude problems containing figures or diagrams since they require visual processing capabilities. We also remove proof questions due to difficulties in answer verification. Based on specific patterns, the remaining problems are classified into question-answering, multiple-choice, or fill-in-the-blank questions. Since fill-in-the-blank questions comprise less than 400 examples compared to the much larger set of multiple-choice questions, we focus solely on multiple-choice questions for further processing.
+
+\subsection{Converting to Direct Question-Answer Format}
+
+
+We transform multiple-choice questions into a direct question-answer format through three sequential stages: rule-based filtering, LLM-based filtering, and LLM-based formatting.
+
+We first identify and remove questions that inherently require multiple-choice options - specifically, those where comparing specific statements or properties is essential to the problem-solving process. These questions cannot be meaningfully converted to a direct question-answer format. The initial filtering employs simple rule-based pattern matching, searching for keywords like "following" and "statement" that typically indicate option-dependent problems.
+
+Following the rule-based filtering, we employ Llama-3.1-8B-Instruct to perform a more nuanced classification of the remaining questions. Our pilot study revealed that while the LLM occasionally misclassifies questions, it tends to err on the conservative side - marking potentially convertible questions as requiring options rather than the reverse. Given our large dataset, we accepted this conservative approach to maintain quality.
+
+For questions classified as convertible, we implement a two-phase reformatting process: 1) Question Reformatting: Removing choice indicators and restructuring the question to elicit direct answers. 2) Solution Reformatting: Converting multiple-choice solutions into step-by-step derivations, ensuring all final answers are presented in standard LaTeX boxed format. This systematic approach maintains mathematical rigor while creating a standardized format suitable for downstream applications.
+
+\subsection{Problem and Solution Validation}
+
+The final stage involves merging all question-answer pairs and performing LLM-based comprehensive validation. We identify two key aspects in validation: solvability and correctness.
+
+We leverage state-of-the-art mathematical reasoning models, including QwQ-32B-Preview~\citep{qwq-32b-preview} and Qwen2.5-Math-72B-Instruct~\citep{yang2024qwen25mathtechnicalreportmathematical}, employing a self-consistency approach to determine problem solvability, and if solvable, verify the correctness of solutions provided in the original dataset.
+
+
+To enhance validation accuracy, we first analyzed sample problems to identify characteristics of solvable and unsolvable cases and created synthetic unsolvable problems featuring missing conditions or logical contradictions. Based on these samples, we developed specialized prompts to improve the models' ability to distinguish solvability. Each problem undergoes five independent validation attempts, where the LLM: 1) Provides step-by-step solutions using LaTeX formatting. 2) Identifies unsolvability due to missing conditions or logical contradictions. 3) Generates complete reasoning traces for solvable problems. 4) Presents final answers in standardized LaTeX boxed format (\texttt{\textbackslash boxed\{...\}}). 5) Document any impediments to solution completion.
+
+
+
+We evaluate two key consistency measures across multiple validation attempts: 1) Status Consistency: agreement on problem solvability. 2) Answer Consistency: consistency of solutions across different attempts and agreement between generated solutions and ground truth. The final dataset retains only problems that demonstrate consistent solvability across validation attempts, agreement in solutions across multiple attempts, and alignment with ground truth answers. This rigorous validation process ensures the resulting dataset comprises well-defined, solvable problems with verified, accurate solutions.
+
+
+
+\subsection{PRM Data}
+\label{sec:app_prm_data}
+\input{tables/stage1_data_stat}
+% \input{tables/stage2_data_stat}
+The dataset statistics of training EurusPRM are shown in Table~\ref{tab:stage1_data_stat}.
+
+\input{tables/dense_reawards_results_avg}

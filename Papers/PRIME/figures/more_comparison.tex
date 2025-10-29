@@ -1,0 +1,15 @@
+\begin{figure}[t] % 图片浮动环境
+    \centering % 居中对齐
+    \begin{minipage}[t]{0.46\textwidth} % 左侧图片
+        \includegraphics[width=0.96\linewidth]{figures/images/train_rewards_vineppo.pdf}
+        \caption{Validation accuracy curves of PRIME and VinePPO.} 
+        \label{fig:comp_vine}
+    \end{minipage}
+    \hspace{5pt}
+    \begin{minipage}[t]{0.47\textwidth} % 右侧图片
+        \centering
+        \includegraphics[width=0.95\linewidth]{figures/images/train_rewards_dsr.pdf}
+        \caption{Training reward curves of PRIME and DeepScaleR.}
+        \label{fig:comp_dsr}
+    \end{minipage}
+\end{figure}

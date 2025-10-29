@@ -1,0 +1,15 @@
+\begin{table}[]
+    \centering
+    \caption{Avg@16 results with temperature=0.3 of PRIME and RLOO w/ outcome verifier (OV).}
+    \resizebox{0.5\textwidth}{!}{
+    \begin{tabular}{l|ccc}
+    \toprule
+        \textbf{Method} & \textbf{Step} & \textbf{AIME 2024} & \textbf{AMC} \\ \midrule
+        \textbf{Eurus-2-7B-SFT} & 0 & 4.4 & 21.4 \\ \midrule
+        \textbf{RLOO w/ OV Only} & 240 & 15.4 & 43.8 \\ \midrule
+        \textbf{Eurus-2-7B-PRIME} & 240 & 17.3 & 49.2 \\ \midrule
+        \textbf{Eurus-2-7B-PRIME} & 592 & 24.2 & 54.5 \\ \bottomrule
+    \end{tabular}
+    }
+    \label{tab:avg_results}
+\end{table}

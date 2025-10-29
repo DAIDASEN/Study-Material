@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Test accuracy of updating PRM with CE or DPO loss after training.}
+\label{tab:prime_benchmark}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|cccccc|c}
+\toprule
+\textbf{Method} & \textbf{Step} & \textbf{AIME 2024} & \textbf{AMC} & \textbf{MATH-500} & \textbf{MinervaMath} & \textbf{OlympiadBench} & \textbf{Avg.} \\
+\midrule
+PRIME w. DPO loss & 96  & 7.7 & 39.3 & 66.2 & 17.3 & 31.3 & \textbf{32.4} \\
+\midrule
+PRIME w. CE loss & 96  & 7.9 & 40.2 & 66.0 & 16.9 & 30.7 & \textbf{32.3} \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:ce_vs_dpo}
+\end{table}

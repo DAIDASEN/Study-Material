@@ -1,0 +1,17 @@
+\begin{table}[!ht]
+    \centering
+    \caption{Comparison between PRIME and DeepScaleR.}
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{l|cccccccc}
+    \toprule
+        \textbf{Model} & \textbf{Step} & \textbf{GPU Hour} & \textbf{AIME 2024} & \textbf{MATH-500} & \textbf{AMC} & \textbf{MinervaMath} & \textbf{OlympiadBench} & \textbf{Avg.} \\ \midrule
+        \textbf{DeepScaleR-1.5B-Preview} & 1750 & 3800 & 43.1 & 87.8 & 73.6 & 30.2 & 50.0 & 57.0 \\ \midrule
+        %\rowcolor[HTML]{D7E8E8}
+        \textbf{DeepScaleR-1.5B-Stage1} & 1040 & $\sim$ 600 & 33.9 & - & - & - & - & - \\ \midrule
+        \textbf{DeepSeek-R1-Distill-Qwen-1.5B} & - & - & 28.8 & 82.8 & 62.9 & 26.5 & 43.3 & 48.9 \\ \midrule
+        %\rowcolor[HTML]{D7E8E8}
+        \textbf{PRIME-DeepScaleR-1.5B-Stage1} & 330 & 446.7 & 32.1 & 85.1 & 68.1 & 30.1 & 44.6 & 52.0 \\ \bottomrule
+    \end{tabular}
+    }
+    \label{tab:comp_dsr}
+\end{table}
