@@ -1,0 +1,735 @@
+/* Blog post specific styles */
+#main.post .post-title {
+  font-family: 'Iowan Old Style BT', Georgia, serif;
+  font-weight: 600;
+  font-size: 30px;
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+  line-height: 1.4;
+}
+
+#main.post .post-subtitle {
+  font-family: 'Iowan Old Style BT', Georgia, serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--fg4);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+#main.post .post-heading {
+  text-align: center;
+}
+
+#main.post .post-heading .publish-metadata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--fg3);
+  font-size: 15px;
+  line-height: 17px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-sans);
+}
+
+/* If a cover exists after the heading, remove extra bottom margin on metadata */
+#main.post .post-heading:has(~ .post-cover) .publish-metadata {
+  margin-bottom: 0rem;
+}
+
+#main.post .post-heading .publish-metadata .author {
+  font-size: 15px;
+  line-height: 21px;
+  letter-spacing: 0.24px;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  text-transform: none;
+  display: block;
+}
+
+/* Author link styling on single post only */
+#main.post .post-heading .publish-metadata .author a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#main.post .post-heading .publish-metadata .author a:hover {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--fg) 20%, transparent);
+  text-underline-offset: 2px;
+}
+
+#main.post .post-heading .publish-metadata svg {
+  display: inline-block;
+  margin: auto;
+}
+
+#main.post .post-heading .publish-metadata>span {
+  display: inline-block;
+  padding-top: 0.6em;
+  font-family: var(--font-sans);
+}
+
+#main.post article h1 {
+  font-family: 'Iowan Old Style BT', Georgia, serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Post cover image styling */
+#main.post .post-cover {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#main.post .post-cover svg {
+  display: block;
+  width: 80%;
+  max-width: min(80%, 100vw);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#main.post .post-cover .cover-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Blog post specific layout adjustments */
+#main.post {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 950px;
+  /* Base width for smaller viewports */
+  position: relative;
+  /* Shared margin variables for sidenotes and left TOC */
+  --sidenote-width: 200px;
+  --sidenote-gap: 28px;
+  /* Slightly narrower TOC than sidenotes */
+  --toc-width: var(--sidenote-width);
+  /* Make TOC gap a bit wider than sidenote gap */
+  --toc-gap: calc(var(--sidenote-gap) + 6px);
+}
+
+/* Increase container width as sidenotes grow */
+@media (min-width: 1200px) {
+  #main.post {
+    max-width: 970px;
+    --sidenote-width: 210px;
+  }
+}
+
+@media (min-width: 1400px) {
+  #main.post {
+    max-width: 990px;
+    --sidenote-width: 220px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #main.post {
+    max-width: 1010px;
+    --sidenote-width: 250px;
+  }
+}
+
+@media (min-width: 1800px) {
+  #main.post {
+    max-width: 1030px;
+    --sidenote-width: 280px;
+  }
+}
+
+/* Center the article content independently */
+#main.post article.content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 660px;
+  position: relative;
+  /* Anchor for absolute-positioned left toc */
+  overflow: visible;
+}
+
+
+/* Removed first-word small-caps styling */
+
+/* Counter for figures and sidenotes */
+#main.post {
+  counter-reset: sidenote-counter figure-counter;
+}
+
+/* Sidenotes and margin notes - use float for automatic stacking */
+#main.post .sidenote,
+#main.post .marginnote {
+  float: right;
+  clear: right;
+  /* Each note clears previous right-floated elements */
+  /* Base values for smaller viewports */
+  --sidenote-width: 200px;
+  --sidenote-gap: 35px;
+  /* Gap between content and sidenote */
+  width: var(--sidenote-width);
+  margin-right: calc(-1 * var(--sidenote-width) - var(--sidenote-gap));
+  margin-left: var(--sidenote-gap);
+  margin-top: 0.3rem;
+  margin-bottom: 20px;
+  /* Space between stacked notes */
+  font-size: 0.9rem;
+  line-height: 1.4;
+  vertical-align: baseline;
+  position: relative;
+}
+
+/* Reduce gap between lists followed by a heading while still clearing floats */
+#main.post article.content ul+h3,
+#main.post article.content ol+h3,
+#main.post article.content ul+h2,
+#main.post article.content ol+h2 {
+  margin-top: 0.8rem;
+  clear: none;
+  /* allow flowing near floats unless heading has its own reasons to clear */
+}
+
+/* Left margin Table of Contents (TOC) */
+#main.post .left-toc {
+  position: absolute;
+  top: 10px;
+  left: calc(-1 * var(--toc-width) - var(--toc-gap));
+  width: var(--toc-width);
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--fg2);
+}
+
+#main.post .left-toc .toc-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#main.post .left-toc .toc-item {
+  margin: 0 0 0.25rem 0;
+}
+
+#main.post .left-toc a {
+  color: var(--fg4);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  position: relative;
+}
+
+#main.post .left-toc a:hover {
+  color: var(--fg1);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--fg1) 20%, var(--bg) 20%);
+  text-underline-offset: 2px;
+}
+
+#main.post .left-toc .toc-level-2 {
+  padding-left: 0.75rem;
+}
+
+#main.post .left-toc .toc-level-3 {
+  padding-left: 1.25rem;
+  color: var(--fg4);
+}
+
+/* Scale sidenote width based on viewport (now inherited from #main.post) */
+
+#main.post .sidenote-number {
+  counter-increment: sidenote-counter;
+  pointer-events: none;
+}
+
+#main.post .sidenote-number:after,
+#main.post .sidenote:before {
+  font-family: 'Iowan Old Style BT', Georgia, serif;
+  position: relative;
+  vertical-align: baseline;
+  color: var(--fg4);
+}
+
+#main.post .sidenote-number:after {
+  content: counter(sidenote-counter);
+  font-size: 0.8rem;
+  top: -0.5rem;
+  left: -0.05rem;
+  color: var(--fg4);
+}
+
+#main.post .sidenote:before {
+  content: counter(sidenote-counter);
+  padding-right: 0.2rem;
+  font-size: 0.8rem;
+  top: -0.4rem;
+  left: -0.1rem;
+  color: var(--fg4);
+}
+
+/* Adjust margin notes in blockquotes - positioned with the new absolute layout */
+#main.post blockquote .sidenote,
+#main.post blockquote .marginnote {
+  /* Blockquotes inherit the dynamic width and positioning */
+  text-align: left;
+}
+
+/* Figure caption styling - positioned in margin like sidenotes */
+#main.post figure {
+  position: relative;
+  counter-increment: figure-counter;
+  /* Clear floats to ensure proper layout */
+  overflow: visible;
+  /* Ensure figure establishes a block formatting context */
+  display: block;
+}
+
+/* Very light border variant for specific figures */
+#main.post figure.figure-light-border .figure-box {
+  border: 1px solid color-mix(in srgb, var(--fg4) 20%, var(--bg) 80%);
+  border-radius: 0.2rem;
+  /* match code block radius */
+  padding: 0.75rem;
+}
+
+#main.post figure figcaption {
+  /* Always place captions below figures (not in margin) */
+  position: static;
+  display: block;
+  width: 100%;
+  /* Put spacing above the caption (between image and caption),
+     and reduce spacing below the caption */
+  margin: 0.5rem 0 2rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-family: 'Iowan Old Style BT', Georgia, serif;
+  text-align: left;
+  color: var(--fg3);
+}
+
+/* Remove previous responsive margin-caption sizing; captions are full-width below figures now */
+
+#main.post figure figcaption:before {
+  content: "Figure " counter(figure-counter) ": ";
+  font-weight: 600;
+  /* color: var(--fg2); */
+}
+
+/* Half-width figures: scale contained images to 50% and center */
+#main.post figure.half-width img {
+  display: block;
+  width: 70%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Slightly larger Matmul figures */
+#main.post figure.half-width.matmul img {
+  width: 90%;
+}
+
+/* Prevent image dragging/selection within blog post content */
+#main.post article.content img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Removed flow containment on lists so following content can flow alongside sidenote floats */
+
+/* Margin note toggle for mobile */
+input.margin-toggle {
+  display: none;
+}
+
+label.sidenote-number {
+  display: inline-block;
+  max-height: 2rem;
+  cursor: pointer;
+}
+
+label.margin-toggle:not(.sidenote-number) {
+  display: none;
+}
+
+/* Canvas styling for JS figures */
+#main.post canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Make inline SVGs responsive within post content */
+#main.post article.content svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Center and scale SVGs within figures */
+#main.post figure svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Do not override KaTeX's internal SVG used for radicals/underbraces. */
+#main.post article.content .katex svg {
+  height: inherit;
+  width: 100%;
+  position: absolute;
+}
+
+/* Paginator (prev/next/back to top) — align to content column and use GT America */
+#main.post .paginator {
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: var(--font-sans);
+  display: grid;
+  /* Three equal boxes */
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  font-size: 15px;
+  width: 100%;
+  /* Match top nav size */
+}
+
+#main.post .paginator a {
+  font-family: var(--font-sans) !important;
+  color: var(--fg4);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  position: relative;
+  display: block;
+  /* Make the whole cell clickable */
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+#main.post .paginator a:hover {
+  color: var(--fg1);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--fg1) 20%, var(--bg) 20%);
+  text-underline-offset: 2px;
+}
+
+/* Align text within each equal-width box */
+#main.post .paginator a:first-child {
+  text-align: left;
+}
+
+#main.post .paginator a:nth-child(2) {
+  text-align: center;
+}
+
+#main.post .paginator a:last-child {
+  text-align: right;
+}
+
+/* Disable interaction for empty placeholders */
+#main.post .paginator a:not([href]) {
+  pointer-events: none;
+}
+
+/* Ensure back-to-top hover matches prev/next underline styling */
+#main.post .paginator #back-to-top:hover {
+  color: var(--fg1);
+  text-decoration: underline !important;
+  text-decoration-color: color-mix(in srgb, var(--fg1) 20%, var(--bg) 20%) !important;
+  text-underline-offset: 2px !important;
+}
+
+/* Center link should be in the middle cell, not absolutely positioned */
+#main.post .paginator #back-to-top {
+  position: static;
+  left: auto;
+  transform: none;
+}
+
+/* Heading anchor link: show a light grey hash on hover; anchor is click target */
+#main.post article.content h2,
+#main.post article.content h3,
+#main.post article.content h4,
+#main.post article.content h5,
+#main.post article.content h6 {
+  position: relative;
+  /* anchor is positioned relative to the heading */
+}
+
+#main.post article.content .heading-text {
+  position: static;
+  /* let the heading element be the positioned ancestor */
+  display: inline;
+  /* behave like normal inline text */
+}
+
+#main.post article.content .heading-anchor {
+  position: absolute;
+  /* Sit in the left margin of the heading */
+  top: 50%;
+  transform: translateY(-50%);
+  left: -1.2rem;
+  /* offset into the left margin */
+  opacity: 0;
+  /* hidden by default but still hoverable */
+  visibility: visible;
+  pointer-events: auto;
+  width: 1rem;
+  /* comfortable hover target */
+  text-align: center;
+  color: color-mix(in srgb, var(--fg4) 65%, transparent);
+  text-decoration: none;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1em;
+  transition: opacity 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+#main.post article.content h2:hover .heading-anchor,
+#main.post article.content h3:hover .heading-anchor,
+#main.post article.content h4:hover .heading-anchor,
+#main.post article.content h5:hover .heading-anchor,
+#main.post article.content h6:hover .heading-anchor {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#main.post article.content .heading-anchor:hover {
+  color: color-mix(in srgb, var(--fg4) 80%, transparent);
+  outline: none;
+}
+
+/* Keep visible when hovering over the hash itself */
+#main.post article.content .heading-anchor:hover,
+#main.post article.content .heading-anchor:focus {
+  opacity: 1;
+  color: color-mix(in srgb, var(--fg4) 80%, transparent);
+}
+
+/* No padding shift needed since anchor sits beside text */
+
+/* Mobile responsive adjustments for blog posts only */
+@media (max-width: 1170px) {
+
+  #main.post .sidenote,
+  #main.post .marginnote {
+    /* Hidden by default on mobile */
+    display: none;
+    position: static;
+    /* Reset absolute positioning */
+    float: none;
+    /* Ensure notes do not shrink following blocks (e.g., lists) */
+    width: 95%;
+    margin: 1rem 2.5%;
+    clear: both;
+  }
+
+  /* Hide left TOC on narrow viewports to match margin note behavior */
+  #main.post .left-toc {
+    display: none;
+  }
+
+  /* Show sidenotes when checkbox is checked */
+  #main.post .margin-toggle:checked+.sidenote,
+  #main.post .margin-toggle:checked+.marginnote {
+    display: block;
+  }
+
+  #main.post .sidenote-number {
+    pointer-events: auto;
+    /* Enable clicking to expand notes */
+    cursor: pointer;
+  }
+
+  label.margin-toggle:not(.sidenote-number) {
+    display: none;
+  }
+
+  /* Show figure captions below figures on mobile */
+  #main.post figure figcaption {
+    font-size: 0.85rem;
+    margin: 0.5rem 0 1rem;
+    color: var(--fg3);
+  }
+
+  /* Adjust main content for mobile on blog posts only */
+  #main.post {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+    max-width: 100%;
+  }
+
+  /* Keep content width fixed but center it when sidenotes disappear */
+  #main.post article.content,
+  #main.post .post-cover {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: min(100%, 660px);
+  }
+
+  /* Reset cover SVG zoom on small screens to avoid overflow */
+  #main.post .post-cover svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: static;
+    left: auto;
+    transform: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0;
+  }
+}
+
+/* Tweet embed styling - for custom shortcode */
+#main.post .tweet-embed {
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  max-width: 420px !important;
+}
+
+#main.post .tweet-embed .twitter-tweet {
+  margin: 0 !important;
+  max-width: 420px !important;
+  width: 420px !important;
+}
+
+/* Hugo's built-in twitter/x shortcode styling */
+#main.post twitter-widget {
+  margin: 2rem auto !important;
+  max-width: 420px !important;
+  width: 420px !important;
+  display: block !important;
+}
+
+/* Force Twitter iframe sizing */
+#main.post .tweet-embed iframe,
+#main.post .twitter-tweet-rendered,
+#main.post .twitter-tweet iframe,
+#main.post twitter-widget iframe {
+  max-width: 420px !important;
+  width: 420px !important;
+  min-width: auto !important;
+  margin: 0 auto !important;
+}
+
+/* Override Twitter's default sizing on the container */
+#main.post .twitter-tweet {
+  max-width: 420px !important;
+  width: 420px !important;
+  margin: 0 auto 1.8rem !important;
+}
+
+/* Direct targeting of Hugo's output */
+#main.post>twitter-widget,
+#main.post article.content twitter-widget {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
+/* Table styling - center tables and make them look good */
+#main.post article.content table {
+  display: table !important;
+  /* Override display: block from typography.css */
+  overflow-x: visible !important;
+  /* Override overflow-x: auto from typography.css */
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  width: auto;
+  /* Let table size to its content */
+  max-width: 100%;
+  /* But don't exceed container width */
+}
+
+#main.post article.content th,
+#main.post article.content td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--fg4) 25%, var(--bg) 75%);
+}
+
+#main.post article.content th {
+  font-weight: 600;
+  background-color: color-mix(in srgb, var(--fg4) 5%, var(--bg) 95%);
+  color: var(--fg);
+}
+
+#main.post article.content tbody tr:hover {
+  background-color: color-mix(in srgb, var(--fg4) 3%, var(--bg) 97%);
+}
+
+/* Center align table content if needed */
+#main.post article.content table.center-content th,
+#main.post article.content table.center-content td {
+  text-align: center;
+}
+
+/* LoRA table color indicators */
+.lora-color-square {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.lora-color-square.green {
+  background-color: green;
+}
+
+.lora-color-square.red {
+  background-color: red;
+}
+
+.lora-color-square.blue {
+  background-color: blue;
+}
+
+.lora-color-square.gold {
+  background-color: #B8860B;
+}
+
+/* Distillation table color indicators */
+.distillation-color-square {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.distillation-color-square.blue {
+  background-color: #0066C0;
+}
+
+.distillation-color-square.green {
+  background-color: #169E78;
+}
+
+.distillation-color-square.light-blue {
+  background-color: #009DE4;
+}
