@@ -227,7 +227,7 @@ class AneurysmVesselSegDataset(Dataset):
                 metadata_candidates.append(self.vessel_pred_dir.parent.parent / "series_niix")
             except Exception:
                 pass
-            metadata_candidates.append(Path("/workspace/data/series_niix"))
+            metadata_candidates.append(Path("/mnt/d/rsna-intracranial-aneurysm-detection/series_niix"))
 
         for candidate in metadata_candidates:
             if candidate is None:

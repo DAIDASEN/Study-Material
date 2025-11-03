@@ -3,7 +3,7 @@
 """
 Evaluate a trained ROI model (Hydra experiment) by calling predict from
 scripts/rsna_submission_roi.py on the training-time validation data, and
-compute AUCs using labels from /workspace/data/train.csv.
+compute AUCs using labels from /mnt/d/rsna-intracranial-aneurysm-detection/train.csv.
 
 Overview:
 - Load training config from a Hydra experiment name and obtain per-fold
@@ -304,7 +304,7 @@ def main() -> None:
         rsna_submission_roi.clear_caches(target="roi")
 
         # Map SeriesInstanceUIDs to DICOM series paths
-        series_root = Path("/workspace/data/series")
+        series_root = Path("/mnt/d/rsna-intracranial-aneurysm-detection/series")
         series_paths: List[Tuple[str, Path]] = []  # (uid, path)
         for uid in val_list:
             series_dir = series_root / uid

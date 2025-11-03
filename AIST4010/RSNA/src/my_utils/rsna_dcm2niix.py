@@ -2133,8 +2133,8 @@ def process_one_dir(
 
 def main():
     parser = argparse.ArgumentParser(description="DICOM to NIfTI batch conversion (with QC)")
-    parser.add_argument("--dicom-root", type=Path, default=Path("/workspace/data/series"))
-    parser.add_argument("--out-root", type=Path, default=Path("/workspace/data/series_niix"))
+    parser.add_argument("--dicom-root", type=Path, default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/series"))
+    parser.add_argument("--out-root", type=Path, default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/series_niix"))
     parser.add_argument("--tmp-root", type=Path, default=Path(tempfile.gettempdir()))
     parser.add_argument("--num-workers", type=int, default=16)
     parser.add_argument("--copy-mode", choices=["auto", "symlink", "copy"], default="auto")
@@ -2148,7 +2148,7 @@ def main():
     parser.add_argument(
         "--annotations-csv",
         type=Path,
-        default=Path("/workspace/data/train_localizers.csv"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/train_localizers.csv"),
         help="Path to annotations CSV file",
     )
     parser.add_argument(

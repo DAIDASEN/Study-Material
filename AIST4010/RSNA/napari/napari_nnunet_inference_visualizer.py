@@ -5,7 +5,7 @@ Press 'v' to toggle the displayed class.
 Example:
   python napari_nnunet_inference_visualizer.py \
     --pred-dir /workspace/logs/nnUNet_results/.../inference_debug \
-    --images-dir /workspace/data/nnUNet_inference/imagesTs_debug
+    --images-dir /mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs_debug
 
 Key bindings:
   - n: next case
@@ -349,7 +349,7 @@ def main():
     parser.add_argument(
         "--images-dir",
         type=str,
-        default="/workspace/data/nnUNet_inference/imagesTs_debug",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs_debug",
         help="Optional path to original images (for background view)",
     )
     parser.add_argument("--start-index", type=int, default=0)

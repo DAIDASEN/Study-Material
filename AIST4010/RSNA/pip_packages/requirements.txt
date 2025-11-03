@@ -26,9 +26,11 @@ pre-commit==4.2.0      # hooks for applying linters on commit
 # sh            # for running bash commands in some tests (linux/macos only)
 
 # # --------- tensorrt --------- #
-tensorrt-cu12==10.7.0.post1
-torch-tensorrt==2.6.0
-triton==3.2.0
+# 说明：以下加速相关依赖目前主要在 Linux/CUDA 环境下提供官方 wheels；
+# 在 Windows 上会导致无法找到发行版或编译失败，因此加平台标记仅在 Linux 安装。
+# tensorrt-cu12==10.7.0.post1; sys_platform == "linux"
+# torch-tensorrt==2.6.0; sys_platform == "linux"
+# triton==3.2.0; platform_system == "Linux" and platform_machine == "x86_64"
 
 # # --------- competition packages --------- #
 nibabel==5.3.2

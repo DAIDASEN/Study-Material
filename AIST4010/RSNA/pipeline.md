@@ -11,13 +11,13 @@ This note summarizes the steps required for production: preprocessing → segmen
 
 ## 0. Data Directories
 - Assumptions
-  - DICOM: `/workspace/data/series/{SeriesInstanceUID}/{SOPInstanceUID}.dcm`
-  - Label CSV: `/workspace/data/train.csv`
-  - Segmentations: `/workspace/data/segmentations/*.nii`
+  - DICOM: `/mnt/d/rsna-intracranial-aneurysm-detection/series/{SeriesInstanceUID}/{SOPInstanceUID}.dcm`
+  - Label CSV: `/mnt/d/rsna-intracranial-aneurysm-detection/train.csv`
+  - Segmentations: `/mnt/d/rsna-intracranial-aneurysm-detection/segmentations/*.nii`
 - Preprocessing outputs
-  - NIfTI outputs: `/workspace/data/series_niix/{SeriesInstanceUID}/*.nii.gz`
-  - nnUNet inference input: `/workspace/data/nnUNet_inference/imagesTs/*.nii.gz`
-  - nnUNet inference outputs (saved by this project): `/workspace/data/nnUNet_inference/predictions/{SeriesInstanceUID}/`
+  - NIfTI outputs: `/mnt/d/rsna-intracranial-aneurysm-detection/series_niix/{SeriesInstanceUID}/*.nii.gz`
+  - nnUNet inference input: `/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs/*.nii.gz`
+  - nnUNet inference outputs (saved by this project): `/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions/{SeriesInstanceUID}/`
 
 ---
 
@@ -29,9 +29,9 @@ This note summarizes the steps required for production: preprocessing → segmen
   - On failure, retry using `gdcmconv`
   - After conversion, enforce RAS orientation and generate QC summaries (`meta_summary.csv`, `suspects.csv`)
   - Convert point annotations in `train_localizers.csv` into NIfTI coordinates (outputs napari‑compatible JSON)
-- Output: `/workspace/data/series_niix/{SeriesInstanceUID}/*.nii.gz` with accompanying JSON
+- Output: `/mnt/d/rsna-intracranial-aneurysm-detection/series_niix/{SeriesInstanceUID}/*.nii.gz` with accompanying JSON
 - Example:
-  - `python src/my_utils/rsna_dcm2niix.py --dicom-root /workspace/data/series --out-root /workspace/data/series_niix --tmp-root /workspace/tmp`
+  - `python src/my_utils/rsna_dcm2niix.py --dicom-root /mnt/d/rsna-intracranial-aneurysm-detection/series --out-root /mnt/d/rsna-intracranial-aneurysm-detection/series_niix --tmp-root /workspace/tmp`
 - Reference discussion: https://www.kaggle.com/competitions/rsna-intracranial-aneurysm-detection/discussion/598083
 
 ---
@@ -39,8 +39,8 @@ This note summarizes the steps required for production: preprocessing → segmen
 ## 2. Move Out Erroneous Data
 
 - Script: `/workspace/src/my_utils/move_error_data.py`
-- Overview: Move SeriesInstanceUIDs listed in `/workspace/data/error_data.yaml` out of `series_niix/`
-- Output: `/workspace/data/series_niix_error_data_backup/`
+- Overview: Move SeriesInstanceUIDs listed in `/mnt/d/rsna-intracranial-aneurysm-detection/error_data.yaml` out of `series_niix/`
+- Output: `/mnt/d/rsna-intracranial-aneurysm-detection/series_niix_error_data_backup/`
 - Example: `python src/my_utils/move_error_data.py`
 
 ---
@@ -52,9 +52,9 @@ This note summarizes the steps required for production: preprocessing → segmen
   - Input: converted NIfTI
   - Output: `nnUNet_raw/Dataset001_VesselSegmentation/` and `nnUNet_raw/Dataset003_VesselGrouping/`
 - Create inference set: `/workspace/src/nnUnet_utils/create_nnunet_inference_dataset.py`
-  - Input: `/workspace/data/series_niix/`
-  - Output: `/workspace/data/nnUNet_inference/imagesTs/{SeriesInstanceUID}_0000.nii.gz`
-  - Example: `python src/nnUnet_utils/create_nnunet_inference_dataset.py --input-dir /workspace/data/series_niix --output-dir /workspace/data/nnUNet_inference/imagesTs`
+  - Input: `/mnt/d/rsna-intracranial-aneurysm-detection/series_niix/`
+  - Output: `/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs/{SeriesInstanceUID}_0000.nii.gz`
+  - Example: `python src/nnUnet_utils/create_nnunet_inference_dataset.py --input-dir /mnt/d/rsna-intracranial-aneurysm-detection/series_niix --output-dir /mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs`
 
 ---
 
@@ -87,7 +87,7 @@ This note summarizes the steps required for production: preprocessing → segmen
   - `roi_annotations.json`: annotations that fell inside the ROI (if any)
   - Root file `annotations_outside_roi.json`: aggregated list of cases with annotations left outside the ROI
 - Example execution:
-  - `python src/my_utils/vessel_segmentation.py --model-path /workspace/logs/nnUNet_results/.../3d_fullres --test-dir /workspace/data/nnUNet_inference/imagesTs --output-dir /workspace/data/nnUNet_inference/predictions`
+  - `python src/my_utils/vessel_segmentation.py --model-path /workspace/logs/nnUNet_results/.../3d_fullres --test-dir /mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs --output-dir /mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions`
 
 ---
 
@@ -137,7 +137,7 @@ This note summarizes the steps required for production: preprocessing → segmen
 
 - Final experiment config: `/workspace/configs/experiment/251018-seg_tf-v4-nnunet_truncate1_preV6_1-ex_dav6w3-m32g64-e25-w01_005_1-s128_256_256-test.yaml`
   - `model.net.nnunet_model_dir`: `/workspace/logs/nnUNet_results/Dataset001_VesselSegmentation/RSNA2025Trainer_moreDAv6_1_SkeletonRecallTverskyBeta07__nnUNetResEncUNetMPlans__3d_fullres`
-  - `data.vessel_pred_dir`: `/workspace/data/nnUNet_inference/predictions_v4_margin15_30`
+  - `data.vessel_pred_dir`: `/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions_v4_margin15_30`
   - `data.input_size`: `[128, 256, 256]`
 - Single‑fold training/eval:
   - `python src/train.py experiment=251018-seg_tf-v4-nnunet_truncate1_preV6_1-ex_dav6w3-m32g64-e25-w01_005_1-s128_256_256-test data.fold=0`

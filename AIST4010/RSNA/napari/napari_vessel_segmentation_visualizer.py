@@ -545,7 +545,7 @@ def main():
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="/workspace/data/nnUNet_inference/predictions_v4",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions_v4",
         # default="/workspace/outputs/nnUNet_inference/predictions_debug",
         help="Output directory of vessel_segmentation.py",
     )

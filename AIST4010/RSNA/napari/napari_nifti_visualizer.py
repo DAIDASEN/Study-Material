@@ -23,8 +23,8 @@ class NapariNiftiVisualizer:
 
     def __init__(
         self,
-        nifti_dir: str = "/workspace/data/series_niix",
-        segmentation_dir: str = "/workspace/data/segmentations",
+        nifti_dir: str = "/mnt/d/rsna-intracranial-aneurysm-detection/series_niix",
+        segmentation_dir: str = "/mnt/d/rsna-intracranial-aneurysm-detection/segmentations",
         segmentation_only: bool = False,
         uid_filter_file: Optional[str] = None,
     ):
@@ -645,13 +645,13 @@ def main():
     parser.add_argument(
         "--nifti-dir",
         type=str,
-        default="/workspace/data/series_niix",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/series_niix",
         help="Directory containing NIfTI files",
     )
     parser.add_argument(
         "--seg-dir",
         type=str,
-        default="/workspace/data/segmentations",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/segmentations",
         help="Directory containing vessel segmentation files",
     )
     parser.add_argument("--start-index", type=int, default=0, help="Starting index")
@@ -670,7 +670,7 @@ def main():
         "--uid-filter",
         type=str,
         default=None,
-        help="YAML file containing UIDs to filter (e.g., /workspace/data/error_data.yaml)",
+        help="YAML file containing UIDs to filter (e.g., /mnt/d/rsna-intracranial-aneurysm-detection/error_data.yaml)",
     )
 
     args = parser.parse_args()

@@ -11,7 +11,7 @@ Features:
 Example:
   python scripts/napari_roi_augmentation_viewer.py \
     --experiment 250927-seg_tf_moe_shareLR-nnunet_pixshuV2-mask_mean-dilate1_xy-s96_192-z_xy-lr1e-4_1e-5-bs1_8-e20-ema995 \
-    --override data.fold=0 paths.data_dir=/workspace/data
+    --override data.fold=0 paths.data_dir=/mnt/d/rsna-intracranial-aneurysm-detection
 """
 
 from __future__ import annotations

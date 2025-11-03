@@ -21,13 +21,13 @@ All required Python packages can be found in `pip_packages/requirements.txt`.
 
 ## Data
 ```
-# 0) Place competition data under /workspace/data
+# 0) Place competition data under /mnt/d/rsna-intracranial-aneurysm-detection
 #    Required: train.csv, train_localizers.csv, series/, segmentations/ 
 
-# 1) Convert DICOM to NIfTI (outputs to /workspace/data/series_niix)
+# 1) Convert DICOM to NIfTI (outputs to /mnt/d/rsna-intracranial-aneurysm-detection/series_niix)
 python src/my_utils/rsna_dcm2niix.py
 
-# 2) Move erroneous series listed in /workspace/data/error_data.yaml
+# 2) Move erroneous series listed in /mnt/d/rsna-intracranial-aneurysm-detection/error_data.yaml
 python src/my_utils/move_error_data.py
 
 # 3) Create nnU-Net training datasets (IDs 1 & 3)

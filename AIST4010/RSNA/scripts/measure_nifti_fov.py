@@ -4,7 +4,7 @@
 Measure physical field-of-view (FOV) of NIfTI volumes and export CSV/JSON.
 
 Expected input:
-  - Directory layout: /workspace/data/series_niix/{SeriesInstanceUID}/*.nii.gz
+  - Directory layout: /mnt/d/rsna-intracranial-aneurysm-detection/series_niix/{SeriesInstanceUID}/*.nii.gz
   - Volumes are assumed to be RAS-oriented (axis codes are recorded otherwise)
 
 Outputs:
@@ -13,7 +13,7 @@ Outputs:
 
 Usage example:
   python scripts/measure_nifti_fov.py \
-    --input-dir /workspace/data/series_niix \
+    --input-dir /mnt/d/rsna-intracranial-aneurysm-detection/series_niix \
     --output-csv /workspace/outputs/orientation_size_summary/fov_sizes.csv \
     --output-json /workspace/outputs/orientation_size_summary/fov_sizes_stats.json
 """
@@ -145,7 +145,7 @@ def main():
     parser.add_argument(
         "--input-dir",
         type=Path,
-        default=Path("/workspace/data/series_niix"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/series_niix"),
         help="Root directory containing NIfTI files (recursively searched).",
     )
     parser.add_argument(

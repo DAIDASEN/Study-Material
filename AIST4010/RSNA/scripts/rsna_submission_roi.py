@@ -2124,7 +2124,7 @@ if __name__ == "__main__":
 
     # Simple test (local run)
     n_test = 10
-    series_paths = glob.glob(os.path.join("/workspace/data/series", "*"))
+    series_paths = glob.glob(os.path.join("/mnt/d/rsna-intracranial-aneurysm-detection/series", "*"))
     series_paths = sorted(series_paths)
 
     for series_path in series_paths[:n_test]:

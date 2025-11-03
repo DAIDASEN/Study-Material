@@ -9,7 +9,7 @@ Displays:
 Example:
   python scripts/visualize_roi_augmentation.py \
     --vessel_pred_dir /workspace/outputs/nnUNet_inference/predictions \
-    --train_csv /workspace/data/train.csv \
+    --train_csv /mnt/d/rsna-intracranial-aneurysm-detection/train.csv \
     --save_dir /workspace/outputs/roi_aug_vis \
     --n_batches 2 --batch_size 2 --input_size 128 224 224
 
@@ -206,7 +206,7 @@ def main() -> None:
     parser.add_argument("--vessel_pred_dir", type=str, required=True, help="nnUNet inference results directory")
     parser.add_argument("--save_dir", type=str, required=True, help="Output directory to save images")
     parser.add_argument(
-        "--train_csv", type=str, default="/workspace/data/train.csv", help="Training CSV (train.csv)"
+        "--train_csv", type=str, default="/mnt/d/rsna-intracranial-aneurysm-detection/train.csv", help="Training CSV (train.csv)"
     )
     parser.add_argument("--batch_size", type=int, default=2)
     parser.add_argument("--n_batches", type=int, default=10, help="Number of batches to visualize")

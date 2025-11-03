@@ -90,8 +90,8 @@ def verify_backup(backup_root: Path, series_ids: Set[str]):
 def main():
     """Main entry point."""
     # Paths
-    yaml_path = Path("/workspace/data/error_data.yaml")
-    data_root = Path("/workspace/data")
+    yaml_path = Path("/mnt/d/rsna-intracranial-aneurysm-detection/error_data.yaml")
+    data_root = Path("/mnt/d/rsna-intracranial-aneurysm-detection")
     backup_root = data_root / "series_niix_error_data_backup"
 
     # Target directories

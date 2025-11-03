@@ -23,8 +23,8 @@ class NapariNnunetValidationVisualizer:
         self,
         result_dir: str,
         fold: Union[int, str] = 0,
-        images_dir: str = "/workspace/data/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/imagesTr",
-        labels_dir: str = "/workspace/data/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/labelsTr",
+        images_dir: str = "/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/imagesTr",
+        labels_dir: str = "/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/labelsTr",
     ):
         """
         初期化
@@ -660,13 +660,13 @@ def main():
     parser.add_argument(
         "--images-dir",
         type=str,
-        default="/workspace/data/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/imagesTr",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/imagesTr",
         help="Directory containing original images",
     )
     parser.add_argument(
         "--labels-dir",
         type=str,
-        default="/workspace/data/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/labelsTr",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet/nnUNet_raw/Dataset001_VesselSegmentation/labelsTr",
         help="Directory containing ground truth labels",
     )
     parser.add_argument(

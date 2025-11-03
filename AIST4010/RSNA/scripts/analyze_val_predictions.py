@@ -318,7 +318,7 @@ def run_val_prediction(
     pred_df = pd.DataFrame(rows)
 
     # Additional meta: bring Modality/Age/Sex from train.csv
-    train_csv = Path(data_cfg.get("train_csv", "/workspace/data/train.csv"))
+    train_csv = Path(data_cfg.get("train_csv", "/mnt/d/rsna-intracranial-aneurysm-detection/train.csv"))
     if train_csv.exists():
         gt_df = pd.read_csv(train_csv)
         keep_cols = [
@@ -666,8 +666,8 @@ def render_error_thumbnails(
     num_extra_seg = (len(extra_suffixes) if extra_suffixes is not None else None)
 
     dataset = AneurysmVesselSegDataset(
-        vessel_pred_dir=data_cfg.get("vessel_pred_dir", "/workspace/data/nnUNet_inference/predictions"),
-        train_csv=data_cfg.get("train_csv", "/workspace/data/train.csv"),
+        vessel_pred_dir=data_cfg.get("vessel_pred_dir", "/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions"),
+        train_csv=data_cfg.get("train_csv", "/mnt/d/rsna-intracranial-aneurysm-detection/train.csv"),
         series_list=sel_uids,
         transform=get_val_transforms(
             input_size=tuple(data_cfg.get("input_size", [128, 224, 224])),

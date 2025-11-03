@@ -832,7 +832,7 @@ class VesselSegmentationPredictor:
         # Root for original annotations (napari-style default)
         # Fallback to legacy default if unspecified
         self.series_niix_dir = (
-            Path(series_niix_dir) if series_niix_dir is not None else Path("/workspace/data/series_niix")
+            Path(series_niix_dir) if series_niix_dir is not None else Path("/mnt/d/rsna-intracranial-aneurysm-detection/series_niix")
         )
 
         # Filenames (constants)
@@ -2418,13 +2418,13 @@ def main():
     parser.add_argument(
         "--test-dir",
         type=str,
-        default="/workspace/data/nnUNet_inference/imagesTs",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs",
         help="Test data directory",
     )
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="/workspace/data/nnUNet_inference/predictions_v4_margin15_30",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/predictions_v4_margin15_30",
         help="Output directory",
     )
     parser.add_argument(
@@ -2437,7 +2437,7 @@ def main():
     parser.add_argument(
         "--series-niix-dir",
         type=str,
-        default="/workspace/data/series_niix",
+        default="/mnt/d/rsna-intracranial-aneurysm-detection/series_niix",
         help="Root directory for annotations (where *.nii.annotations.json are searched)",
     )
     parser.add_argument(

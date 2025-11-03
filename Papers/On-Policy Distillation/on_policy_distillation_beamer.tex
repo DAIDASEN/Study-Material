@@ -15,6 +15,8 @@
 % Math and graphics
 \usepackage{amsmath, amssymb, bm}
 \usepackage{graphicx}
+% Make graphics lookup robust on Overleaf and local (handles spaces/Unicode)
+\graphicspath{{On-Policy Distillation - Thinking Machines Lab_files/}{反向 KL 散度与正向 KL 散度 - 机器学习POD_files/}}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning}
 \usepackage{booktabs}
@@ -26,6 +28,7 @@
 \author{Prepared by You}
 \institute{Study Notes}
 \date{\today}
+% Overleaf note: set Compiler to XeLaTeX (or LuaLaTeX) for Unicode paths and fontspec.
 
 \begin{document}
 
@@ -142,19 +145,22 @@
 % Image from the KL article (provided asset)
 \begin{frame}{Forward vs Reverse KL (visual)}
   \centering
-  \includegraphics[width=0.9\linewidth]{KL&Reverse_KL.html/20240112163924.png}
+  % Image is in: 反向 KL 散度与正向 KL 散度 - 机器学习POD_files/20240112163924.png
+  \includegraphics[width=0.9\linewidth]{20240112163924.png}
 \end{frame}
 
 % Another image if desired
 \begin{frame}{Another KL intuition graphic}
   \centering
-  \includegraphics[width=0.9\linewidth]{KL&Reverse_KL.html/20240112163931.png}
+  % Image is in: 反向 KL 散度与正向 KL 散度 - 机器学习POD_files/20240112163931.png
+  \includegraphics[width=0.9\linewidth]{20240112163931.png}
 \end{frame}
 
 % A generic RL image from the distillation page assets
 \begin{frame}{RL context}
   \centering
-  \includegraphics[width=0.7\linewidth]{On-Policy Distillation - Thinking Machines Lab_files/chess.png}
+  % Image is in: On-Policy Distillation - Thinking Machines Lab_files/chess.png
+  \includegraphics[width=0.7\linewidth]{chess.png}
 \end{frame}
 
 % Practical tips

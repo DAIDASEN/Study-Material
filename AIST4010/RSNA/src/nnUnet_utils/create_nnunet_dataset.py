@@ -8,8 +8,8 @@ segmentation masks. (Note: the old brain BBox cropping feature has been
 removed.)
 
 Inputs:
-- Brain image: /workspace/data/segmentations/{uid}.nii
-- Vessel segmentation: /workspace/data/segmentations/{uid}_cowseg.nii
+- Brain image: /mnt/d/rsna-intracranial-aneurysm-detection/segmentations/{uid}.nii
+- Vessel segmentation: /mnt/d/rsna-intracranial-aneurysm-detection/segmentations/{uid}_cowseg.nii
 
 Output:
 - nnUNet-formatted dataset: /workspace/nnUNet_raw/Dataset001_VesselSegmentation/
@@ -300,13 +300,13 @@ def main():
     parser.add_argument(
         "--segmentation-dir",
         type=Path,
-        default=Path("/workspace/data/segmentations"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/segmentations"),
         help="Path to segmentation directory",
     )
     parser.add_argument(
         "--series-dir",
         type=Path,
-        default=Path("/workspace/data/series"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/series"),
         help="Path to series directory (for modality discovery)",
     )
     parser.add_argument(
@@ -329,7 +329,7 @@ def main():
 
     # If output is not specified, use default path based on ID
     if args.output_dir is None:
-        default_raw_root = Path("/workspace/data/nnUNet/nnUNet_raw")
+        default_raw_root = Path("/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet/nnUNet_raw")
         args.output_dir = default_raw_root / dataset_config["folder_name"]
 
     binary_status = "Enabled" if dataset_config["binary_vessel"] else "Disabled"

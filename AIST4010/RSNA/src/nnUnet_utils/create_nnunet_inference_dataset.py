@@ -11,7 +11,7 @@ not allowed). The old normalization + re-save path and brain BBox cropping
 were removed.
 
 Input:
-- Brain NIfTI: /workspace/data/series_niix/{uid}/*.nii.gz
+- Brain NIfTI: /mnt/d/rsna-intracranial-aneurysm-detection/series_niix/{uid}/*.nii.gz
 
 Output:
 - nnUNet inference format: /workspace/nnUNet_inference/imagesTs/
@@ -109,13 +109,13 @@ def main():
     parser.add_argument(
         "--input-dir",
         type=Path,
-        default=Path("/workspace/data/series_niix"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/series_niix"),
         help="NIfTI directory converted by rsna_dcm2niix.py",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("/workspace/data/nnUNet_inference/imagesTs"),
+        default=Path("/mnt/d/rsna-intracranial-aneurysm-detection/nnUNet_inference/imagesTs"),
         help="Output directory for inference data",
     )
     # Note: This script prefers symlinks (falls back to copy if not allowed)
