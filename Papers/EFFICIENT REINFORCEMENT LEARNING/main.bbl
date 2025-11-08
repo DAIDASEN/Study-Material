@@ -1,0 +1,328 @@
+\begin{thebibliography}{64}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bai et~al.(2023)Bai, Bai, Chu, Cui, Dang, Deng, Fan, Ge, Han, Huang, et~al.]{bai2023qwen}
+Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang, Xiaodong Deng, Yang Fan, Wenbin Ge, Yu~Han, Fei Huang, et~al.
+\newblock Qwen technical report.
+\newblock \emph{arXiv preprint arXiv:2309.16609}, 2023.
+
+\bibitem[Brooks et~al.(2023)Brooks, Walls, Lewis, and Singh]{brooks2023large}
+Ethan Brooks, Logan~A Walls, Richard Lewis, and Satinder Singh.
+\newblock Large language models can implement policy iteration.
+\newblock In \emph{Thirty-seventh Conference on Neural Information Processing Systems}, 2023.
+
+\bibitem[Brooks et~al.(2024)Brooks, Walls, Lewis, and Singh]{brooks2024large}
+Ethan Brooks, Logan Walls, Richard~L Lewis, and Satinder Singh.
+\newblock Large language models can implement policy iteration.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2024.
+
+\bibitem[Brown et~al.(2024)Brown, Juravsky, Ehrlich, Clark, Le, R{\'e}, and Mirhoseini]{brown2024large}
+Bradley Brown, Jordan Juravsky, Ryan Ehrlich, Ronald Clark, Quoc~V Le, Christopher R{\'e}, and Azalia Mirhoseini.
+\newblock Large language monkeys: Scaling inference compute with repeated sampling.
+\newblock \emph{arXiv preprint arXiv:2407.21787}, 2024.
+
+\bibitem[Brunke et~al.(2022)Brunke, Greeff, Hall, Yuan, Zhou, Panerati, and Schoellig]{brunke2022safe}
+Lukas Brunke, Melissa Greeff, Adam~W Hall, Zhaocong Yuan, Siqi Zhou, Jacopo Panerati, and Angela~P Schoellig.
+\newblock Safe learning in robotics: From learning-based control to safe reinforcement learning.
+\newblock \emph{Annual Review of Control, Robotics, and Autonomous Systems}, 5\penalty0 (1):\penalty0 411--444, 2022.
+
+\bibitem[Carta et~al.(2023)Carta, Romac, Wolf, Lamprier, Sigaud, and Oudeyer]{carta2023grounding}
+Thomas Carta, Cl{\'e}ment Romac, Thomas Wolf, Sylvain Lamprier, Olivier Sigaud, and Pierre-Yves Oudeyer.
+\newblock Grounding large language models in interactive environments with online reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2302.02662}, 2023.
+
+\bibitem[Christianos et~al.(2023)Christianos, Papoudakis, Zimmer, Coste, Wu, Chen, Khandelwal, Doran, Feng, Liu, Xiong, Luo, Hao, Shao, Bou-Ammar, and Wang]{christianos2023panguagent}
+Filippos Christianos, Georgios Papoudakis, Matthieu Zimmer, Thomas Coste, Zhihao Wu, Jingxuan Chen, Khyati Khandelwal, James Doran, Xidong Feng, Jiacheng Liu, Zheng Xiong, Yicheng Luo, Jianye Hao, Kun Shao, Haitham Bou-Ammar, and Jun Wang.
+\newblock Pangu-agent: A fine-tunable generalist agent with structured reasoning, 2023.
+
+\bibitem[Cobbe et~al.(2019)Cobbe, Klimov, Hesse, Kim, and Schulman]{cobbe2019quantifying}
+Karl Cobbe, Oleg Klimov, Chris Hesse, Taehoon Kim, and John Schulman.
+\newblock Quantifying generalization in reinforcement learning.
+\newblock In \emph{International conference on machine learning}, pp.\  1282--1289. PMLR, 2019.
+
+\bibitem[C{\^o}t{\'e} et~al.(2019)C{\^o}t{\'e}, K{\'a}d{\'a}r, Yuan, Kybartas, Barnes, Fine, Moore, Hausknecht, El~Asri, Adada, et~al.]{cote2019textworld}
+Marc-Alexandre C{\^o}t{\'e}, Akos K{\'a}d{\'a}r, Xingdi Yuan, Ben Kybartas, Tavian Barnes, Emery Fine, James Moore, Matthew Hausknecht, Layla El~Asri, Mahmoud Adada, et~al.
+\newblock Textworld: A learning environment for text-based games.
+\newblock In \emph{Computer Games: 7th Workshop, CGW 2018, Held in Conjunction with the 27th International Conference on Artificial Intelligence, IJCAI 2018, Stockholm, Sweden, July 13, 2018, Revised Selected Papers 7}, pp.\  41--75. Springer, 2019.
+
+\bibitem[Devlin(2018)]{devlin2018bert}
+Jacob Devlin.
+\newblock Bert: Pre-training of deep bidirectional transformers for language understanding.
+\newblock \emph{arXiv preprint arXiv:1810.04805}, 2018.
+
+\bibitem[Dulac-Arnold et~al.(2015)Dulac-Arnold, Evans, van Hasselt, Sunehag, Lillicrap, Hunt, Mann, Weber, Degris, and Coppin]{dulac2015deep}
+Gabriel Dulac-Arnold, Richard Evans, Hado van Hasselt, Peter Sunehag, Timothy Lillicrap, Jonathan Hunt, Timothy Mann, Theophane Weber, Thomas Degris, and Ben Coppin.
+\newblock Deep reinforcement learning in large discrete action spaces.
+\newblock \emph{arXiv preprint arXiv:1512.07679}, 2015.
+
+\bibitem[Feng et~al.(2023)Feng, Wan, Wen, Wen, Zhang, and Wang]{feng2023alphazero}
+Xidong Feng, Ziyu Wan, Muning Wen, Ying Wen, Weinan Zhang, and Jun Wang.
+\newblock Alphazero-like tree-search can guide large language model decoding and training.
+\newblock \emph{arXiv preprint arXiv:2309.17179}, 2023.
+
+\bibitem[Fourati et~al.(2024)Fourati, Aggarwal, and Alouini]{fourati2024stochastic}
+Fares Fourati, Vaneet Aggarwal, and Mohamed-Slim Alouini.
+\newblock Stochastic q-learning for large discrete action spaces.
+\newblock \emph{arXiv preprint arXiv:2405.10310}, 2024.
+
+\bibitem[Gallego(2024)]{gallego2024distilled}
+Victor Gallego.
+\newblock Distilled self-critique of llms with synthetic data: a bayesian perspective.
+\newblock In \emph{The Second Tiny Papers Track at ICLR 2024}, 2024.
+
+\bibitem[Garcia et~al.(1989)Garcia, Prett, and Morari]{garcia1989model}
+Carlos~E Garcia, David~M Prett, and Manfred Morari.
+\newblock Model predictive control: Theory and practice—a survey.
+\newblock \emph{Automatica}, 25\penalty0 (3):\penalty0 335--348, 1989.
+
+\bibitem[Granter et~al.(2017)Granter, Beck, and Papke~Jr]{granter2017alphago}
+Scott~R Granter, Andrew~H Beck, and David~J Papke~Jr.
+\newblock Alphago, deep learning, and the future of the human microscopist.
+\newblock \emph{Archives of pathology \& laboratory medicine}, 141\penalty0 (5):\penalty0 619--621, 2017.
+
+\bibitem[Haarnoja et~al.(2018)Haarnoja, Zhou, Abbeel, and Levine]{haarnoja2018soft}
+Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine.
+\newblock Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, pp.\  1861--1870. PMLR, 2018.
+
+\bibitem[Hao et~al.(2023)Hao, Gu, Ma, Hong, Wang, Wang, and Hu]{hao2023reasoning}
+Shibo Hao, Yi~Gu, Haodi Ma, Joshua~Jiahua Hong, Zhen Wang, Daisy~Zhe Wang, and Zhiting Hu.
+\newblock Reasoning with language model is planning with world model.
+\newblock \emph{arXiv preprint arXiv:2305.14992}, 2023.
+
+\bibitem[Hu et~al.(2023)Hu, Jain, Elmoznino, Kaddar, Lajoie, Bengio, and Malkin]{hu2023amortizing}
+Edward~J Hu, Moksh Jain, Eric Elmoznino, Younesse Kaddar, Guillaume Lajoie, Yoshua Bengio, and Nikolay Malkin.
+\newblock Amortizing intractable inference in large language models.
+\newblock \emph{arXiv preprint arXiv:2310.04363}, 2023.
+
+\bibitem[Imani et~al.(2023)Imani, Du, and Shrivastava]{imani2023mathprompter}
+Shima Imani, Liang Du, and Harsh Shrivastava.
+\newblock Mathprompter: Mathematical reasoning using large language models.
+\newblock \emph{arXiv preprint arXiv:2303.05398}, 2023.
+
+\bibitem[Jiang(2023)]{jiang2023latent}
+Hui Jiang.
+\newblock A latent space theory for emergent abilities in large language models.
+\newblock \emph{arXiv preprint arXiv:2304.09960}, 2023.
+
+\bibitem[Korbak et~al.(2022)Korbak, Perez, and Buckley]{korbak2022rl}
+Tomasz Korbak, Ethan Perez, and Christopher~L Buckley.
+\newblock Rl with kl penalties is better viewed as bayesian inference.
+\newblock \emph{arXiv preprint arXiv:2205.11275}, 2022.
+
+\bibitem[Kumar et~al.(2020)Kumar, Zhou, Tucker, and Levine]{kumar2020conservative}
+Aviral Kumar, Aurick Zhou, George Tucker, and Sergey Levine.
+\newblock Conservative q-learning for offline reinforcement learning.
+\newblock \emph{Advances in Neural Information Processing Systems}, 33:\penalty0 1179--1191, 2020.
+
+\bibitem[Levine(2018)]{levine2018reinforcement}
+Sergey Levine.
+\newblock Reinforcement learning and control as probabilistic inference: Tutorial and review.
+\newblock \emph{arXiv preprint arXiv:1805.00909}, 2018.
+
+\bibitem[Li et~al.(2024)Li, Jelassi, Zhang, Kakade, Wattenberg, and Brandfonbrener]{li2024q}
+Kenneth Li, Samy Jelassi, Hugh Zhang, Sham Kakade, Martin Wattenberg, and David Brandfonbrener.
+\newblock Q-probe: A lightweight approach to reward maximization for language models.
+\newblock \emph{arXiv preprint arXiv:2402.14688}, 2024.
+
+\bibitem[Li et~al.(2019)Li, Kiseleva, and De~Rijke]{li2019dialogue}
+Ziming Li, Julia Kiseleva, and Maarten De~Rijke.
+\newblock Dialogue generation: From imitation learning to inverse reinforcement learning.
+\newblock In \emph{Proceedings of the AAAI conference on artificial intelligence}, volume~33, pp.\  6722--6729, 2019.
+
+\bibitem[Lightman et~al.(2023)Lightman, Kosaraju, Burda, Edwards, Baker, Lee, Leike, Schulman, Sutskever, and Cobbe]{lightman2023let}
+Hunter Lightman, Vineet Kosaraju, Yura Burda, Harri Edwards, Bowen Baker, Teddy Lee, Jan Leike, John Schulman, Ilya Sutskever, and Karl Cobbe.
+\newblock Let's verify step by step.
+\newblock \emph{arXiv preprint arXiv:2305.20050}, 2023.
+
+\bibitem[Ma et~al.(2023)Ma, Mi, Yan, Wu, Lin, Zhang, and Wang]{ma2023large}
+Weiyu Ma, Qirui Mi, Xue Yan, Yuqiao Wu, Runji Lin, Haifeng Zhang, and Jun Wang.
+\newblock Large language models play starcraft ii: Benchmarks and a chain of summarization approach.
+\newblock \emph{arXiv preprint arXiv:2312.11865}, 2023.
+
+\bibitem[McAleese et~al.(2024)McAleese, Pokorny, Uribe, Nitishinskaya, Trebacz, and Leike]{mcaleese2024llm}
+Nat McAleese, Rai~Michael Pokorny, Juan Felipe~Ceron Uribe, Evgenia Nitishinskaya, Maja Trebacz, and Jan Leike.
+\newblock Llm critics help catch llm bugs.
+\newblock \emph{arXiv preprint arXiv:2407.00215}, 2024.
+
+\bibitem[McTear(2022)]{mctear2022conversational}
+Michael McTear.
+\newblock \emph{Conversational ai: Dialogue systems, conversational agents, and chatbots}.
+\newblock Springer Nature, 2022.
+
+\bibitem[Mnih(2013)]{mnih2013playing}
+Volodymyr Mnih.
+\newblock Playing atari with deep reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1312.5602}, 2013.
+
+\bibitem[Naranjo et~al.(2005)Naranjo, Gonz{\'a}lez, Garc{\'\i}a, de~Pedro, and Haber]{naranjo2005power}
+Jos{\'e}~Eugenio Naranjo, Carlos Gonz{\'a}lez, Ricardo Garc{\'\i}a, Teresa de~Pedro, and Rodolfo~E Haber.
+\newblock Power-steering control architecture for automatic driving.
+\newblock \emph{Ieee transactions on intelligent transportation systems}, 6\penalty0 (4):\penalty0 406--415, 2005.
+
+\bibitem[Park et~al.(2023)Park, O'Brien, Cai, Morris, Liang, and Bernstein]{park2023generative}
+Joon~Sung Park, Joseph O'Brien, Carrie~Jun Cai, Meredith~Ringel Morris, Percy Liang, and Michael~S Bernstein.
+\newblock Generative agents: Interactive simulacra of human behavior.
+\newblock In \emph{Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology}, pp.\  1--22, 2023.
+
+\bibitem[Polydoros \& Nalpantidis(2017)Polydoros and Nalpantidis]{polydoros2017survey}
+Athanasios~S Polydoros and Lazaros Nalpantidis.
+\newblock Survey of model-based reinforcement learning: Applications on robotics.
+\newblock \emph{Journal of Intelligent \& Robotic Systems}, 86\penalty0 (2):\penalty0 153--173, 2017.
+
+\bibitem[Rae et~al.(2021)Rae, Borgeaud, Cai, Millican, Hoffmann, Song, Aslanides, Henderson, Ring, Young, et~al.]{rae2021scaling}
+Jack~W Rae, Sebastian Borgeaud, Trevor Cai, Katie Millican, Jordan Hoffmann, Francis Song, John Aslanides, Sarah Henderson, Roman Ring, Susannah Young, et~al.
+\newblock Scaling language models: Methods, analysis \& insights from training gopher.
+\newblock \emph{arXiv preprint arXiv:2112.11446}, 2021.
+
+\bibitem[Rafailov et~al.(2023)Rafailov, Sharma, Mitchell, Ermon, Manning, and Finn]{rafailov2023direct}
+Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher~D Manning, and Chelsea Finn.
+\newblock Direct preference optimization: Your language model is secretly a reward model.
+\newblock \emph{arXiv preprint arXiv:2305.18290}, 2023.
+
+\bibitem[Rana et~al.(2023)Rana, Xu, Tidd, Milford, and S{\"u}nderhauf]{rana2023residual}
+Krishan Rana, Ming Xu, Brendan Tidd, Michael Milford, and Niko S{\"u}nderhauf.
+\newblock Residual skill policies: Learning an adaptable skill-based action space for reinforcement learning for robotics.
+\newblock In \emph{Conference on Robot Learning}, pp.\  2095--2104. PMLR, 2023.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and Klimov]{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Shridhar et~al.(2020)Shridhar, Yuan, C{\^o}t{\'e}, Bisk, Trischler, and Hausknecht]{shridhar2020alfworld}
+Mohit Shridhar, Xingdi Yuan, Marc-Alexandre C{\^o}t{\'e}, Yonatan Bisk, Adam Trischler, and Matthew Hausknecht.
+\newblock Alfworld: Aligning text and embodied environments for interactive learning.
+\newblock \emph{arXiv preprint arXiv:2010.03768}, 2020.
+
+\bibitem[Silver et~al.(2016)Silver, Huang, Maddison, Guez, Sifre, van~den Driessche, Schrittwieser, Antonoglou, Panneershelvam, Lanctot, Dieleman, Grewe, Nham, Kalchbrenner, Sutskever, Lillicrap, Leach, Kavukcuoglu, Graepel, and Hassabis]{44806}
+David Silver, Aja Huang, Christopher~J. Maddison, Arthur Guez, Laurent Sifre, George van~den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, Sander Dieleman, Dominik Grewe, John Nham, Nal Kalchbrenner, Ilya Sutskever, Timothy Lillicrap, Madeleine Leach, Koray Kavukcuoglu, Thore Graepel, and Demis Hassabis.
+\newblock Mastering the game of go with deep neural networks and tree search.
+\newblock \emph{Nature}, 529:\penalty0 484--503, 2016.
+\newblock URL \url{http://www.nature.com/nature/journal/v529/n7587/full/nature16961.html}.
+
+\bibitem[Snell et~al.(2024)Snell, Lee, Xu, and Kumar]{snell2024scaling}
+Charlie Snell, Jaehoon Lee, Kelvin Xu, and Aviral Kumar.
+\newblock Scaling llm test-time compute optimally can be more effective than scaling model parameters.
+\newblock \emph{arXiv preprint arXiv:2408.03314}, 2024.
+
+\bibitem[Snell et~al.()Snell, Kostrikov, Su, Yang, and Levine]{snelloffline}
+Charlie~Victor Snell, Ilya Kostrikov, Yi~Su, Sherry Yang, and Sergey Levine.
+\newblock Offline rl for natural language generation with implicit language q learning.
+\newblock In \emph{The Eleventh International Conference on Learning Representations}.
+
+\bibitem[Song et~al.(2022)Song, Fu, Wang, Sun, Wang, and Zhou]{song2022quantum}
+Qingyuan Song, Weiping Fu, Wen Wang, Yuan Sun, Denggui Wang, and Jincao Zhou.
+\newblock Quantum decision making in automatic driving.
+\newblock \emph{Scientific reports}, 12\penalty0 (1):\penalty0 11042, 2022.
+
+\bibitem[{\'S}wiechowski et~al.(2023){\'S}wiechowski, Godlewski, Sawicki, and Ma{\'n}dziuk]{swiechowski2023monte}
+Maciej {\'S}wiechowski, Konrad Godlewski, Bartosz Sawicki, and Jacek Ma{\'n}dziuk.
+\newblock Monte carlo tree search: A review of recent modifications and applications.
+\newblock \emph{Artificial Intelligence Review}, 56\penalty0 (3):\penalty0 2497--2562, 2023.
+
+\bibitem[Tan et~al.()Tan, Zhang, Liu, Zheng, Wang, and An]{tantrue}
+Weihao Tan, Wentao Zhang, Shanqi Liu, Longtao Zheng, Xinrun Wang, and Bo~An.
+\newblock True knowledge comes from practice: Aligning large language models with embodied environments via reinforcement learning.
+\newblock In \emph{The Twelfth International Conference on Learning Representations}.
+
+\bibitem[Tucker \& Tuckute(2023)Tucker and Tuckute]{tucker2023increasing}
+Mycal Tucker and Greta Tuckute.
+\newblock Increasing brain-llm alignment via information-theoretic compression.
+\newblock In \emph{UniReps: the First Workshop on Unifying Representations in Neural Models}, 2023.
+
+\bibitem[Vinyals et~al.(2019)Vinyals, Babuschkin, Czarnecki, Mathieu, Dudzik, Chung, Tashman, Horgan, Kroiss, Powell, et~al.]{vinyals2019grandmaster}
+Oriol Vinyals, Igor Babuschkin, Wojciech~M Czarnecki, Micha{\"e}l Mathieu, Audrey Dudzik, Junyoung Chung, Arthur~J Tashman, David Horgan, Peter Kroiss, Max Powell, et~al.
+\newblock Grandmaster level in starcraft ii using multi-agent reinforcement learning.
+\newblock \emph{Nature}, 575\penalty0 (7782):\penalty0 350--354, 2019.
+
+\bibitem[Wang et~al.(2023)Wang, Xie, Jiang, Mandlekar, Xiao, Zhu, Fan, and Anandkumar]{wang2023voyager}
+Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and Anima Anandkumar.
+\newblock Voyager: An open-ended embodied agent with large language models.
+\newblock \emph{arXiv preprint arXiv:2305.16291}, 2023.
+
+\bibitem[Wang et~al.(2024{\natexlab{a}})Wang, Li, Shao, Xu, Dai, Li, Chen, Wu, and Sui]{wang2024math}
+Peiyi Wang, Lei Li, Zhihong Shao, Runxin Xu, Damai Dai, Yifei Li, Deli Chen, Yu~Wu, and Zhifang Sui.
+\newblock Math-shepherd: Verify and reinforce llms step-by-step without human annotations.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pp.\  9426--9439, 2024{\natexlab{a}}.
+
+\bibitem[Wang et~al.(2024{\natexlab{b}})Wang, Zhu, Saxon, Steyvers, and Wang]{wang2024large}
+Xinyi Wang, Wanrong Zhu, Michael Saxon, Mark Steyvers, and William~Yang Wang.
+\newblock Large language models are latent variable models: Explaining and finding good demonstrations for in-context learning.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2024{\natexlab{b}}.
+
+\bibitem[Wang et~al.(2022)Wang, Wei, Schuurmans, Le, Chi, Narang, Chowdhery, and Zhou]{wang2022self}
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed~Chi, Sharan Narang, Aakanksha Chowdhery, and Denny Zhou.
+\newblock Self-consistency improves chain of thought reasoning in language models.
+\newblock \emph{arXiv preprint arXiv:2203.11171}, 2022.
+
+\bibitem[Wen et~al.(2024)Wen, Deng, Wang, Zhang, and Wen]{wen2024entropy}
+Muning Wen, Cheng Deng, Jun Wang, Weinan Zhang, and Ying Wen.
+\newblock Entropy-regularized token-level policy optimization for large language models.
+\newblock \emph{arXiv preprint arXiv:2402.06700}, 2024.
+
+\bibitem[Yan et~al.(2023)Yan, Song, Cui, Christianos, Zhang, Mguni, and Wang]{yan2023ask}
+Xue Yan, Yan Song, Xinyu Cui, Filippos Christianos, Haifeng Zhang, David~Henry Mguni, and Jun Wang.
+\newblock Ask more, know better: Reinforce-learned prompt questions for decision making with large language models.
+\newblock \emph{arXiv preprint arXiv:2310.18127}, 2023.
+
+\bibitem[Yan et~al.(2024)Yan, Guo, Lou, Wang, Zhang, and Du]{yan2024efficient}
+Xue Yan, Jiaxian Guo, Xingzhou Lou, Jun Wang, Haifeng Zhang, and Yali Du.
+\newblock An efficient end-to-end training approach for zero-shot human-ai coordination.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2024.
+
+\bibitem[Yang \& Klein(2021)Yang and Klein]{yang2021fudge}
+Kevin Yang and Dan Klein.
+\newblock Fudge: Controlled text generation with future discriminators.
+\newblock \emph{arXiv preprint arXiv:2104.05218}, 2021.
+
+\bibitem[Yao et~al.(2023)Yao, Yu, Zhao, Shafran, Griffiths, Cao, and Narasimhan]{yao2023tree}
+Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas~L Griffiths, Yuan Cao, and Karthik Narasimhan.
+\newblock Tree of thoughts: Deliberate problem solving with large language models.
+\newblock \emph{arXiv preprint arXiv:2305.10601}, 2023.
+
+\bibitem[Yao et~al.(2024)Yao, Yu, Zhao, Shafran, Griffiths, Cao, and Narasimhan]{yao2024tree}
+Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Tom Griffiths, Yuan Cao, and Karthik Narasimhan.
+\newblock Tree of thoughts: Deliberate problem solving with large language models.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2024.
+
+\bibitem[Ye et~al.(2024)Ye, Yang, Siah, and Namkoong]{ye2024pre}
+Naimeng Ye, Hanming Yang, Andrew Siah, and Hongseok Namkoong.
+\newblock Pre-training and in-context learning is bayesian inference a la de finetti.
+\newblock \emph{arXiv preprint arXiv:2408.03307}, 2024.
+
+\bibitem[Zhang et~al.(2023)Zhang, Yang, Hu, Wang, Li, Sun, Zhang, Zhang, Liu, Zhu, et~al.]{zhang2023proagent}
+Ceyao Zhang, Kaijie Yang, Siyi Hu, Zihao Wang, Guanghe Li, Yihang Sun, Cheng Zhang, Zhaowei Zhang, Anji Liu, Song-Chun Zhu, et~al.
+\newblock Proagent: Building proactive cooperative ai with large language models.
+\newblock \emph{arXiv preprint arXiv:2308.11339}, 2023.
+
+\bibitem[Zhang et~al.(2024{\natexlab{a}})Zhang, Hosseini, Bansal, Kazemi, Kumar, and Agarwal]{zhang2024generative}
+Lunjun Zhang, Arian Hosseini, Hritik Bansal, Mehran Kazemi, Aviral Kumar, and Rishabh Agarwal.
+\newblock Generative verifiers: Reward modeling as next-token prediction.
+\newblock \emph{arXiv preprint arXiv:2408.15240}, 2024{\natexlab{a}}.
+
+\bibitem[Zhang et~al.(2024{\natexlab{b}})Zhang, Zheng, Ke, Liu, Jin, Yuan, Yang, Yang, and Wang]{zhang2024can}
+Shenao Zhang, Sirui Zheng, Shuqi Ke, Zhihan Liu, Wanxin Jin, Jianbo Yuan, Yingxiang Yang, Hongxia Yang, and Zhaoran Wang.
+\newblock How can llm guide rl? a value-based approach.
+\newblock \emph{arXiv preprint arXiv:2402.16181}, 2024{\natexlab{b}}.
+
+\bibitem[Zhao et~al.(2024{\natexlab{a}})Zhao, Huang, Xu, Lin, Liu, and Huang]{zhao2024expel}
+Andrew Zhao, Daniel Huang, Quentin Xu, Matthieu Lin, Yong-Jin Liu, and Gao Huang.
+\newblock Expel: Llm agents are experiential learners.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial Intelligence}, volume~38, pp.\  19632--19642, 2024{\natexlab{a}}.
+
+\bibitem[Zhao et~al.(2024{\natexlab{b}})Zhao, Brekelmans, Makhzani, and Grosse]{zhao2024probabilistic}
+Stephen Zhao, Rob Brekelmans, Alireza Makhzani, and Roger Grosse.
+\newblock Probabilistic inference in language models via twisted sequential monte carlo.
+\newblock \emph{arXiv preprint arXiv:2404.17546}, 2024{\natexlab{b}}.
+
+\bibitem[Zhou et~al.(2024)Zhou, Du, and Li]{zhou2024reflect}
+Runlong Zhou, Simon~S Du, and Beibin Li.
+\newblock Reflect-rl: Two-player online rl fine-tuning for lms.
+\newblock \emph{arXiv preprint arXiv:2402.12621}, 2024.
+
+\end{thebibliography}
