@@ -1,0 +1,319 @@
+#Johansen's Test
+
+stop.on.bdObject <- function(x, name = deparse(substitute(x)))
+{
+	# simple version that works even if bdObject subclasses not defined
+	if(is.element(as.character(class(x)), c("bdCharacter", "bdExclude",
+		"bdFactor", "bdFrame", "bdInternalCache", "bdLogical", 
+		"bdModel", "bdNumeric", "bdObject", "bdOmit", "bdPackedObject",
+		"bdSeries", "bdSignalSeries", "bdTimeDate", "bdTimeSeries",
+		"bdTimeSpan", "bdVector"))) {
+		expr <- substitute(stop("Argument ", name, 
+			" cannot be a bdObject"), list(name = name))
+		eval(expr, local = sys.parent())
+	}
+	invisible(NULL)
+}
+
+tslag <- function (x, k = 1, trim = FALSE) 
+{
+	if (is.matrix(x)) {
+   		c <- ncol(x)
+    		r <- nrow(x)
+    		if (trim) {
+			ans <- matrix(x[1:(r-k),],ncol = c, nrow = (r-k))
+  	  	} else {
+			ans <- matrix(ncol = c, nrow = r)
+			ans[(k+1):r,] <- x[1:(r-k),]
+    		}
+    	} else {
+		n <- length(x)
+		if (trim) {
+			ans <- x[1:(n-k)]
+  	  	} else {
+			ans <- rep(NA,n)
+			ans[(k+1):n] <- x[1:(n-k)]
+    		}
+	}
+    ans
+}
+
+
+VECM.form <- function(Y, lags = 1, trend = "c")
+{
+	stop.on.bdObject(Y)
+	##
+	## 1. Check for valid inputs. 
+	##
+	if(is(Y, "timeSeries")) {
+		isTS <- T
+		pos <- positions(Y)
+		Y <- seriesData(Y)
+	}
+	else {
+		isTS <- F
+	}
+	if(is.data.frame(Y)) {
+		Y <- as.matrix(Y)
+	}
+	if(any(is.na(Y))) {
+		stop("NAs are not allowed in Y.")
+	}
+	n <- nrow(Y)
+	p <- ncol(Y)
+	##
+	## 2. Create VECM: use notation from Johansen chapter 6
+	## 
+	Z0 <- diff(Y)
+	# differenced LHS variable
+	Z1 <- tslag(Y, k = 1, trim = T)
+	# lagged Y
+	y.names <- dimnames(Y)[[2]]
+	dimnames(Z1) <- list(NULL, y.names)
+	if(isTS) {
+		pos <- pos[ - (1:(lags + 1))]
+	}
+	#######  we can subtract lags by 1 here ########
+	if(lags > 0) {
+		Z2 <- tslag(Z0, k = 1:lags, trim = T)
+	}
+	else {
+		Z2 <- NULL
+	}
+	Z0 <- Z0[(lags + 1):(n - 1),  ]
+	# adjust sample for lagged values
+	Z1 <- Z1[(lags + 1):(n - 1),  ]
+	nobs <- nrow(Z0)
+	# sample size for estimation
+	df <- nobs - lags * p - 1
+	# residual degrees of freedom without constant terms
+	##
+	## distinguish between the 5 possible trend cases: see Johansen secton 5.7
+	##
+	trend = casefold(trend)
+	if(trend == "c") {
+		##
+		## 2.1 H1(r): unrestricted constant
+		##
+		if(lags > 0) {
+			Z2 <- cbind(Z2, Intercept = 1)
+		}
+		else {
+			Z2 <- matrix(1, nrow = nobs, ncol = 1)
+			dimnames(Z2) <- list(NULL, "Intercept")
+		}
+		df <- df - 1
+	}
+	else if(trend == "ct") {
+		##
+		## 2.2 H(r): unrestricted constant and trend
+		## 
+		if(lags > 0) {
+			Z2 <- cbind(Z2, Intercept = 1, Trend = (1:nobs)/nobs)
+		}
+		else {
+			Z2 <- cbind(Intercept = 1, Trend = (1:nobs)/nobs)
+		}
+		df <- df - 2
+	}
+	else if(trend == "rc") {
+		##               
+		## 2.3 H1*(r): restricted constant
+		##
+		Z1 <- cbind(Z1, "Intercept*" = 1)
+	}
+	else if(trend == "rt") {
+		##
+		## 2.4 H*(r): restricted trend
+		##
+		Z1 <- cbind(Z1, "Trend*" = (1:nobs)/nobs)
+		if(lags > 0) {
+			Z2 <- cbind(Z2, Intercept = 1)
+		}
+		else {
+			Z2 <- matrix(1, nrow = nobs, ncol = 1)
+			dimnames(Z2) <- list(NULL, "Intercept")
+		}
+		df <- df - 1
+	}
+	else if(trend != "nc") {
+		##
+		## 2.5 Fall through: no constant nor trend component	
+		##
+		stop("Invalid choice for optional argument trend.")
+	}
+	ans <- list(Z0 = Z0, Z1 = Z1, Z2 = Z2, df = df)
+	if(isTS) {
+		ans$pos <- pos
+	}
+	ans
+}
+
+
+coint <- function(Y, X = NULL, lags = 1, trend = "c", H = NULL, b = NULL, save.VECM = T
+	)
+{
+	stop.on.bdObject(Y)
+	stop.on.bdObject(X)
+	##
+	## 1. Check for valid inputs and obtain VECM form. 
+	##
+	call <- match.call()
+	n <- nrow(Y)
+	p <- ncol(Y)
+	##
+	z.mat <- VECM.form(Y, lags = lags, trend = trend)
+	n.coint <- ncol(z.mat$Z1)
+	nobs <- nrow(z.mat$Z1)
+	##
+	if(!is.null(H)) {
+		if(!is.null(b)) {
+			stop("Only one of H and b can be specified.")
+		}
+		H <- as.matrix(H)
+		if(nrow(H) != n.coint || ncol(H) > n.coint) {
+			stop("Dimension of H must be compatible with cointegrating space."
+				)
+		}
+	}
+	if(!is.null(b)) {
+		b <- as.matrix(b)
+		b.s <- ncol(b)
+		if(nrow(b) != n.coint || b.s > n.coint) {
+			stop("Dimension of b must be compatible with cointegrating space."
+				)
+		}
+	}
+	##
+	if(!is.null(X)) {
+		if(is(X, "timeSeries")) {
+			X <- seriesData(X)
+		}
+		if(is.data.frame(X)) {
+			X <- as.matrix(X)
+		}
+		if(nrow(X) != n) {
+			if(n - nrow(X) != (lags + 1)) {
+				stop("X and Y must have same number of observations."
+					)
+			}
+		}
+		else {
+			X <- X[ - (1:(lags + 1)),  ]
+		}
+		if(any(is.na(X))) {
+			stop("NAs are not allowed in X.")
+		}
+	}
+	##
+	## 2. concentrate the log-likelihood function
+	##  
+	noZ2 <- (lags == 0 && trend == "nc") || (lags == 0 && trend == "rc")
+	if(noZ2) {
+		if(is.null(X)) {
+			R0 <- z.mat$Z0
+			R1 <- z.mat$Z1
+		}
+		else {
+			R0 <- z.mat$Z0 - X %*% qr.solve(X, z.mat$Z0)
+			R1 <- z.mat$Z1 - X %*% qr.solve(X, z.mat$Z1)
+		}
+	} else if(is.null(X)) {
+		R0 <- z.mat$Z0 - z.mat$Z2 %*% qr.solve(z.mat$Z2, z.mat$Z0)
+		R1 <- z.mat$Z1 - z.mat$Z2 %*% qr.solve(z.mat$Z2, z.mat$Z1)
+	}
+	else {
+		z.mat$Z2 <- cbind(z.mat$Z2, X)
+		R0 <- z.mat$Z0 - z.mat$Z2 %*% qr.solve(z.mat$Z2, z.mat$Z0)
+		R1 <- z.mat$Z1 - z.mat$Z2 %*% qr.solve(z.mat$Z2, z.mat$Z1)
+	}
+	S00 <- crossprod(R0)/nobs
+	S01 <- crossprod(R0, R1)/nobs
+	S11 <- crossprod(R1)/nobs
+	ans <- list(S00 = S00, S01 = S01, S11 = S11)
+	if(!is.null(H)) {
+		S11 <- t(H) %*% S11 %*% H
+		S01 <- S01 %*% H
+	}
+	if(!is.null(b)) {
+		##  solve for rho before S_{ij} gets transformed
+		G.1 <- t(b) %*% S11 %*% b
+		G.1 <- backsolve(chol((G.1 + t(G.1))/2), diag(ncol(G.1)))
+		G.2 <- backsolve(chol((S00 + t(S00))/2), diag(ncol(S00)))
+		A <- crossprod(t(G.1) %*% t(S01 %*% b) %*% G.2)
+		rho <- eigen(A, symm = T, only = T)$values[1:b.s]
+		##
+		S00 <- S00 - crossprod(t(S01 %*% b %*% G.1))
+		S01 <- S01 - S01 %*% b %*% crossprod(t(G.1)) %*% t(b) %*% S11
+		S11 <- S11 - crossprod(t(S11 %*% b %*% G.1))
+		b.perp <- perpMat(b)
+		S11 <- t(b.perp) %*% S11 %*% b.perp
+		S01 <- S01 %*% b.perp
+	}
+	##
+	## 3. Solve for eigenvalues/squared canonical correlations 
+	##
+	G.1 <- backsolve(chol((S00 + t(S00))/2), diag(ncol(S00)))
+	G.2 <- backsolve(chol((S11 + t(S11))/2), diag(ncol(S11)))
+	A <- crossprod(t(G.1) %*% S01 %*% G.2)
+	# A <- t(G) %*% S10 %*% S00.inv %*% S01 %*% G
+	EV <- eigen(A, symm = T)
+	##
+	## eigenvalues can be computed using Hamilton's
+	## formula (20.2.9). However, the resulting A2 
+	## matrix is not symmetric and the eigenvectors
+	## are not normalized to unity
+	## 
+	## A2 <- S11.inv%*%S10%*%S00.inv%*%S01
+	## EV2 <- eigen(A2)
+	## 
+	evals <- EV$values
+	# evals ordered from largest to smallest
+	if(!is.null(b)) {
+		evals <- c(rho, evals[1:(n.coint - b.s)])
+	}
+	if(length(evals) < n.coint) {
+		evals <- c(evals, rep(0, n.coint - length(evals)))
+	}
+	evecs <- EV$vectors
+	# evecs are normalized to unity
+	normalized.evec <- crossprod(evecs, t(G.2))
+	# normalized by V*S11*V' = I. Gives beta'
+	# rows are unnormalized cointegrating vectors
+	if(!is.null(H)) {
+		normalized.evec <- normalized.evec %*% t(H)
+	}
+	if(!is.null(b)) {
+		normalized.evec <- rbind(t(b), normalized.evec %*% t(b.perp))
+	}
+	cv.names <- paste("coint", 1:nrow(normalized.evec), sep = ".")
+	y.names <- dimnames(z.mat$Z1)[[2]]
+	dimnames(normalized.evec) <- list(cv.names, y.names)
+	alpha.hat <- ans$S01 %*% t(normalized.evec)
+	# unrestricted adjustment coefficients
+	dimnames(alpha.hat) <- list(y.names[1:p], cv.names)
+	##
+	## 4. compute log-likelihood values for models H(1), H(2),..., H(p)
+	##
+	const <-  - nobs * p * 0.5 * (log(2 * pi) + 1) - 0.5 * nobs * sum(
+		log(eigen(ans$S00, symm = T)$values))
+	loglik <- const - 0.5 * nobs * cumsum(log(1 - evals))
+	##
+	## 5. compute test statistics for determining number of cointegrating vectors
+	##
+	Lmax <-  - nobs * log(1 - evals)
+	Ltrace <- rev( - nobs * cumsum(log(1 - rev(evals))))
+	ans <- c(ans, list(call = call, evals = evals, coint.vectors = 
+		normalized.evec, adj.coef = alpha.hat, loglike.values = loglik,
+		maxeig.tests = Lmax, trace.tests = Ltrace, nobs = nobs, trend
+		 = trend, ar.order = lags))
+	if(!is.null(H))
+		ans$H <- H
+	if(!is.null(b))
+		ans$b <- b
+	if(save.VECM) {
+		ans$vecm <- z.mat
+	}
+	oldClass(ans) <- "coint"
+	ans
+}

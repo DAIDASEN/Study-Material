@@ -1,0 +1,75 @@
+source("coint.R")	# Load coint function code
+daysf<-1		# start day for forming pairs
+dayef<-131		# end day for forming pairs
+dayst<-132		# start day for trading
+dayet<-262		# end day for trading
+npairs<-10		# number of pairs used for trading
+cutoff<-2		# boundary for opened positions
+Data<-read.csv("Data.csv",header=T)	# Read in data
+# forming cointegrating pairs of largest trace test statistics
+napairs<-ncol(Data)*(ncol(Data)-1)/2
+pvalmat.s<-matrix(0,napairs,5)
+k<-0
+for (i in 2:ncol(Data)){
+	print(i)
+	for (j in 1:(i-1)){
+	k<-k+1
+	fred<-log(Data[daysf:dayef,c(j,i)])
+	george<-coint(fred,lags=1)
+	if(george$coint.vectors[1,1]*george$coint.vectors[1,2]>=0){
+		k<-k-1}else{
+			pvalmat.s[k,3]<-george$trace.tests[1]
+			pvalmat.s[k,1:2]<-c(j,i)
+			pvalmat.s[k,4:5]<-abs(george$coint.vectors[1,])/max(abs(george$coint.vectors[1,]))
+		}
+	}
+}
+coint.sort<-sort.list(pvalmat.s[,3])
+profit<-rep(0.0,npairs)		# profit for each pair
+nopen<-rep(0,npairs)		# numbers of opened position
+nclose<-rep(0,npairs)		# numbers of closed position
+invest<-rep(0,npairs)		# amount of money invested
+# start to trade for each pairs of stocks
+for (i in 1:npairs){
+	ii<-i+napairs-npairs
+	stock1<-Data[,pvalmat.s[coint.sort[ii],1]]
+	stock2<-Data[,pvalmat.s[coint.sort[ii],2]]
+	coef1<-pvalmat.s[coint.sort[ii],4]
+	coef2<-pvalmat.s[coint.sort[ii],5]
+	fred<-coef1*log(stock1[daysf:dayef])-coef2*log(stock2[daysf:dayef])
+	ratio.mean<-mean(fred)
+	ratio.std<-sqrt(var(fred))
+	ratio.trade<-(coef1*log(stock1[dayst:dayet])-coef2*log(stock2[dayst:dayet])-ratio.mean)/ratio.std
+	open.trade<-0
+	profit[i]<-0.0
+	for (j in 1:(dayet-dayst)){
+# check if we should close an opened position
+		if(open.trade!=0){
+			if(open.trade*ratio.trade[j]<=0.0){
+				open.trade<-0
+				profit[i]<-profit[i]+n1*stock1[j+dayst]+n2*stock2[j+dayst]-opencap
+				nclose[i]<-nclose[i]+1
+			}
+		}else{
+# check if we should open a new position
+			if(abs(ratio.trade[j])>=cutoff){
+				open.trade<-sign(ratio.trade[j])
+				n1<-coef1*(-open.trade)/stock1[j+dayst]
+				n2<-coef2*open.trade/stock2[j+dayst]
+				nopen[i]<-nopen[i]+1
+				dayopen<-j
+				opencap<-n1*stock1[j+dayst]+n2*stock2[j+dayst]
+				invest[i]<-invest[i]+opencap
+			}
+		}
+	}
+# close all the opened positions on last day
+	if(open.trade!=0){
+		profit[i]<-profit[i]+n1*stock1[dayet]+n2*stock2[dayet]-opencap
+	}
+}
+result<-cbind(names(Data[pvalmat.s[coint.sort[(napairs-npairs+1):napairs],1]]),names(Data[pvalmat.s[coint.sort[(napairs-npairs+1):napairs],2]]),nopen, nclose, profit, invest)
+sum(nopen)
+sum(nclose)
+sum(profit)
+sum(invest)
