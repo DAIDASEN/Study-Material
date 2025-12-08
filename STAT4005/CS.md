@@ -4,20 +4,9 @@ $\frac{1}{1-x} = \sum_{n=0}^{\infin}x^n$
 $\frac{1}{1+x} = \sum_{n=0}^{\infin}(-1)^nx^n$
 $\Pi_{i=1}^{p}\frac1{a_{i}}=\sum_{i=1}^p\frac{c_i}{a_i}$
 <font color=blue>**Taylor's Formula: **</font>$f(x) = f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n + R_n(x)$
-<font color=blue>**Characteristic Equation Method**</font>
-
-1. **Identify the recurrence relation**: Determine the form $a_n = c_1 a_{n-1} + c_2 a_{n-2} + \cdots + c_k a_{n-k}$
-
-2. **Set up the characteristic equation**: Convert the recurrence relation to $r^k - c_1 r^{k-1} - c_2 r^{k-2} - \cdots - c_k = 0$
-
-3. **Solve for the characteristic roots (eigenvalues)**: Find all roots $r_1, r_2, \ldots, r_k$
-
-4. **Construct the general solution**:
-   - If all roots are distinct: $a_n = A_1 r_1^n + A_2 r_2^n + \cdots + A_k r_k^n$
-   - If there are repeated roots, e.g., $r_1$ with multiplicity $m$: $A_1 r_1^n + A_2 n r_1^n + \cdots + A_m n^{m-1} r_1^n$
-
-5. **Determine the coefficients**: Use initial conditions ($a_0, a_1, \ldots, a_{k-1}$) to solve for $A_1, A_2, \ldots, A_k$
-
+**<font color=blue>Stationary: </font>** $MA$天然Stationary, $AR\ 1-\phi B$没有根在单位圆上 
+**<font color=blue>Causality</font>**: AR 特征方程的根在单位圆外 $$X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}$$
+<font color=blue>**Invertibility**</font> MA 特征方程的根在单位圆外 $$\epsilon_t = \sum_{j=0}^{\infty} \pi_j X_{t-j}$$
 
 <font color=blue>**Inverse Matrix**</font>  若 $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$，则$
 A^{-1} = \frac{1}{|A|}
@@ -30,8 +19,8 @@ $
 <font color="blue"><b>$\gamma(k)$</b></font>  : $MA(q):\ Y_t = \theta_0 Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$  $\gamma(k) = \sigma^2 \sum_{i=0}^{q-k} \theta_i \theta_{i+k}, \quad k=0,1,\dots,q;
 \qquad \gamma(k)=0,\ k>q.$
 $Z\sim N(0,\sigma^2)$, $E(Z^2) = \sigma^2 \text{ and } E(Z^4) = 3\sigma^4$
-**<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 1
-**<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$ 2
+**<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 
+**<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$ 
 
 ---
 

@@ -18,7 +18,7 @@
 
 * **预测误差与方差**：  
   $e_n(h)=Y_{n+h}-\hat Y_{n+h}=\sum_{i=0}^{h-1}\psi_i Z_{n+h-i}$，  
-  $P_{n+h}^n=\operatorname{Var}(e_n(h)\mid Y_{1:n})=\sigma^2\sum_{i=0}^{h-1}\psi_i^2$。
+  $P_{n+h}^n=\operatorname{Var}(e_n(h)\mid Y_1,...,Y_n)=\sigma^2\sum_{i=0}^{h-1}\psi_i^2$。
 
 * **95% 区间**：$\hat Y_{n+h}\pm1.96\sqrt{P_{n+h}^n}$。
 
