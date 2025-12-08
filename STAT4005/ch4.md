@@ -132,15 +132,7 @@ MLE 的核心是写出观测数据 $Y_1, Y_2, ..., Y_n$ 的 **Joint PDF** $f(y_1
 #### ==**Model Selection** and **Diagnostics**==
 
 <font color="navy">**1. ACF & PACF**</font>
-
-$PACF \phi_{kk}$ 就是转换为AR模型，然后看$Y_{t-k}$的系数。这两个参数能看的前提是都是Stationary的
-
-| **Model** | **Plot**             | **Pattern**                               |
-| --------- | -------------------- | ----------------------------------------- |
-| **MA(q)** | **ACF** $\rho(k)$    | **Cut-off at lag $q$** (zero for $k > q$) |
-|           | **PACF** $\phi_{kk}$ | **Exponential Decay (MA(1))** (NA)        |
-| **AR(p)** | **ACF** $\rho(k)$    | **Exponential Decay (AR(1))** (NA)        |
-|           | **PACF** $\phi_{kk}$ | **Cut-off at lag $p$** (zero for $k > p$) |
+![image-20251208230604776](C:\Users\31670\AppData\Roaming\Typora\typora-user-images\image-20251208230604776.png)
 
 <font color="navy">**2. Order Selection**</font>
 $\hat{\beta} = (\hat{\phi}_1, \dots, \hat{\phi}_p, \hat{\theta}_1, \dots, \hat{\theta}_q)$ and $\hat{\sigma}^2$ as the MLE of the model given $Y_1, \dots, Y_n$.
@@ -149,7 +141,7 @@ $L(\hat{\beta}, \hat{\sigma}^2) = (2\pi\hat{\sigma}^2)^{-n/2} \exp\{-S_Y(\hat{\b
 $\frac{S_Y(\hat{\beta})}{n} = \hat \sigma^2$.
 
 <font color="red">**A. AIC (Akaike Information Criterion)**</font>  $\mathrm{AIC}
-= -2\log L(\hat\beta,\hat\sigma^2)+2(p+q+1)$  
+= -2\log L(\hat\beta,\hat\sigma^2)+2(p+q+1)$ 
 **Principle:** AIC aims to estimate the **Expected Predictive Log-likelihood**. It strikes a balance between **model goodness-of-fit** (the likelihood function) and **model complexity** (the number of parameters $p+q+1$).
 **Applicable Scenarios:** Use when your primary goal is to achieve **accurate prediction**.
 **Drawback:** AIC is **Not Consistent**; even with a large sample size $n$, it may select a model more complex than the true model. It tends to **overfit** with small sample sizes.
