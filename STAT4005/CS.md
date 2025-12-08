@@ -20,6 +20,10 @@ $
 $Z\sim N(0,\sigma^2)$, $E(Z^2) = \sigma^2 \text{ and } E(Z^4) = 3\sigma^4$
 **<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 
 **<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$
+$$F(x) = \frac{1}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b}$$
+目标：求 $A$。
+在等式左边，用手指盖住分母里的 $(x-a)$。 把剩下的部分中所有的 $x$ 都替换成让被盖住的那项为 0 的值。算出来的结果(不包含(x-a))就是 $A$
+然后我们分别对每一个式子都进行$1/(1-cB)$的分解
 
 ![image-20251208223136588](C:\Users\31670\Desktop\Study-Material\STAT4005\image-20251208223136588.png)
 
