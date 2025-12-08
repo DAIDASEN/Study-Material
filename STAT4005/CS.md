@@ -18,6 +18,21 @@ $\Pi_{i=1}^{p}\frac1{a_{i}}=\sum_{i=1}^p\frac{c_i}{a_i}$
 
 5. **Determine the coefficients**: Use initial conditions ($a_0, a_1, \ldots, a_{k-1}$) to solve for $A_1, A_2, \ldots, A_k$
 
+
+<font color=blue>**Inverse Matrix**</font>  若 $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$，则$
+A^{-1} = \frac{1}{|A|}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix},
+\quad |A|=ad-bc.
+$
+<font color="blue"><b>$\gamma(k)$</b></font>  : $MA(q):\ Y_t = \theta_0 Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$  $\gamma(k) = \sigma^2 \sum_{i=0}^{q-k} \theta_i \theta_{i+k}, \quad k=0,1,\dots,q;
+\qquad \gamma(k)=0,\ k>q.$
+$Z\sim N(0,\sigma^2)$, $E(Z^2) = \sigma^2 \text{ and } E(Z^4) = 3\sigma^4$
+**<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 1
+**<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$ 2
+
 ---
 
 <font color=blue>**Decomposition of time series:**</font> 

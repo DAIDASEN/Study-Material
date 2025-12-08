@@ -1,18 +1,5 @@
 #### ==**Estimation**==
 
-<font color="red"><b>$\gamma(k)$</b></font>  : $MA(q):\ Y_t = \theta_0 Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$  $\gamma(k) = \sigma^2 \sum_{i=0}^{q-k} \theta_i \theta_{i+k}, \quad k=0,1,\dots,q;
-\qquad \gamma(k)=0,\ k>q.$
-<font color="red">**逆矩阵计算:**</font>   若 $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$，则$
-A^{-1} = \frac{1}{|A|}
-\begin{pmatrix}
-d & -b \\
--c & a
-\end{pmatrix},
-\quad |A|=ad-bc.
-$
-
------
-
 <font color="navy">**1. Model Notations & Basics**</font>
 
   * **ARMA(p, q):** $\phi(B)(Y_{t}-\mu)=\theta(B)Z_{t}$ where $Z_{t}\sim WN(0,\sigma^{2})$.
@@ -144,7 +131,9 @@ MLE 的核心是写出观测数据 $Y_1, Y_2, ..., Y_n$ 的 **Joint PDF** $f(y_1
 
 #### ==**Model Selection** and **Diagnostics**==
 
-$PACF \phi_{kk}$ 就是转换为AR模型，然后看$Y_{t-k}$的系数
+<font color="navy">**1. ACF & PACF**</font>
+
+$PACF \phi_{kk}$ 就是转换为AR模型，然后看$Y_{t-k}$的系数。这两个参数能看的前提是都是Stationary的
 
 | **Model** | **Plot**             | **Pattern**                                 |
 | --------- | -------------------- | ------------------------------------------- |
@@ -152,3 +141,44 @@ $PACF \phi_{kk}$ 就是转换为AR模型，然后看$Y_{t-k}$的系数
 |           | **PACF** $\phi_{kk}$ | **Exponential Decay** (or damped sine wave) |
 | **AR(p)** | **ACF** $\rho(k)$    | **Exponential Decay** (or damped sine wave) |
 |           | **PACF** $\phi_{kk}$ | **Cut-off at lag $p$** (zero for $k > p$)   |
+
+<font color="navy">**2. Order Selection**</font>
+$\hat{\beta} = (\hat{\phi}_1, \dots, \hat{\phi}_p, \hat{\theta}_1, \dots, \hat{\theta}_q)$ and $\hat{\sigma}^2$ as the MLE of the model given $Y_1, \dots, Y_n$.
+$S_Y(\hat{\beta}) = \sum_{t=1}^n \hat{Z}_t^2$, where $\hat{Z}_t = Y_t - \hat{\phi}_1 Y_{t-1} - \dots - \hat{\phi}_p Y_{t-p} - \hat{\theta}_1 Z_{t-1} - \dots - \hat{\theta}_q Z_{t-q}$. 
+$L(\hat{\beta}, \hat{\sigma}^2) = (2\pi\hat{\sigma}^2)^{-n/2} \exp\{-S_Y(\hat{\beta})/(2\hat{\sigma}^2)\}$, as the likelihood function of ARMA($p, q$) model.
+$\frac{S_Y(\hat{\beta})}{n} = \hat \sigma^2$.
+
+<font color="red">**A. AIC (Akaike Information Criterion)**</font>  $\mathrm{AIC}
+= -2\log L(\hat\beta,\hat\sigma^2)+2(p+q+1)$  
+**Principle:** AIC aims to estimate the **Expected Predictive Log-likelihood**. It strikes a balance between **model goodness-of-fit** (the likelihood function) and **model complexity** (the number of parameters $p+q+1$).
+**Applicable Scenarios:** Use when your primary goal is to achieve **accurate prediction**.
+**Drawback:** AIC is **Not Consistent**; even with a large sample size $n$, it may select a model more complex than the true model. It tends to **overfit** with small sample sizes.
+
+<font color="red">**B. AICC (Corrected AIC)**</font>   $\mathrm{AICC}= -2\log L(\hat\beta,\hat\sigma^2)+ \frac{2(p+q+1)n}{\,n-p-q-2\,}$
+**Principle:** AICC is a **small-sample correction** of AIC. When the sample size $n$ is small, AIC tends to select models with too many parameters (overfitting). AICC introduces the correction factor $\frac{n}{n-p-q-2}$, which imposes a harsher penalty on the number of parameters when $n$ is small.
+**Applicable Scenarios:** You **must use AICC** to prevent overfitting when the sample size $n$ is small. Since AICC converges to AIC when $n$ is large, it is a generally more robust choice.
+
+<font color="red">**C. BIC (Bayesian Information Criterion)**</font>   $BIC= (n-p-q)\log\left[\frac{n\hat{\sigma}^2}{\,n-p-1\,}\right] - n\bigl(1 + \log\sqrt{2\pi}\bigr)-(p+q)\log\left[\frac{\sum_{i=1}^n X_i^2 - n\hat{\sigma}^2}{p+q}\right].$
+**Principle:** Based on **Bayesian inference**, BIC aims to estimate the **Marginal Log-likelihood**. BIC assumes the existence of a "true model" and penalizes model complexity **more heavily** than AIC (the penalty term involves $\log n$).
+**Applicable Scenarios:** BIC is a **Consistent** estimator. Use BIC when your goal is not purely prediction, but to find the **"true" underlying model structure** of the data (i.e., identifying the correct $p$ and $q$) and the sample size $n$ is sufficiently large.
+
+<font color="red">**D. FPE (Final Prediction Error, AR Model Only)**</font>  $\mathrm{FPE}=\left(\frac{n+p}{n-p}\right)\hat{\sigma}^2$
+**Principle:** FPE is designed to estimate the **Mean Squared Error (MSE)** of the parameter estimators, specifically $E[(\hat{\phi}-\phi)'(\hat{\phi}-\phi)]$. It reflects the average predictive error variance when performing a one-step-ahead forecast using this model.
+**Applicable Scenarios:** **Only applicable to AR models**. If you are fitting a pure AR model and wish to minimize the prediction error, you can use FPE. For large samples, the results selected by FPE are generally very similar to those selected by AIC (both lack consistency).
+
+<font color="navy">**3. Model Diagnostics**</font> 检测Residuals，看是否足够小，并且可以看是否是WN
+**Step 1: **Residual $\hat{Z}_t = Y_t - \hat{Y}_t$,  计算$\hat{r}_Z(j) = \frac{\sum_{t=1}^{n-j} (\hat{Z}_t - \bar{Z})(\hat{Z}_{t+j} - \bar{Z})}{\sum_{t=1}^{n} (\hat{Z}_t - \bar{Z})^2}$ 
+**Step 2: **Plot $\hat{r}_Z(j)$ 的图看是不是在$(-2/\sqrt n, +2/\sqrt n)$
+**Step 3: **Apply the Ljung-Box test.
+
+<font color=red>**Ljung-Box: **</font>
+Let $r_Z(j)$ be the sample ACF of $\{\hat Z_t\}$ and $\rho_Z$ be the ACF of the true noise sequence.
+$H_0 : \rho_Z(k) = 0 \text{ whenever } |k| \leq h \quad \text{against} \quad H_1 : \rho_Z(k) \neq 0 \text{ for some } |k| \leq h$
+The Ljung-Box Test is defined by $Q(h) = n(n+2)\sum_{j=1}^h \frac{r_{\hat Z}^2(j)}{n-j}$ and $Q(h) \xrightarrow{d} \chi^2(h-p-q) \text{ under } H_0 \text{ as } n \to \infty.$
+**Remark: ** 1. A common choice of $h$ lies between **10 and 30**. 2. If $Q(h) \geq \chi^2_{h-p-q, 0.95}$, $H_0$ is **rejected** $\Rightarrow$ the **model is not a bad fit to the data**.
+
+<font color=navy>**4. Four Stages of Model Building:**</font>
+<font color=black>1. Pre-processing:</font> (1) Remove trend and seasonal effect. (2)Check ACF of the residual to see if it is stationary. Otherwise, take differences to make it stationary
+<font color=black>2. Model Estimation:</font> (1) Draw ACF/PACF of the filtered data and get an initial ARMA model (2) Do estimation 
+<font color=black>3. Model Identification:</font> Repeat step 2 for various ARMA models, choose an ARMA model by FPE/AIC/BIC
+<font color=black>4. Model Checking: (1) Residual analysis (ts.plot/acf of $\hat Z_t $) (2) Ljung-Box test</font>
