@@ -21,7 +21,7 @@ $Z\sim N(0,\sigma^2)$, $E(Z^2) = \sigma^2 \text{ and } E(Z^4) = 3\sigma^4$
 **<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 
 **<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$
 
-![image-20251208223136588](C:\Users\31670\AppData\Roaming\Typora\typora-user-images\image-20251208223136588.png)
+![image-20251208223136588](C:\Users\31670\Desktop\Study-Material\STAT4005\image-20251208223136588.png)
 
 ---
 
