@@ -4,10 +4,9 @@ $\frac{1}{1-x} = \sum_{n=0}^{\infin}x^n$
 $\frac{1}{1+x} = \sum_{n=0}^{\infin}(-1)^nx^n$
 $\Pi_{i=1}^{p}\frac1{a_{i}}=\sum_{i=1}^p\frac{c_i}{a_i}$
 <font color=blue>**Taylor's Formula: **</font>$f(x) = f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n + R_n(x)$
-**<font color=blue>Stationary: </font>** $MA$天然Stationary, $AR\ 1-\phi B$没有根在单位圆上 
-**<font color=blue>Causality</font>**: AR 特征方程的根在单位圆外 $$X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}$$
-<font color=blue>**Invertibility**</font> MA 特征方程的根在单位圆外 $$\epsilon_t = \sum_{j=0}^{\infty} \pi_j X_{t-j}$$
-
+**<font color=blue>Stationary: </font>** $MA$天然Stationary, $AR\ 1-\phi B$没有根在单位圆上 1. $\mu=E(Y_t)=c$ 2. $\gamma(k) = Cov(Y_t,Y_{t+k})$ only depends on k
+**<font color=blue>Causality</font>**: AR 特征方程的根在单位圆外 
+<font color=blue>**Invertibility**</font> MA 特征方程的根在单位圆外
 <font color=blue>**Inverse Matrix**</font>  若 $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$，则$
 A^{-1} = \frac{1}{|A|}
 \begin{pmatrix}
