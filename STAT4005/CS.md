@@ -19,7 +19,9 @@ $
 \qquad \gamma(k)=0,\ k>q.$
 $Z\sim N(0,\sigma^2)$, $E(Z^2) = \sigma^2 \text{ and } E(Z^4) = 3\sigma^4$
 **<font color=blue>ARMA 课程定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t - \theta_1Z_{t-1} - \cdots - \theta_qZ_{t-q}$ 
-**<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$ 
+**<font color=blue>ARMA R 定义</font>：** $Y_t - \phi_1Y_{t-1} - \cdots - \phi_pY_{t-p} = Z_t + \theta_1Z_{t-1} + \cdots + \theta_qZ_{t-q}$
+
+![image-20251208223136588](C:\Users\31670\AppData\Roaming\Typora\typora-user-images\image-20251208223136588.png)
 
 ---
 
@@ -199,7 +201,7 @@ where $$\phi(B) = 1 - \phi_1B - \cdots - \phi_pB^p$$     $$\theta(B) = 1 - \thet
 Noticed that for $ARIMA(p,d,q)$ model, if $d\geq1$, the root of $(1-B)^d$ is 1, therefore it is **non-stationary and non-causal**
 But it is **invertible** if the roots of θ(B) are outside the unit circle.
 
-==Seasonal ARIMA==
+==**Seasonal ARIMA**==
 $\{Y_t\}$ follows an $SARIMA(p, d, q) \times (P, D, Q)_s$ model if
 $$\phi(B)\Phi_P(B^s)(1-B)^d(1-B^s)^D Y_t = \theta(B)\Theta_Q(B^s)Z_t$$
 where
