@@ -135,12 +135,12 @@ MLE 的核心是写出观测数据 $Y_1, Y_2, ..., Y_n$ 的 **Joint PDF** $f(y_1
 
 $PACF \phi_{kk}$ 就是转换为AR模型，然后看$Y_{t-k}$的系数。这两个参数能看的前提是都是Stationary的
 
-| **Model** | **Plot**             | **Pattern**                                 |
-| --------- | -------------------- | ------------------------------------------- |
-| **MA(q)** | **ACF** $\rho(k)$    | **Cut-off at lag $q$** (zero for $k > q$)   |
-|           | **PACF** $\phi_{kk}$ | **Exponential Decay** (or damped sine wave) |
-| **AR(p)** | **ACF** $\rho(k)$    | **Exponential Decay** (or damped sine wave) |
-|           | **PACF** $\phi_{kk}$ | **Cut-off at lag $p$** (zero for $k > p$)   |
+| **Model** | **Plot**             | **Pattern**                               |
+| --------- | -------------------- | ----------------------------------------- |
+| **MA(q)** | **ACF** $\rho(k)$    | **Cut-off at lag $q$** (zero for $k > q$) |
+|           | **PACF** $\phi_{kk}$ | **Exponential Decay (MA(1))** (NA)        |
+| **AR(p)** | **ACF** $\rho(k)$    | **Exponential Decay (AR(1))** (NA)        |
+|           | **PACF** $\phi_{kk}$ | **Cut-off at lag $p$** (zero for $k > p$) |
 
 <font color="navy">**2. Order Selection**</font>
 $\hat{\beta} = (\hat{\phi}_1, \dots, \hat{\phi}_p, \hat{\theta}_1, \dots, \hat{\theta}_q)$ and $\hat{\sigma}^2$ as the MLE of the model given $Y_1, \dots, Y_n$.
