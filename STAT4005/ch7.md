@@ -76,7 +76,7 @@ $$X_t^2 = \alpha_0 + \sum_{i=1}^{q} \alpha_i X_{t-i}^2 + v_t$$ where $\text{E}(v
 | Quantity       | **Unconditional (Long-run)**                                 | **Conditional on $\mathcal{F}_{t-1}$ (Short-run)** |
 | -------------- | ------------------------------------------------------------ | -------------------------------------------------- |
 | **Mean**       | $E(X_t)=0$                                                   | $E(X_t|\mathcal{F}_{t-1})=0$                       |
-| **Variance**   | $Var(X_t)$ $\frac{\alpha_0}{1-(\sum_q\alpha_i+\sum_p\beta_j)}$ | $Var(X_t|\mathcal{F}_{t-1}) \sigma_t^2$            |
+| **Variance**   | $Var(X_t)$ $\frac{\alpha_0}{1-(\sum_q\alpha_i+\sum_p\beta_j)}$ | $Var(X_t|\mathcal{F}_{t-1}) =\sigma_t^2$           |
 | **Covariance** | $Cov(X_t,X_{t+h})=0$                                         | $Cov(X_t,X_{t+h}|\mathcal{F}_{t-1})=0$             |
 
 **I-GARCH (Integrated Non-Stationary):** 
@@ -98,12 +98,17 @@ where $\alpha_i := 0$ and $\beta_j := 0$ for $i \ge q, j \ge p$.
 **异方差 (Heteroscedasticity)** **同方差 (Homoscedasticity)**
 
 **<font color="brown">A. Detecting Heteroskedasticity (LM Test)</font>**
-$H_ 0$: No ARCH effect  $H_1$: ARCH effect exists
+$H_ 0$: No ARCH effect $\alpha_1 = ...= \alpha_p = 0$  $H_1$: ARCH effect exists
 Run auxiliary regression of squared residuals: $X_t^2 = \alpha_0 + \alpha_1 X_{t-1}^2 + \dots + \alpha_q X_{t-q}^2$
 **Statistic:** $T = n \times R^2 \rightarrow \chi^2(q)$.
 **Rule:** If $T> \chi^2_{0.95, p}$ (or p-value < 0.05), **Reject $H_0$**
 
 **<font color="brown">B. Estimation (MLE)</font>**
+$
+f(x_t \mid \mathcal{F}_{t-1})
+= \frac{1}{\sqrt{2\pi\sigma_t^{2}}}
+  \exp\left(-\frac{1}{2\sigma_t^{2}}x_t^{2}\right)
+$
 **Method:** Use Maximum Likelihood (MLE), **NOT OLS** (because variance changes).
 Log-Likelihood Function (to maximize):
 $l(\theta) = -\frac{n}{2}\ln(2\pi) - \frac{1}{2}\sum_{t=1}^n \left( \ln(\sigma_t^2) + \frac{X_t^2}{\sigma_t^2} \right)$
@@ -111,10 +116,11 @@ $l(\theta) = -\frac{n}{2}\ln(2\pi) - \frac{1}{2}\sum_{t=1}^n \left( \ln(\sigma_t
 
 <font color="brown">**C. Model Selection**</font>: 
 Use **AIC / BIC**.
+$AIC = -2logL+2(p+q+1)$  $BIC=-2logL+(p+q+1)logn$
 Note: PACF of $X_t^2$ works for ARCH order identification, but fails for GARCH.
 
 **<font color="brown">D. Diagnostics (Goodness of Fit)</font>** 
 **Object:** Standardized Squared Residuals: $\hat{\epsilon}_t^2 = \frac{X_t^2}{\hat{\sigma}_t^2}$.
-**Test:** **Ljung-Box Test** on $\hat{\epsilon}_t^2$.
+**Test:** **Ljung-Box Test** on $\hat{\epsilon}_t^2$. $H_0$: no autocorrelation in $ϵ_t^2$ up to lag h.
 **Statistic:** $Q(h) = n(n+2) \sum_{j=1}^{h} \frac{r^2(j)}{n-j}\rightarrow\chi^2(h - p - q - 1)$.
 **Goal:** Fail to reject $H_0$ (High p-value > 0.05) $\rightarrow$ No correlation left $\rightarrow$ Good Model.
