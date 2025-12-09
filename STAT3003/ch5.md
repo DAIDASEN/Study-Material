@@ -1,52 +1,30 @@
 ==<font color="navy">**Systematic Sampling**</font>==
-<font color="navy">**1. Notation**</font>
-• $N$: number of population elements (or number of primary units if using cluster notation).  
-• $n$: sample size (number of selected elements, or number of selected clusters).  
-• $r$: random start, chosen uniformly from $\{1, 2, \dots, k\}$.  
-• $y_i$: value of the $i$-th population element in the ordered frame.  
-• $Y_{ij}$: observation on element $j$ in cluster $i$ (cluster notation).  
-• $M_i$: number of elements in cluster $i$.  
-• $\bar{M}$: common cluster size when all clusters have the same size ($M_i = \bar{M}$).  
-• $M = \sum_{i=1}^N M_i$: total number of secondary units in the population.  
-• $Y_i = \sum_{j=1}^{M_i} Y_{ij}$: total of cluster $i$.  
-• $\mu_c$: mean of cluster totals $Y_i$ (theoretical).  
-• $\sigma^2$: population variance of individual values $y_i$ (theoretical).  
-• $\sigma_c^2$: population variance of cluster totals $Y_i$ (theoretical).
-• $n_s$: number of repeated systematic samples (clusters in repeated systematic sampling).  
-• $k'$: systematic interval used in repeated systematic sampling.  
-• $K' = k'$: number of possible clusters in the population under repeated systematic sampling.  
 
-<font color="navy">**2. Definition of 1-in-$k$ Systematic Sampling**</font>
+<font color="navy">**1. Definition of 1-in-$k$ Systematic Sampling**</font>
 <font color="navy">The Process</font>  
 <font color="navy">1.</font> Population elements are ordered in a list (time, space, or any fixed order).  
-<font color="navy">2.</font> Choose an integer interval $k$. Ideally, $k = N/n$ when $N$ and desired $n$ are known.  
+<font color="navy">2.</font> Choose an integer interval $k$. Ideally, $k = N/n$, $N$ and desired $n$.  
 <font color="navy">3.</font> Randomly select a start $r$ from $\{1, 2, \dots, k\}$.  
 <font color="navy">4.</font> Select units with indices  $r,\ r+k,\ r+2k,\ \dots,\ r+(n-1)k.$
+<font color="red">Unknown Population Size $N$</font> : If $N$ is unknown (e.g. stopping shoppers at a mall), we must guess a value for $k$.  If $k$ is chosen too large, we might not achieve the desired sample size $n$ before the population list is exhausted.
 
-<font color="navy">Special Case: Unknown Population Size $N$</font>  
-• If $N$ is unknown (e.g. stopping shoppers at a mall), we must guess a value for $k$.  
-• If $k$ is chosen too large, we might not achieve the desired sample size $n$ before the population list is exhausted.
+<font color="navy">**2. Systematic Sampling as One-Stage Cluster Sampling**</font>
+• Systematic sampling is statistically equivalent to selecting $n=1$ cluster from a population of $k$ possible clusters.
+<font color="navy">Cluster notation mapping</font> 
+• N is the number of primary units in the population 
+• n is the number of primary units in the sample (Normally n = 1)
+• $M_i$ is the number of secondary units in the *i*th primary unit 
+• $M = \sum_{i=1}^{N} M_i$ is the total number of secondary units in the population
+• $Y_{ij}$ is the *j*th observation in the *i*th primary unit 
+• $Y_i = \sum_{j=1}^{M_i} Y_{ij}$ is the total of observations in the $i$th primary unit
 
-<font color="navy">**3. Systematic Sampling as One-Stage Cluster Sampling**</font>
-• Key concept: systematic sampling is statistically equivalent to selecting $n=1$ cluster from a population of $k$ possible clusters.  
-• Partition the ordered frame into $k$ “systematic clusters”: elements having the same remainder modulo $k$ form one cluster.  
-• The random start $r$ determines exactly one of these clusters.  
-
-<font color="navy">Cluster notation mapping</font>  
-• $Y_i$: total of the $i$-th systematic cluster.  
-• $\mu_c = \frac{1}{k}\sum_{i=1}^k Y_i$: mean of cluster totals.  • $\sigma_c^2 = \frac{1}{k}\sum_{i=1}^k (Y_i - \mu_c)^2$: variance of cluster totals.  
-
-<font color="navy">**4. Estimating Population Total and Mean**</font>
-
+<font color="navy">**3. Estimating Population Total and Mean**</font>
 <font color="navy">4.1 Estimator via cluster view (one selected cluster)</font>  
-If exactly one cluster is selected (say cluster 1) and each cluster has size $\bar{M}$ (with $\bar{M} \approx N/k$):  $\hat{\tau}_{sys} = k Y_1$  
-Here $k$ plays the role of the expansion factor $N$ in standard cluster formulas.
-
-<font color="navy">4.2 Estimator via SRS approximation (element-level)</font>  
-Work with element-level data $\{y_1, \dots, y_n\}$ from the systematic sample.  
-• Estimator of mean: $\hat{\mu}_{sys} = \bar{y}_{sys} = \frac{1}{n}\sum_{i=1}^n y_i$
-• Estimator of total:  $\hat{\tau}_{sys} = N \bar{y}_{sys}$
-These estimators are unbiased if the ordering is random with respect to $y_i$.
+Population:  $\hat{\tau}_{sys} = NY_1 = kY_1$    $Var(\hat\tau) = N^2\sigma^2_c$    $\widehat{Var}(\hat \tau) =N^2(1-n/N)\hat \sigma_c^2/n$    $\hat \sigma_c^2$ can't be calculate  $\Rightarrow$ Regard it as SRS.
+<font color=red>Assumption: </font>the secondary units are in random order
+$Var(\hat{t}_{\text{sys}}) \approx \frac{M - M_1}{M_1}  \frac{M^2}{M - 1}  \sigma^2$ $
+\hat{V}ar(\hat{t}_{\text{sys}}) \approx M^2 \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1}  \hat{\sigma}^2= \frac{M^2}{M_1} \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1 - 1} \sum_{j=1}^{M_1} \left(Y_{1j} - \bar{Y}_1 \right)^2
+$
 
 <font color="navy">**5. Approximate Variance under Random Ordering (SRS Assumption)**</font>
 Because $n=1$ at the cluster level, we cannot estimate the variance directly without assumptions. We assume the list is in random order, so the systematic sample behaves like a simple random sample.
@@ -107,7 +85,7 @@ Repeated systematic sampling is used to estimate variance directly when the rand
 
 <font color="navy">8.1 Design idea</font>  
 • Instead of one large 1-in-$k$ sample, take $n_s$ separate systematic samples.  
-• New interval: $k' = n_s \cdot k$.  
+• New interval: $k' = n_s  k$.  
 • Select $n_s$ random starts $r_1, \dots, r_{n_s}$ from $\{1, \dots, k'\}$.  
 • This creates $n_s$ clusters (repeated systematic samples), allowing us to compute a variance.
 
