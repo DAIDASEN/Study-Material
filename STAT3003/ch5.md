@@ -88,25 +88,28 @@ $\hat{\tau} = N \dfrac{1}{n_s}\sum_{i=1}^{n_s} Y_i$    $Var(\hat{\tau}) = N \dfr
  $\tau_y=\sum_{i=1}^N Y_i$; $\tau_x=\sum_{i=1}^N X_i$; $\mu_y=\tau_y/N$; $\mu_x=\tau_x/N$; $\bar{Y}=\frac1n\sum Y_i$; 
 $\bar{X}=\frac1n\sum X_i$; $R=\tau_y/\tau_x=\mu_y/\mu_x$; $\hat{R}=\bar{Y}/\bar{X}$; 
 $\sigma_y^2,\sigma_x^2,\sigma_{xy}$ population var/cov; $\hat{\sigma}_y^2=\frac{1}{n-1}\sum(Y_i-\bar{Y})^2$; $\hat{\sigma}_x^2=\frac{1}{n-1}\sum(X_i-\bar{X})^2$;
-$Z_i=Y_i-RX_i$; $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$;  $\hat{cv}_x=\hat{\sigma}_x/\bar{X}$; $\hat{cv}_y=\hat{\sigma}_y/\bar{Y}$;
+$Z_i=Y_i-RX_i$; $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$;  $\hat{c}_{v,x}=\hat{\sigma}_x/\bar{X}$; $\hat{c}_{v,y}=\hat{\sigma}_y/\bar{Y}$;
 Auxiliary $X$ is easy/cheap and strongly related to $Y$; assume $Y_i\approx RX_i$ (through origin).
 
 **1.1 Ratio estimators**
  Population ratio: $R=\tau_y/\tau_x=\mu_y/\mu_x$. Sample ratio: $\hat{R}=\bar{Y}/\bar{X}$.
  ==Total==: $\hat{\tau}_r=\hat{R}\tau_x=(\bar{Y}/\bar{X})\tau_x$.    ==Mean==: $\hat{\mu}_r=\hat{R}\mu_x=(\bar{Y}/\bar{X})\mu_x$.
- Bias exists but small for large $n$, so MSE $\approx$ variance.
+ Biased exists but small for large $n$(大SRS样本), so MSE $\approx$ variance.
+Biased of $\hat R = E[\hat R]-R = -Cov(\hat R, \bar X)/\mu_x$ $Cov(X,Y)^2<=Var(X)Var(Y)$ 所以$|Bias|/\sqrt{Var(\hat R)}<=\sqrt{Var(\bar X)}/\mu_x$
+根据泰勒展开$\hat{R} \approx \frac{\mu_y}{\mu_x} - \frac{\mu_y}{\mu_x^2}(\bar{X} - \mu_x) + \frac{1}{\mu_x}(\bar{Y} - \mu_y)$  所以$\text{Var}(\hat{R}) \approx MSE(\hat{R}) \approx \frac{1}{\mu_x^2}\text{Var}(\bar{Y} - R\bar{X})$
 
 **1.2 Variance approximations**
  Define $Z_i=Y_i-RX_i$, $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$, $\hat{\sigma}_r^2=\frac{1}{n-1}\sum(Y_i-\hat{R}X_i)^2$.
- Approx design var of $\hat{\mu}_r$: $\operatorname{Var}(\hat{\mu}_r)\approx\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$.
- Estimator: $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
-Total: $\operatorname{Var}(\hat{\tau}_r)\approx\frac{N-n}{N-1}\frac{N^2}{n}\sigma_r^2$,  $\widehat{\operatorname{Var}}(\hat{\tau}_r)=\frac{N-n}{N}\frac{N^2}{n}\hat{\sigma}_r^2$.
-Ratio $R$: $\operatorname{Var}(\hat{R})\approx\frac{1}{\mu_x^2}\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$,  $\widehat{\operatorname{Var}}(\hat{R})=\frac{1}{\mu_x^2}\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
+
+Estimator: $\operatorname{Var}(\hat{\mu}_r)\approx\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
+Total: $\operatorname{Var}(\hat{\tau}_r)\approx\frac{N-n}{N-1}\frac{N^2}{n}\sigma_r^2$;   $\widehat{\operatorname{Var}}(\hat{\tau}_r)=\frac{N-n}{N}\frac{N^2}{n}\hat{\sigma}_r^2$.
+Ratio $R$: $\operatorname{Var}(\hat{R})\approx\frac{1}{\mu_x^2}\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{R})=\frac{1}{\mu_x^2}\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
 
 **1.3 When is ratio better than SRS?**
- <font color=red>SRS mean</font>: $\bar{Y}$, $\widehat{\operatorname{Var}}(\bar{Y})=\Big(1-\frac{n}{N}\Big)\frac{\hat{\sigma}_y^2}{n}$.  <font color=red>Ratio mean</font>: $\hat{\mu}_r$, $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{\hat{\sigma}_r^2}{n}$.
+ <font color=red>SRS mean</font>: $\bar{Y}$, $\widehat{\operatorname{Var}}(\bar{Y})=\Big(1-\frac{n}{N}\Big){\hat{\sigma}_y^2}/{n}$.  <font color=red>Ratio mean</font>: $\hat{\mu}_r$, $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big){\hat{\sigma}_r^2}/{n}$.
 Key identity: $\hat{\sigma}_r^2=\hat{\sigma}_y^2+\hat{R}^2\hat{\sigma}_x^2-2\hat{R}\hat{\rho}\hat{\sigma}_x\hat{\sigma}_y$.   $\hat{\rho}=\hat{\sigma}_{xy}/(\hat{\sigma}_x\hat{\sigma}_y)$ $\hat{c}_{v, x}=\hat{\sigma}_x/\bar{X}$
-Ratio better if ==$\hat{\sigma}_r^2\ll\hat{\sigma}_y^2$==. Sufficient condition: $\hat{\rho}\gg\frac12{\hat{cv}_x}/{(\hat{cv}_y)}$. or When $\hat{c}_{v, x}\approx\hat{c}_{v,y}$, “$\hat{\rho}>0.5$ usually enough”.
+Ratio better if $\hat{\rho}\gg\frac12{\hat{cv}_x}/{(\hat{cv}_y)}$  then ==$\hat{\sigma}_r^2\ll\hat{\sigma}_y^2$==. 
+Also if $\hat{c}_{v, x}\approx\hat{c}_{v,y}$, “$\hat{\rho}>0.5$ usually enough to say Ratio better”.
 
 **1.4 CI & sample size **
 CI: $\text{Point Estimator}\pm t_{n-1,1-\alpha/2}\sqrt{\widehat{\operatorname{Var}}(E)}$.
@@ -116,6 +119,7 @@ Planning (approx): $d=z_{1-\alpha/2}\sqrt{\operatorname{Var}(E)}$ with assumed $
 
 **Notation (clusters)**
  $N$ #clusters; $M_i$ cluster size; $M=\sum_{j=1}^N M_j$ total elements; $Y_i$ total $Y$ in cluster $i$; $\bar{Y}_i$ sample mean in cluster $i$ (if 2-stage); $\hat{Y}_i=M_i\bar{Y}_i$  est cluster total; $A_i$ count with a characteristic in cluster $i$; $p$ pop proportion; $\hat{p}_i$ cluster sample proportion.
+相关性系数$\hat \rho_{XY} = \frac{\text{Cov}(X, Y)}{\sqrt{\text{Var}(X) \text{Var}(Y)}}$
 
 Auxiliary variable: $M_i$. Ratio good when $Y_i$ and $M_i$ are highly correlated (cluster total ≈ proportional to size).
 
@@ -138,7 +142,7 @@ Auxiliary variable: $M_i$. Ratio good when $Y_i$ and $M_i$ are highly correlated
 **3.1 Two-stage: mean $\mu_y$**
  Ratio est: $\hat{\mu}_r=\dfrac{\sum_{i=1}^n M_i\bar{Y}_i}{\sum_{i=1}^n M_i}=\dfrac{\sum_{i=1}^n \hat{Y}_i}{\sum_{i=1}^n M_i}$.
  Between-cluster var est: $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(\hat{Y}_i-\hat{\mu}_rM_i)^2$.
- Design var est: $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\dfrac{1}{M^2}{N(N-n)\dfrac{1}{n}\hat{\sigma}_r^2+\frac1{M^2}\dfrac{N}{n}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2}$.
+$\widehat{\operatorname{Var}}(\hat{\mu}_r)=\dfrac{1}{M^2}{N(N-n)\dfrac{1}{n}\hat{\sigma}_r^2+\frac1{M^2}\dfrac{N}{n}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2}$.
 
 **3.2 Two-stage: total $\tau_y$ and proportion $p$**
  Total: $\hat{\tau}_r=M\dfrac{\sum\hat{Y}_i}{\sum M_i}$,   $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(\hat{Y}_i-\hat{\mu}_rM_i)^2$.	
