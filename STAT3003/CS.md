@@ -132,10 +132,10 @@ When $N$ is very large, the formula further simplifies to: $$n = \frac{1}{1.04d^
 
 ==**Sample Allocation**==
 最佳的分配方案$n_1,n_2,...,n_L$应该受以下几个方面的影响
-<font color=black>1. </font>The relative size of each stratum in the population affects how much information we gain from sampling(同样的20个里面取10个和2000个取10个不一样)
+<font color=black>1. </font>The relative size of each stratum in the population affects how much information we gain from sampling(同样的20个里面取10个和2000个取10个不一样)
 <font color=black>2. </font>The variability of observations within each stratum (measured by $\sigma_i$) significantly impacts required sample sizes (层内方差越大取的越多)
 <font color=black>3. </font>The cost of obtaining observations may differ substantially between strata(不同层的花销不一样)
-<font color=red>**Naive: **</font>$n_i = nN_i/N$ $\Rightarrow $ it does not consider the  variability within each stratum
+<font color=red>**Naive: **</font>$n_i = nN_i/N$ $\Rightarrow $ it does not consider the  variability within each stratum
 <font color=red>**Neyman Allocation**:</font> $n_h = n \cdot {N_h \sigma_h}/{\sum_{i=1}^L N_i \sigma_i}$
 The proportional allocation formula is: $n_i = \frac{n \cdot N_i}{N}$
 $a_1 = \frac{N_1}{N}, a_2 = \frac{N_2}{N}, \ldots, a_L = \frac{N_L}{N}$
@@ -339,7 +339,7 @@ Biased of $\hat R = E[\hat R]-R = -Cov(\hat R, \bar X)/\mu_x$ $Cov(X,Y)^2<=Var(X
 根据泰勒展开$\hat{R} \approx \frac{\mu_y}{\mu_x} - \frac{\mu_y}{\mu_x^2}(\bar{X} - \mu_x) + \frac{1}{\mu_x}(\bar{Y} - \mu_y)$  所以$\text{Var}(\hat{R}) \approx MSE(\hat{R}) \approx \frac{1}{\mu_x^2}\text{Var}(\bar{Y} - R\bar{X})$
 
 **1.2 Variance approximations**
-Define $Z_i=Y_i-RX_i$, $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$, $\hat{\sigma}_r^2=\frac{1}{n-1}\sum(Y_i-\hat{R}X_i)^2$.
+Define $Z_i=Y_i-RX_i$, $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$, $\hat{\sigma}_r^2=\frac{1}{n-1}\sum(Y_i-\hat{R}X_i)^2 =\hat{\sigma}_y^2+\hat{R}^2\hat{\sigma}_x^2-2\hat{R}\hat{\sigma}_{xy}$.
 Estimator: $\operatorname{Var}(\hat{\mu}_r)\approx\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
 Total: $\operatorname{Var}(\hat{\tau}_r)\approx\frac{N-n}{N-1}\frac{N^2}{n}\sigma_r^2$;   $\widehat{\operatorname{Var}}(\hat{\tau}_r)=\frac{N-n}{N}\frac{N^2}{n}\hat{\sigma}_r^2$.
 Ratio $R$: $\operatorname{Var}(\hat{R})\approx\frac{1}{\mu_x^2}\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{R})=\frac{1}{\mu_x^2}\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
@@ -558,7 +558,7 @@ High non-response rate $\Rightarrow$ sample not properly reflect the groupings i
 
 <font color="navy">**4. Subpopulations (population we study contains elements we are not interested in)**</font>
 Estimating parameters for a specific subpopulation (size $N_1$) where membership is not known prior to sampling.
-<font color="navy">**4.1 Estimating Subpopulation Mean** $\mu_1 = \frac {1} {N_1} \sum_{j=1} ^ {N_1} Y_{1j}$</font>
+<font color="navy">**4.1 Estimating Subpopulation Mean** $\mu_1 = \frac {1} {N_1} \sum_{j=1} ^ {N_1} Y_{1j}$</font>
 • Estimator: $\hat{\mu}_1 = \overline{Y}_1 = \frac{1}{n_1}\sum_{i=1}^{n_1} Y_{1i}$ (This is technically a ratio estimator because $n_1$ is random).
 • Variance Estimator:$\widehat{Var}(\overline{Y}_1) = \frac{N^2}{N_1^2}\left(1-\frac{n}{N}\right)\frac{1}{n}\frac{n_1-1}{n-1}\hat{\sigma}_1^2$
 If $N_1/N$ is unknown, approximate using $n_1/n$:$\widehat{Var}(\overline{Y}_1) = \left(1-\frac{n}{N}\right)(\frac{n}{n-1})(\frac{n_1-1}{n_1})\frac{\hat{\sigma}_1^2}{n_1}$ $ \approx \left(1-\frac{n}{N}\right)\frac{\hat{\sigma}_1^2}{n_1}$ when $n, n_1$ are large
