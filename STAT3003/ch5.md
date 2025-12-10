@@ -21,16 +21,14 @@
 <font color="navy">**3. Estimating Population Total and Mean**</font>
 Population:  $\hat{\tau}_{sys} = NY_1 = kY_1$    $Var(\hat\tau) = N^2\sigma^2_c$    $\widehat{Var}(\hat \tau) =N^2(1-n/N)\hat \sigma_c^2/n$    $\hat \sigma_c^2$ can't be calculate  $\Rightarrow$ Regard it as SRS.
 <font color=red>Assumption: </font>the secondary units are in random order
-$Var(\hat{\tau}_{\text{sys}}) \approx \frac{M - M_1}{M_1}  \frac{M^2}{M - 1}  \sigma^2$ $
-\hat{Var}(\hat{\tau}_{\text{sys}}) \approx M^2 \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1}  \hat{\sigma}^2= \frac{M^2}{M_1} \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1 - 1} \sum_{j=1}^{M_1} \left(Y_{1j} - \bar{Y}_1 \right)^2
-$
-
-Mean: $\hat{\mu}_{\text{sys}} = \bar{Y}_{\text{sys}} = \bar{Y}_1 = \frac{1}{M_1} \sum_{j=1}^{M_1} Y_{1j}$   $\hat{\tau}_{\text{sys}} = M \, \hat{\mu}_{\text{sys}}$  $\hat Var(\hat\mu_{sys}) = \hat{Var}(\hat{\tau}_{\text{sys}})/M^2$    $\hat{\mu}_{\text{sys}} \pm t_{\alpha/2,\,M_1-1} \,
+$Var(\hat{\tau}_{\text{sys}}) \approx \frac{M - M_1}{M_1}  \frac{M^2}{M - 1}  \sigma^2$   $\hat{Var}(\hat{\tau}_{\text{sys}}) \approx M^2 \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1}  \hat{\sigma}^2= \frac{M^2}{M_1} \left(1 - \frac{M_1}{M} \right)  \frac{1}{M_1 - 1} \sum_{j=1}^{M_1} \left(Y_{1j} - \bar{Y}_1 \right)^2$
+半宽d估计:  $$M_1 \ge M\Big/(1 + (M-1) \frac{d^2}{z^2 M^2 \sigma^2})$$
+Mean: $\hat{\mu}_{\text{sys}} = \bar{Y}_{\text{sys}} = \bar{Y}_1 = \frac{1}{M_1} \sum_{j=1}^{M_1} Y_{1j}$     $\hat{\tau}_{\text{sys}} = M \, \hat{\mu}_{\text{sys}}$  $\hat Var(\hat\mu_{sys}) = \hat{Var}(\hat{\tau}_{\text{sys}})/M^2$    $\hat{\mu}_{\text{sys}} \pm t_{\alpha/2,\,M_1-1} \,
 \sqrt{\hat{V}ar(\hat{\mu}_{\text{sys}})}$
+半宽d估计: $$z_{1-\alpha/2} \sqrt{Var(\hat{\mu})} \le d$$ 其中$$Var(\hat{\mu}) = \frac{M - M_1}{M - 1} \cdot \frac{\sigma^2}{M_1}$$  所以我们有$$M_1 \ge {M}\Big / ({1 + (M - 1)\frac{d^2}{\sigma^2 z^2}})$$
 
 <font color="navy">**4. Cluster Variance, ICC, and the Guiding Principle**</font>
-
-<font color="navy">4.1 Definition of ICC (Intraclass Correlation Coefficient)</font>  
+**Intraclass Correlation Coefficient** 
 Based on equal cluster size $\bar{M}$, the intraclass correlation coefficient is  $ICC = 
 \left(
 \sum_{i=1}^{N}\sum_{j=1}^{\bar{M}}\sum_{k\ne j}(Y_{ij}-\mu)(Y_{ik}-\mu)
@@ -69,17 +67,15 @@ The sign and magnitude of $ICC$ depend on how the frame is ordered.
 • Implication: SRS formulas underestimate variance (dangerous / misleading).
 
 <font color="navy">**6. Repeated Systematic Sampling**</font>
-
 Repeated systematic sampling is used to estimate variance directly when the **random-order assumption** is unsafe.
-
 <font color="navy">6.1 Design idea</font>  
 • Instead of one large 1-in-$k$ sample, take $n_s$ separate systematic samples.  
 • New interval: $k' = n_s  k$.  
 • Select $n_s$ random starts $r_1, \dots, r_{n_s}$ from $\{1, \dots, k'\}$.  
 • This creates $n_s$ clusters (repeated systematic samples), allowing us to compute a variance.
-
-<font color="navy">8.2 Estimator and variance (cluster formulas)</font>  
+<font color="navy">6.2 Estimator and variance (cluster formulas)</font>  
 $\hat{\tau} = N \dfrac{1}{n_s}\sum_{i=1}^{n_s} Y_i$    $Var(\hat{\tau}) = N \dfrac{N-n_s}{N-1}\sigma_c^2$   $\widehat{Var}(\hat{\tau}) = N(N-n_s)\dfrac{1}{n_s}\hat{\sigma}_c^2$
+**Assumption:** the distribution of the cluster totals (the systematic sample totals) follows a Normal distribution, or that the Central Limit Theorem applies to the mean of the 10 cluster totals.
 
 ---
 
@@ -116,8 +112,6 @@ Ratio better if ==$\hat{\sigma}_r^2\ll\hat{\sigma}_y^2$==. Sufficient condition:
 CI: $\text{Point Estimator}\pm t_{n-1,1-\alpha/2}\sqrt{\widehat{\operatorname{Var}}(E)}$.
 Planning (approx): $d=z_{1-\alpha/2}\sqrt{\operatorname{Var}(E)}$ with assumed $\sigma_r^2$, or iteratively solve $d=t_{n-1,1-\alpha/2}\sqrt{\widehat{\operatorname{Var}}(E)}$ for $n$.
 
-------
-
 **2. Ratio Estimation in Cluster Sampling**
 
 **Notation (clusters)**
@@ -137,8 +131,6 @@ Auxiliary variable: $M_i$. Ratio good when $Y_i$ and $M_i$ are highly correlated
  Ratio est of $p$: $\hat{p}_r={\sum_{i=1}^N A_i}/{\sum_{i=1}^N M_i}$.
  Var est: $\widehat{\operatorname{Var}}(\hat{p}_r)=\dfrac{N-n}{N}\dfrac{N^2}{M^2}\dfrac{\hat{\sigma}_r^2}{n}$,  $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(A_i-\hat{p}_rM_i)^2$.
 
-------
-
 **3. Ratio Estimation in Two-stage Cluster Sampling**
 
 **Notation (two-stage)**
@@ -150,20 +142,19 @@ Auxiliary variable: $M_i$. Ratio good when $Y_i$ and $M_i$ are highly correlated
  Design var est: $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\dfrac{1}{M^2}{N(N-n)\dfrac{1}{n}\hat{\sigma}_r^2+\frac1{M^2}\dfrac{N}{n}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2}$.
 
 **3.2 Two-stage: total $\tau_y$ and proportion $p$**
- Total: $\hat{\tau}_r=M\dfrac{\sum\hat{Y}_i}{\sum M_i}$,
- $\widehat{\operatorname{Var}}(\hat{\tau}_r)=N(N-n)\dfrac{1}{n}\hat{\sigma}_r^2+\dfrac{N}{n}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2$ $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(\hat{Y}_i-\hat{\mu}_rM_i)^2$.
-
-Proportion: $\hat{p}_r=\dfrac{\sum M_i\hat{p}_i}{\sum M_i}$.
- Var est: $\widehat{\operatorname{Var}}(\hat{p}_r)=\dfrac{N(N-n)}{nM^2}\hat{\sigma}_r^2+\dfrac{N}{nM^2}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2$,
- $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(M_i\hat{p}_i-\hat{p}_rM_i)^2$, $\hat{\sigma}_i^2=\dfrac{m_i}{m_i-1}\hat{p}_i(1-\hat{p}_i)$.
-
-------
-
+ Total: $\hat{\tau}_r=M\dfrac{\sum\hat{Y}_i}{\sum M_i}$,   $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(\hat{Y}_i-\hat{\mu}_rM_i)^2$.	
+$$
+\widehat{\operatorname{Var}}(\hat{\tau}_r)=N(N-n)\dfrac{1}{n}\hat{\sigma}_r^2+\dfrac{N}{n}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2
+$$
+ Proportion: $\hat{p}_r=\dfrac{\sum M_i\hat{p}_i}{\sum M_i}$.     $\hat{\sigma}_r^2=\dfrac{1}{n-1}\sum(M_i\hat{p}_i-\hat{p}_rM_i)^2$, $\hat{\sigma}_i^2=\dfrac{m_i}{m_i-1}\hat{p}_i(1-\hat{p}_i)$.
+$$
+\widehat{\operatorname{Var}}(\hat{p}_r)=\dfrac{N(N-n)}{nM^2}\hat{\sigma}_r^2+\dfrac{N}{nM^2}\sum_{i=1}^n M_i(M_i-m_i)\dfrac{1}{m_i}\hat{\sigma}_i^2
+$$
 **4. Regression Estimation (SRS)**
 
 **Notation (regression)**
 known aux: $\mu_x,\tau_x$; $N,n,\hat{\rho}$ as before.
-Regression = generalisation of ratio (allows non-zero intercept). Use when $(X,Y)$ approx linear but not through origin.
+Regression = generalization of ratio (allows non-zero intercept). Use when $(X,Y)$ approx linear but not through origin.
 
 **4.1 LS estimators**
  $\hat{b}=\dfrac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2}=\dfrac{\sum_{i=1}^n X_iY_i-\frac1n(\sum_{i=1}^n X_i)(\sum_{i=1}^n Y_i)}{\sum_{i=1}^n X_i^2-\frac1n(\sum_{i=1}^n X_i)^2}$,
