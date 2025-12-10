@@ -28,8 +28,6 @@ $
 Mean: $\hat{\mu}_{\text{sys}} = \bar{Y}_{\text{sys}} = \bar{Y}_1 = \frac{1}{M_1} \sum_{j=1}^{M_1} Y_{1j}$   $\hat{\tau}_{\text{sys}} = M \, \hat{\mu}_{\text{sys}}$  $\hat Var(\hat\mu_{sys}) = \hat{Var}(\hat{\tau}_{\text{sys}})/M^2$    $\hat{\mu}_{\text{sys}} \pm t_{\alpha/2,\,M_1-1} \,
 \sqrt{\hat{V}ar(\hat{\mu}_{\text{sys}})}$
 
-
-
 <font color="navy">**4. Cluster Variance, ICC, and the Guiding Principle**</font>
 
 <font color="navy">4.1 Definition of ICC (Intraclass Correlation Coefficient)</font>  
