@@ -99,8 +99,7 @@ Biased of $\hat R = E[\hat R]-R = -Cov(\hat R, \bar X)/\mu_x$ $Cov(X,Y)^2<=Var(X
 根据泰勒展开$\hat{R} \approx \frac{\mu_y}{\mu_x} - \frac{\mu_y}{\mu_x^2}(\bar{X} - \mu_x) + \frac{1}{\mu_x}(\bar{Y} - \mu_y)$  所以$\text{Var}(\hat{R}) \approx MSE(\hat{R}) \approx \frac{1}{\mu_x^2}\text{Var}(\bar{Y} - R\bar{X})$
 
 **1.2 Variance approximations**
- Define $Z_i=Y_i-RX_i$, $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$, $\hat{\sigma}_r^2=\frac{1}{n-1}\sum(Y_i-\hat{R}X_i)^2$.
-
+Define $Z_i=Y_i-RX_i$, $\sigma_r^2=\frac1N\sum(Y_i-RX_i)^2$, $\hat{\sigma}_r^2=\frac{1}{n-1}\sum(Y_i-\hat{R}X_i)^2$.
 Estimator: $\operatorname{Var}(\hat{\mu}_r)\approx\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
 Total: $\operatorname{Var}(\hat{\tau}_r)\approx\frac{N-n}{N-1}\frac{N^2}{n}\sigma_r^2$;   $\widehat{\operatorname{Var}}(\hat{\tau}_r)=\frac{N-n}{N}\frac{N^2}{n}\hat{\sigma}_r^2$.
 Ratio $R$: $\operatorname{Var}(\hat{R})\approx\frac{1}{\mu_x^2}\frac{N-n}{N-1}\frac{1}{n}\sigma_r^2$;  $\widehat{\operatorname{Var}}(\hat{R})=\frac{1}{\mu_x^2}\Big(1-\frac{n}{N}\Big)\frac{1}{n}\hat{\sigma}_r^2$.
