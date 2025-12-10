@@ -42,9 +42,9 @@ Assume all clusters have the same size $\bar{M} = \frac{1}{N}\sum_{i=1}^N M_i$.
 Relationship between cluster-level variance and element-level variance:  $\sigma_c^2 = \bar{M}\sigma^2 \bigl(1 + (\bar{M}-1)ICC\bigr)$ 
 
 If we select multiple clusters, the variance depends on $ICC$: 
-• If $ICC \approx 0$: design behaves like SRS. 
-• If $ICC > 0$: variance is inflated (homogeneous clusters). 
-• If $ICC < 0$: variance is reduced (heterogeneous clusters).  
+• If $ICC \approx 0$: design behaves like SRS. goodestimate
+• If $ICC > 0$: variance is inflated (homogeneous clusters). underestimate
+• If $ICC < 0$: variance is reduced (heterogeneous clusters).  overestimate
 
 <font color="navy">**Guiding principle for variance reduction**</font>  
 • To obtain estimators with low variance, clusters should be internally heterogeneous (high within-cluster variance) and similar to each other (low between-cluster variance).  
@@ -105,7 +105,7 @@ Ratio $R$: $\operatorname{Var}(\hat{R})\approx\frac{1}{\mu_x^2}\frac{N-n}{N-1}\f
 
 **1.3 When is ratio better than SRS?**
  <font color=red>SRS mean</font>: $\bar{Y}$, $\widehat{\operatorname{Var}}(\bar{Y})=\Big(1-\frac{n}{N}\Big)\frac{\hat{\sigma}_y^2}{n}$.  <font color=red>Ratio mean</font>: $\hat{\mu}_r$, $\widehat{\operatorname{Var}}(\hat{\mu}_r)=\Big(1-\frac{n}{N}\Big)\frac{\hat{\sigma}_r^2}{n}$.
-Key identity: $\hat{\sigma}_r^2=\hat{\sigma}_y^2+\hat{R}^2\hat{\sigma}_x^2-2\hat{R}\hat{\rho}\hat{\sigma}_x\hat{\sigma}_y$.   $\hat{\rho}=\hat{\sigma}_{xy}/(\hat{\sigma}_x\hat{\sigma}_y)$
+Key identity: $\hat{\sigma}_r^2=\hat{\sigma}_y^2+\hat{R}^2\hat{\sigma}_x^2-2\hat{R}\hat{\rho}\hat{\sigma}_x\hat{\sigma}_y$.   $\hat{\rho}=\hat{\sigma}_{xy}/(\hat{\sigma}_x\hat{\sigma}_y)$ $\hat{c}_{v, x}=\hat{\sigma}_x/\bar{X}$
 Ratio better if ==$\hat{\sigma}_r^2\ll\hat{\sigma}_y^2$==. Sufficient condition: $\hat{\rho}\gg\frac12{\hat{cv}_x}/{(\hat{cv}_y)}$. or When $\hat{c}_{v, x}\approx\hat{c}_{v,y}$, “$\hat{\rho}>0.5$ usually enough”.
 
 **1.4 CI & sample size **
@@ -115,8 +115,7 @@ Planning (approx): $d=z_{1-\alpha/2}\sqrt{\operatorname{Var}(E)}$ with assumed $
 **2. Ratio Estimation in Cluster Sampling**
 
 **Notation (clusters)**
- $N$ #clusters; $M_i$ cluster size; $M=\sum_{j=1}^N M_j$ total elements; $Y_i$ total $Y$ in cluster $i$; $\bar{Y}_i$ sample mean in cluster $i$ (if 2-stage); $\hat{Y}_i=M_i\bar{Y}_i$ 
-est. cluster total; $A_i$ count with a characteristic in cluster $i$; $p$ pop proportion; $\hat{p}_i$ cluster sample proportion.
+ $N$ #clusters; $M_i$ cluster size; $M=\sum_{j=1}^N M_j$ total elements; $Y_i$ total $Y$ in cluster $i$; $\bar{Y}_i$ sample mean in cluster $i$ (if 2-stage); $\hat{Y}_i=M_i\bar{Y}_i$  est cluster total; $A_i$ count with a characteristic in cluster $i$; $p$ pop proportion; $\hat{p}_i$ cluster sample proportion.
 
 Auxiliary variable: $M_i$. Ratio good when $Y_i$ and $M_i$ are highly correlated (cluster total ≈ proportional to size).
 
