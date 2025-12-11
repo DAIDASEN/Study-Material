@@ -574,3 +574,12 @@ $$\widehat{Var}(\hat{\tau}_1) = N^2\left(1-\frac{n}{N}\right)\frac{\hat{\sigma}_
 Sample variance of $U$ (including the $n-n_1$ zeros). $$\hat{\sigma}_u^2 = \frac{1}{n-1}\left(\sum_{i=1}^{n} U_i^2 - n(\overline{U})^2\right)$$, where $\sum U_i^2 = \sum_{j=1}^{n_1} y_{1j}^2$.
 $y_{1j}$ 就是你抽到的那 $n_1$ 个“有效样本”（子总体成员）的具体数值。
 <font color="navy">Note</font>: This estimator has higher variance because the zeros in $U$ inflate the variance ($\hat{\sigma}_u^2 > \hat{\sigma}_1^2$). 
+
+<font color=red>1. </font>Main motivation to use Stratified Random Sampling:  Reduce **var** and **control sample composition** by dividing the population into strata and sampling within each stratum.
+<font color=red>2. </font>Main reason to use Cluster Sampling: Reduce **cost** by sampling natural groups (clusters) instead of individual units.
+<font color=red>3. </font>Main reason to use Systematic Sampling: Achieve **operational simplicity** and **good coverage of an ordered population** using one random start and then every k-th unit.
+<font color=red>4. </font>Main motivation of using two-stage Cluster Sampling instead of one-stage Cluster Sampling: **Cut cost and gain flexibility** when clusters are large by sampling only a subset of units within each selected cluster instead of all units.
+<font color=red>5. </font>Main motivation of using repeated systematic sampling: To obtain a design-based estimate of the var of a systematic-sample estimator without relying on the random-order assumption, and to protect against hidden trends or periodicity in the ordered population.
+<font color=red>6. </font>Main reason to use Ratio estimator: To **use a known auxiliary variable X** that is strongly correlated with Y, so we get a **lower-var estimate** of the population mean/total when Y is roughly proportional to X. = nonzero intercept Regression
+<font color=red>7. </font>Main reason to use Regression estimator: To **use one or more known auxiliary variables X1, X2, ...** that are strongly correlated with Y, ... by adjusting for the linear relationship between Y and the X's.
+<font color=red>8. </font>C.I. Assumption: The distribution of the cluster totals (the systematic sample totals) is approximately Normal, or equivalently the CLT applies to the mean of the  cluster totals.

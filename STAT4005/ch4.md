@@ -129,8 +129,11 @@ MLE 的核心是写出观测数据 $Y_1, Y_2, ..., Y_n$ 的 **Joint PDF** $f(y_1
 **Pros:** **Optimal:** The most theoretically efficient estimator; utilizes the full covariance matrix $\Sigma$. **No Approximation:** Does not need to assume $Z_0=0$.
 **Cons:** **Computationally Expensive:** Calculation of the inverse covariance matrix $\Sigma^{-1}$ or iterative conditioning is complex and slow.
 
-#### ==**Model Selection** and **Diagnostics**==
+**MM Estimation in Time Series**
+**Advantages:**1. Simple and intuitive; based on matching sample and theoretical moments. 2. Computationally easy—no need for complex optimization like MLE. 3. Can give consistent estimates under mild assumptions.
+**Disadvantages:** 1. Less efficient than MLE (larger variance). 2. Sensitive to choice of moments or lag order. 3. Not optimal for small samples or non-Gaussian data.
 
+==**Model Selection** and **Diagnostics**==
 <font color="navy">**1. ACF & PACF**</font>
 ![image-20251208230604776](C:\Users\31670\AppData\Roaming\Typora\typora-user-images\image-20251208230604776.png)
 
@@ -300,7 +303,7 @@ The white-noise sequence is given by $v_t = X_t^2 - \sigma_t^2 = \sigma_t^2 (\ep
 $X_t^2 = \sigma_t^2 + (X_t^2 - \sigma_t^2) = \alpha_0 + \sum_{j=1}^{q} \alpha_j X_{t-j}^2 + \sum_{i=1}^{p} \beta_i \sigma_{t-i}^2 + (X_t^2 - \sigma_t^2)$$= \alpha_0 + \sum_{j=1}^{m} (\alpha_j + \beta_j) X_{t-j}^2 - \sum_{i=1}^{p} \beta_i (X_{t-i}^2 - \sigma_{t-i}^2) + v_t$$$= \alpha_0 + \sum_{j=1}^{m} (\alpha_j + \beta_j) X_{t-j}^2 + v_t - \sum_{i=1}^{p} \beta_i v_{t-i}$$
 where $\alpha_i := 0$ and $\beta_j := 0$ for $i \ge q, j \ge p$.
 
-<font color=red>**Compare**</font>In an ARCH(q) model the conditional variance $\sigma_t^2$ depends **only** on past shocks $X_{t-i}^2$, so to capture long‐lasting volatility clustering we often need a **large q**.
+<font color=red>**Compare: **</font>In an ARCH(q) model the conditional variance $\sigma_t^2$ depends **only** on past shocks $X_{t-i}^2$, so to capture long‐lasting volatility clustering we often need a **large q**.
  GARCH adds lagged variances $\sigma_{t-j}^2$ on top of past shocks, so the variance “remembers” the distant past through its own lags.
 
 ------
