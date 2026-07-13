@@ -1,0 +1,43 @@
+diff -ruN --ex hw2-q2/admin.php hw2-q2-fixed/admin.php
+--- hw2-q2/admin.php	2026-03-18 15:40:09
++++ hw2-q2-fixed/admin.php	2026-03-18 15:41:03
+@@ -21,10 +21,10 @@
+ // Handle POST actions (book management operations)
+ // -------------------------------------------------------
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+-    // Verify that the user is authenticated before processing
+-    if (!is_logged_in()) {
+-        http_response_code(401);
+-        die('Authentication required.');
++    // Verify that the user is authenticated AND authorized as admin
++    if (!is_logged_in() || !is_admin()) {
++        http_response_code(403);
++        die('Admin privileges required.');
+     }
+ 
+     // Validate CSRF token to prevent cross-site request forgery
+diff -ruN --ex hw2-q2/index.php hw2-q2-fixed/index.php
+--- hw2-q2/index.php	2026-03-18 15:04:10
++++ hw2-q2-fixed/index.php	2026-03-18 15:41:03
+@@ -65,7 +65,7 @@
+             <?php foreach ($books as $book): ?>
+             <tr>
+                 <td>
+-                    <span title="<?= sanitize_text($book['description']) ?>">
++                    <span title="<?= sanitize_output($book['description']) ?>">
+                         <?= sanitize_output($book['title']) ?>
+                     </span>
+                 </td>
+diff -ruN --ex hw2-q2/search.php hw2-q2-fixed/search.php
+--- hw2-q2/search.php	2026-03-18 15:05:06
++++ hw2-q2-fixed/search.php	2026-03-18 15:41:03
+@@ -19,7 +19,8 @@
+         $query .= " AND year >= " . $year_from;
+     }
+     if (!empty($_GET['year_to'])) {
+-        $query .= " AND year <= " . $_GET['year_to'];
++        $year_to = intval($_GET['year_to']);
++        $query .= " AND year <= " . $year_to;
+     }
+ 
+     // Sorting — validate column name against a strict whitelist
